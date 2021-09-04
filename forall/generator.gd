@@ -2,6 +2,9 @@ extends Node
 
 signal generated
 signal lined
+signal lineend
+signal newline
+export(int,0,100) var hillprov
 export(int) var betweencaves
 export(String,"bystep","onframe","byvis") var genmode
 export(int) var outsidechunks
@@ -21,7 +24,6 @@ export(Script) var chunkbase
 export(Script) var hillscript
 export(Script) var plainscript
 export(Script) var outscript
-export(Script) var checkscript
 export(Script) var cavescript
 var checkwall:Area
 var chunkbypos={}
@@ -63,10 +65,9 @@ func _process(_delta):
 			emit_signal("generated")
 onready var box=get_node("/root/main/floor/box")
 onready var startpos=makexpos(terrwide)
+signal setscripts(to)
 var doned=false
 var changetype:int
-var ischeck=false
-var tonextcheck=worldman.checkfre
 var lastcave=4
 func endgen():
 	terrlong=(leng*60)-30
@@ -83,11 +84,13 @@ func endgen():
 			set_process(true)
 		"byvis":
 			emit_signal("generated")
+var candown=true
 func doline():
 	var out=dones>leng
 	var h=1
-	var candown=true
+	candown=true
 	chunksbystage.append([])
+	emit_signal("newline")
 	while (h<terrwide) or (out and h<terrwide*3):
 		var nod=chunk.instance() as Spatial
 		add_child(nod)
@@ -103,7 +106,7 @@ func doline():
 		pos.x+=60
 		if dones>leng:
 			nod.set_script(outscript)
-		if randman.randbool(cavechance) and changetype==0 and dones<leng and lastcave>betweencaves and tonextcheck>4:
+		if randman.randbool(cavechance) and changetype==0 and dones<leng and lastcave>betweencaves and $checkman.tonextcheck>4:
 			nod.set_script(cavescript)
 			lastcave=0
 			if terrhei<abs(pos.y)+30:
@@ -111,8 +114,7 @@ func doline():
 			candown=false
 		else:
 			lastcave+=1
-		if ischeck:
-			nod.set_script(checkscript)
+		emit_signal("setscripts",nod)
 		nod.h=h
 		if h==1:
 			nod.side=1
@@ -142,12 +144,9 @@ func doline():
 		startpos=startpos*3-60
 		doned=true
 	pos.x=startpos
-	ischeck=fmod(dones,worldman.checkfre)==0 and dones<leng-6
-	tonextcheck-=1
-	if ischeck:
-		tonextcheck=worldman.checkfre
-	if dones<leng and ischeck==false and candown:
-		changetype=randman.randbool(50)
+	emit_signal("lineend")
+	if dones<leng and candown:
+		changetype=randman.randbool(hillprov)
 		if changetype==1:
 			pos.y-=30
 			terrhei+=30
