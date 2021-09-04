@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "EditorProperty",
-"class": "EC_CreateCategory",
-"language": "GDScript",
-"path": "res://addons/export_categories/ec_create_category.gd"
-}, {
 "base": "Node2D",
 "class": "aligner",
 "language": "GDScript",
@@ -35,7 +30,6 @@ _global_script_classes=[ {
 "path": "res://forall/sistematic/resoursman.gd"
 } ]
 _global_script_class_icons={
-"EC_CreateCategory": "",
 "aligner": "res://gui/images/extendericon.png",
 "input": "res://gui/debug/input.png",
 "output": "res://gui/debug/output.png",
@@ -66,7 +60,7 @@ multirun/other_window_args="join"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/export_categories/plugin.cfg", "res://addons/multirun/plugin.cfg", "res://addons/vpainter/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
 
 [importer_defaults]
 
