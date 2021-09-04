@@ -1,0 +1,140 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "EditorProperty",
+"class": "EC_CreateCategory",
+"language": "GDScript",
+"path": "res://addons/export_categories/ec_create_category.gd"
+}, {
+"base": "Node2D",
+"class": "aligner",
+"language": "GDScript",
+"path": "res://gui/sider.gd"
+}, {
+"base": "Button",
+"class": "input",
+"language": "GDScript",
+"path": "res://gui/debug/input.gd"
+}, {
+"base": "Button",
+"class": "output",
+"language": "GDScript",
+"path": "res://gui/debug/output.gd"
+}, {
+"base": "Node",
+"class": "resman",
+"language": "GDScript",
+"path": "res://forall/sistematic/resoursman.gd"
+} ]
+_global_script_class_icons={
+"EC_CreateCategory": "",
+"aligner": "res://gui/images/extendericon.png",
+"input": "res://gui/debug/input.png",
+"output": "res://gui/debug/output.png",
+"resman": "res://forall/sistematic/resman.png"
+}
+
+[application]
+
+config/name="Racing"
+run/main_scene="res://menu/menu.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+server="*res://network/server.tscn"
+nameman="*res://network/nameman.tscn"
+worldman="*res://forall/worldman.tscn"
+randman="*res://forall/sistematic/randman.gd"
+globals="*res://forall/sistematic/globals.tscn"
+
+[debug]
+
+multirun/number_of_windows=4
+multirun/window_distance=700
+multirun/add_custom_args=true
+multirun/first_window_args="listen"
+multirun/other_window_args="join"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/export_categories/plugin.cfg", "res://addons/multirun/plugin.cfg", "res://addons/vpainter/plugin.cfg" )
+
+[importer_defaults]
+
+texture={
+"flags/filter": false
+}
+
+[input]
+
+ui_select={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+forward={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+changedirr={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+changedirl={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+brake={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+restart={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+console={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777235,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+3d_physics/layer_1="default"
+3d_physics/layer_2="impulse"
+3d_physics/layer_3="stopcamera"
+3d_physics/layer_4="chunkdetect"
+
+[physics]
+
+common/physics_fps=40
+common/enable_pause_aware_picking=true
+3d/default_gravity=17.7
+
+[rendering]
+
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation.mobile=2
+vram_compression/import_etc=true
+gles2/compatibility/disable_half_float=true
+environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
+environment/default_environment="res://default_env.tres"
