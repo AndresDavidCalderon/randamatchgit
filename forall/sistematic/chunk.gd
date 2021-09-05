@@ -75,6 +75,7 @@ func getnewchunk(script:Script,gentype:String="onvis")->Spatial:
 func created():
 	gen=get_node("/root/main/generator")
 	player=get_node("/root/main/player")
+	add_to_group("chunks")
 func getresname(res:Resource)->String:
 	var path:String=res.get_path()
 	var from=path.length()-1
@@ -104,3 +105,9 @@ func onvisgen():
 func oncam(_cam):
 	$vis.disconnect("camera_entered",self,"oncam")
 	call("defined")
+
+
+func _on_killdown_area_entered(area):
+	if area!=get_node("dect") and area.name!="killdown":
+		$killdown.queue_free()
+		globals.iprint([area.get_parent(),"passed treshold"])

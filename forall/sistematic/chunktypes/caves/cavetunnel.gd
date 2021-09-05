@@ -12,15 +12,26 @@ func defined():
 			add_child(child)
 			child.translation.y=-30
 			offset.y=-30
+		"up":
+			var child=globals.res.getres("res://forall/chunkconts/hills/caves/todownbody.tscn").instance() as StaticBody
+			add_child(child)
+			child.rotation_degrees.y=0
+			offset.y=30
 	if not gen.chunkbypos.has(forward+offset):
 		if randman.randbool(70) or cavelong<2 or hilltype!="forward" or not gen.chunkbypos.has(forwup):
 			var tunnel=createcont(Vector3()+offset,get_script(),true)
 			var hillposibs:Array
 			match hilltype:
 				"forward":
-					hillposibs=["up","down"]
+					if not gen.chunkbypos.has(forwup):
+						hillposibs=["up","down","forward","forward","up"]
+					else:
+						hillposibs=["down","forward"]
 				"up":
-					hillposibs=["up","forward"]
+					if not gen.chunkbypos.has(forwup):
+						hillposibs=["up","up","forward"]
+					else:
+						hillposibs=["forward"]
 				"down":
 					hillposibs=["down","forward"]
 			tunnel.hilltype=randman.choose(hillposibs)

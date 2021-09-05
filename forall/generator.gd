@@ -1,5 +1,4 @@
 extends Node
-
 signal generated
 signal lined
 signal lineend

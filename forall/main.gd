@@ -4,8 +4,6 @@ extends Node
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-enum genmodes{onframe,bystep,onsee}
-export(genmodes) var chunkgenmode
 onready var error=$camholder/cam/center/errorback
 func _ready():
 	if server.players>1:
