@@ -1,3 +1,92 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d8e6bd62c87b1bf48e6ee7aa031613b51a91e105fb1eb43987bcb649fe2d9232
-size 2982
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://models/car/car.gltf" type="PackedScene" id=1]
+[ext_resource path="res://models/placamat.material" type="Material" id=2]
+[ext_resource path="res://models/placa.gltf" type="PackedScene" id=3]
+[ext_resource path="res://models/car/glass.tres" type="Material" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0, 0, 0, 0.745098 )
+roughness = 0.61
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.847059, 0.67451, 0, 1 )
+emission_enabled = true
+emission = Color( 0.74902, 0.788235, 0.0509804, 1 )
+emission_energy = 1.43
+emission_operator = 0
+emission_on_uv2 = false
+transmission_enabled = true
+transmission = Color( 0.843137, 0.776471, 0.0784314, 1 )
+
+[node name="vis" type="Spatial"]
+
+[node name="front" type="CSGBox" parent="."]
+transform = Transform( -1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, -3.18914, 3.92532, -6.8598 )
+material_override = SubResource( 1 )
+width = 8.03011
+height = 4.8112
+depth = 0.34313
+
+[node name="car3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.051, 0, 0 )
+
+[node name="car" parent="car3" index="0"]
+generate_lightmap = false
+
+[node name="glass" parent="car3" index="1"]
+material/0 = ExtResource( 5 )
+
+[node name="car4" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -4.293, 0, 0 )
+
+[node name="car" parent="car4" index="0"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 0.764354, -2.09751, 4.76837e-07, -9.53674e-07 )
+generate_lightmap = false
+
+[node name="glass" parent="car4" index="1"]
+material/0 = ExtResource( 5 )
+
+[node name="spl" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0334697, 1.15333, -13.2159 )
+light_color = Color( 0.741176, 0.717647, 0.65098, 1 )
+light_energy = 2.04
+light_indirect_energy = 0.59
+light_bake_mode = 0
+shadow_enabled = true
+spot_range = 46.2
+spot_angle = 33.3
+
+[node name="sp" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4045, 1.11938, -13.2269 )
+light_color = Color( 0.741176, 0.717647, 0.65098, 1 )
+light_energy = 2.04
+light_indirect_energy = 0.59
+light_bake_mode = 0
+shadow_enabled = true
+spot_range = 46.2
+spot_angle = 33.3
+
+[node name="light" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15529, -13.0814 )
+material_override = SubResource( 2 )
+width = 1.37645
+height = 0.63865
+depth = 0.241405
+
+[node name="light2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.321, 1.155, -13.081 )
+material_override = SubResource( 2 )
+width = 1.37645
+height = 0.63865
+depth = 0.241405
+
+[node name="placa" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96845, 0, 0 )
+
+[node name="placa" parent="placa" index="0"]
+material/0 = ExtResource( 2 )
+
+[editable path="car3"]
+[editable path="car4"]
+[editable path="placa"]

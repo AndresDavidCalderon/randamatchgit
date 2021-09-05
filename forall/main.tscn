@@ -1,3 +1,442 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:39401cb00d9d24f0420e7a323c506446beb8fc84012784a636a906e23140788f
-size 16071
+[gd_scene load_steps=53 format=2]
+
+[ext_resource path="res://forall/visual/carrep.tscn" type="PackedScene" id=1]
+[ext_resource path="res://models/ruedabody.tscn" type="PackedScene" id=2]
+[ext_resource path="res://forall/scripts/player.gd" type="Script" id=3]
+[ext_resource path="res://network/sync.gd" type="Script" id=4]
+[ext_resource path="res://forall/generator.gd" type="Script" id=5]
+[ext_resource path="res://forall/scripts/cam.gd" type="Script" id=6]
+[ext_resource path="res://forall/camholder.gd" type="Script" id=7]
+[ext_resource path="res://gui/images/accel.png" type="Texture" id=8]
+[ext_resource path="res://gui/sider.tscn" type="PackedScene" id=9]
+[ext_resource path="res://gui/images/side.png" type="Texture" id=10]
+[ext_resource path="res://gui/images/accelpress.png" type="Texture" id=11]
+[ext_resource path="res://gui/images/sidepres.png" type="Texture" id=12]
+[ext_resource path="res://network/playervisman.gd" type="Script" id=13]
+[ext_resource path="res://network/playerrep/player.tscn" type="PackedScene" id=14]
+[ext_resource path="res://forall/main.gd" type="Script" id=15]
+[ext_resource path="res://fonts/LuckiestGuy-Regular.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://forall/actionman.gd" type="Script" id=17]
+[ext_resource path="res://gui/images/progress.png" type="Texture" id=18]
+[ext_resource path="res://gui/progress.gd" type="Script" id=19]
+[ext_resource path="res://gui/carpin.tscn" type="PackedScene" id=20]
+[ext_resource path="res://forall/visual/baker.gd" type="Script" id=21]
+[ext_resource path="res://forall/checkman.gd" type="Script" id=22]
+[ext_resource path="res://forall/sistematic/chunk.tscn" type="PackedScene" id=23]
+[ext_resource path="res://forall/sistematic/chunk.gd" type="Script" id=24]
+[ext_resource path="res://forall/sistematic/chunktypes/hill.gd" type="Script" id=25]
+[ext_resource path="res://forall/sistematic/chunktypes/plain.gd" type="Script" id=26]
+[ext_resource path="res://forall/sistematic/chunktypes/out.gd" type="Script" id=27]
+[ext_resource path="res://forall/sistematic/chunktypes/checkpoint.gd" type="Script" id=28]
+[ext_resource path="res://forall/sistematic/chunktypes/caves/caveentrance.gd" type="Script" id=29]
+[ext_resource path="res://gui/sider.gd" type="Script" id=30]
+[ext_resource path="res://gui/debug/console.tscn" type="PackedScene" id=31]
+[ext_resource path="res://forall/sistematic/resoursman.gd" type="Script" id=32]
+[ext_resource path="res://forall/chunkconts/hills/caves/ramptocavebody.tscn" type="PackedScene" id=33]
+[ext_resource path="res://forall/chunkconts/hills/caves/torampbody.tscn" type="PackedScene" id=34]
+[ext_resource path="res://forall/chunkconts/hills/caves/todownbody.tscn" type="PackedScene" id=35]
+[ext_resource path="res://forall/sistematic/debug/tohill.png" type="Texture" id=36]
+[ext_resource path="res://forall/sistematic/chunktypes/caves/cavetunnel.gd" type="Script" id=37]
+[ext_resource path="res://forall/chunkconts/hills/caves/cavetunnel.tscn" type="PackedScene" id=38]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.23
+rough = true
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 3.84104, 3.18178, 8.40115 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 5.21962, 1.1307, 8.01676 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 4.37119, 1.93052, 2.04197 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 3.96996, 0.843558, 1.26515 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 7.17086, 7.65976, 12.9206 )
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 36.0174, 1, 34.3437 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 40, 45 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 40, 45 )
+
+[sub_resource type="DynamicFont" id=10]
+outline_size = 1
+outline_color = Color( 1, 0, 0, 1 )
+font_data = ExtResource( 16 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+outline_size = 1
+outline_color = Color( 0.2, 0.0980392, 0.0980392, 1 )
+font_data = ExtResource( 16 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 64
+font_data = ExtResource( 16 )
+
+[sub_resource type="ProceduralSky" id=13]
+sky_top_color = Color( 0.247059, 0.321569, 0.364706, 1 )
+sky_horizon_color = Color( 0.203922, 0.356863, 0.478431, 1 )
+ground_bottom_color = Color( 0.141176, 0.25098, 0.12549, 1 )
+ground_energy = 0.47
+sun_latitude = 127.89
+sun_longitude = -118.42
+
+[sub_resource type="Environment" id=14]
+background_mode = 2
+background_sky = SubResource( 13 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+fog_depth_begin = 19.0
+fog_transmit_enabled = true
+fog_transmit_curve = 0.196146
+glow_intensity = 1.37
+glow_strength = 1.4
+glow_hdr_threshold = 0.83
+adjustment_enabled = true
+
+[node name="main" type="Node"]
+script = ExtResource( 15 )
+maxtries = 4
+
+[node name="player" type="RigidBody" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0103111, 15.0876, 22.8899 )
+mode = 1
+mass = 345.214
+physics_material_override = SubResource( 1 )
+sleeping = true
+can_sleep = false
+angular_damp = 2.306
+script = ExtResource( 3 )
+speed = 16000.0
+rotspeed = 12000.0
+balancing = true
+rotgrav = 6000.0
+rotonair = 10000.0
+
+[node name="col" type="CollisionShape" parent="player"]
+transform = Transform( 1, 0, -5.68434e-14, 0, 0.999999, 0, 0, 0, 0.999999, -0.194292, 2.19102, -4.53217 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="getflor" type="Area" parent="player"]
+transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 0.532305, -4.97684, -6.03905 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="player/getflor"]
+transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.11499, 1.58941 )
+shape = SubResource( 3 )
+
+[node name="getfront" type="Area" parent="player"]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 1.36948, -3.60535, -10.1944 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="player/getfront"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420212 )
+shape = SubResource( 4 )
+
+[node name="getright" type="Area" parent="player"]
+transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -3.71438, -4.79198, -4.37423 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="player/getright"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420213 )
+shape = SubResource( 5 )
+
+[node name="getback" type="Area" parent="player"]
+transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 1.18189, -4.57895, 1.18832 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="player/getback"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4215, 2.23199, 0.930443 )
+shape = SubResource( 4 )
+
+[node name="vis" parent="player" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98536, 0, 0 )
+
+[node name="sync" type="Node" parent="player"]
+script = ExtResource( 4 )
+
+[node name="ruedaback" parent="player" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0771024, -1.00491, 1.71085 )
+
+[node name="vis" parent="player/ruedaback" index="0"]
+transform = Transform( 1.1, 3.34075e-22, -4.23516e-22, 3.67483e-22, 1, 0, -4.23516e-22, 0, 1.1, 0, 0, 0.0732212 )
+byinput = true
+
+[node name="Cylinder" parent="player/ruedaback/vis/rueda3" index="0"]
+transform = Transform( 1.77636e-15, 0.209666, 0, -1.74657, -1.11022e-16, -1.05879e-22, 1.05879e-22, 3.55271e-15, 1.74657, 0.01301, -0.842985, 0.00271988 )
+
+[node name="ruedafront" parent="player" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0771014, -1.00491, -10.4764 )
+
+[node name="vis" parent="player/ruedafront" index="0"]
+byinput = true
+directs = true
+accels = false
+rotmode = "local"
+
+[node name="Cylinder" parent="player/ruedafront/vis/rueda4" index="0"]
+transform = Transform( 1.22532e-21, 0.209666, 0, -1.74657, -1.33721e-22, -1.69407e-21, 0, -1.77636e-15, 1.74657, 0.01301, -0.842985, 0.00272369 )
+
+[node name="chunkdect" type="Area" parent="player"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="col" type="CollisionShape" parent="player/chunkdect"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.61572 )
+shape = SubResource( 6 )
+
+[node name="generator" type="Node" parent="."]
+script = ExtResource( 5 )
+hillprov = 50
+betweencaves = 5
+genmode = "byvis"
+outsidechunks = 8
+leng = 120
+stepbystep = true
+cavechance = 70
+chunk = ExtResource( 23 )
+chunkbase = ExtResource( 24 )
+hillscript = ExtResource( 25 )
+plainscript = ExtResource( 26 )
+outscript = ExtResource( 27 )
+cavescript = ExtResource( 29 )
+
+[node name="checkman" type="Node" parent="generator"]
+script = ExtResource( 22 )
+checkscript = ExtResource( 28 )
+
+[node name="floor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36519, 0 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="col" type="CollisionShape" parent="floor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00014019, 0.0109382, 0.0236282 )
+shape = SubResource( 7 )
+
+[node name="box" type="CSGBox" parent="floor"]
+use_in_baked_light = true
+width = 71.6837
+depth = 68.5282
+
+[node name="camholder" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.0486, 19.5642 )
+script = ExtResource( 7 )
+
+[node name="cam" type="ClippedCamera" parent="camholder"]
+transform = Transform( -1, 4.03173e-08, -7.7571e-08, 0, 0.887309, 0.461176, 8.74228e-08, 0.461176, -0.887309, 1.026, 16.1351, -17.1835 )
+current = true
+fov = 74.0
+size = 94.19
+far = 284.9
+margin = 2.97
+collision_mask = 4
+script = ExtResource( 6 )
+
+[node name="siderbr" parent="camholder/cam" instance=ExtResource( 9 )]
+position = Vector2( 1024.08, 600.135 )
+bottom = true
+right = true
+scales = true
+
+[node name="accel" type="TouchScreenButton" parent="camholder/cam/siderbr"]
+position = Vector2( -101.332, -186.594 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 11 )
+passby_press = true
+action = "forward"
+
+[node name="accel2" type="TouchScreenButton" parent="camholder/cam/siderbr"]
+position = Vector2( -136.016, -101.572 )
+rotation = 1.5708
+normal = ExtResource( 10 )
+pressed = ExtResource( 12 )
+passby_press = true
+action = "brake"
+
+[node name="siderbl" parent="camholder/cam" instance=ExtResource( 9 )]
+position = Vector2( 0.61145, 598.904 )
+bottom = true
+scales = true
+
+[node name="dirl" type="TouchScreenButton" parent="camholder/cam/siderbl"]
+position = Vector2( 165.76, -58.4202 )
+rotation = -3.14159
+scale = Vector2( 1.2, 1.2 )
+normal = ExtResource( 10 )
+pressed = ExtResource( 12 )
+shape = SubResource( 8 )
+passby_press = true
+action = "changedirl"
+
+[node name="dir" type="TouchScreenButton" parent="camholder/cam/siderbl"]
+position = Vector2( 204.81, -155.05 )
+scale = Vector2( 1.2, 1.2 )
+normal = ExtResource( 10 )
+pressed = ExtResource( 12 )
+shape = SubResource( 9 )
+passby_press = true
+action = "changedirr"
+
+[node name="sidertl" parent="camholder/cam" instance=ExtResource( 9 )]
+scales = true
+
+[node name="fps" type="Label" parent="camholder/cam/sidertl"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 3.31955, 3.31955 )
+text = "fps: "
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="rot" type="Label" parent="camholder/cam/sidertl"]
+margin_left = 1.76758
+margin_top = 46.5838
+margin_right = 184.768
+margin_bottom = 62.5838
+text = "rot="
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" parent="camholder/cam" instance=ExtResource( 9 )]
+position = Vector2( 524.408, 263.702 )
+bottom = true
+right = true
+scaleview = Vector2( 0.5, 0.5 )
+scales = true
+
+[node name="errorback" type="Panel" parent="camholder/cam/center"]
+margin_left = -289.163
+margin_top = -61.5676
+margin_right = 282.837
+margin_bottom = 69.4324
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="camholder/cam/center/errorback"]
+margin_left = 83.3409
+margin_top = 7.88093
+margin_right = 496.34
+margin_bottom = 31.881
+custom_fonts/font = SubResource( 10 )
+text = "error example"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="goback" type="Button" parent="camholder/cam/center/errorback"]
+margin_left = 112.903
+margin_top = 58.4007
+margin_right = 463.902
+margin_bottom = 97.4007
+custom_fonts/font = SubResource( 11 )
+text = "back to the menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="top" parent="camholder/cam" instance=ExtResource( 9 )]
+position = Vector2( 512.034, 3.75803 )
+right = true
+scaleview = Vector2( 0.5, 1 )
+scales = true
+
+[node name="spr" type="Sprite" parent="camholder/cam/top"]
+position = Vector2( 0, 27.618 )
+texture = ExtResource( 18 )
+script = ExtResource( 19 )
+enabled = true
+indicator = ExtResource( 20 )
+
+[node name="celebration" type="Label" parent="camholder/cam/top"]
+visible = false
+margin_left = -28.0722
+margin_top = 45.8081
+margin_right = 35.9278
+margin_bottom = 109.808
+custom_fonts/font = SubResource( 12 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "#1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="topright" type="Node2D" parent="camholder/cam"]
+position = Vector2( 1024.51, -0.747765 )
+script = ExtResource( 30 )
+right = true
+
+[node name="console" parent="camholder/cam/topright" instance=ExtResource( 31 )]
+bypress = true
+
+[node name="sun" type="DirectionalLight" parent="."]
+transform = Transform( 0.907946, 3.51954e-07, 0.419088, -0.319899, -0.646017, 0.693056, 0.270738, -0.763323, -0.586548, 39.0947, 32.5736, -16.4536 )
+light_energy = 1.69
+light_indirect_energy = 3.64
+shadow_enabled = true
+directional_shadow_blend_splits = true
+directional_shadow_depth_range = 1
+directional_shadow_max_distance = 274.2
+
+[node name="playervisman" type="Node" parent="."]
+script = ExtResource( 13 )
+playersource = ExtResource( 14 )
+
+[node name="env" type="WorldEnvironment" parent="."]
+environment = SubResource( 14 )
+
+[node name="actionman" type="Node" parent="."]
+script = ExtResource( 17 )
+wintexts = [ Color( 0.741176, 0.643137, 0.0980392, 1 ), Color( 0.533333, 0.615686, 0.698039, 1 ), Color( 0.443137, 0.34902, 0.176471, 1 ) ]
+
+[node name="wintime" type="Timer" parent="actionman"]
+
+[node name="loadtime" type="Timer" parent="."]
+wait_time = 2.217
+autostart = true
+
+[node name="baker" type="GIProbe" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93565, 2.58567, 21.4044 )
+subdiv = 2
+extents = Vector3( 7.24535, 6.53387, 4.88267 )
+propagation = 0.58
+script = ExtResource( 21 )
+
+[node name="resman" type="Node" parent="."]
+script = ExtResource( 32 )
+initresources = [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ]
+
+[connection signal="body_entered" from="player/getflor" to="player" method="_on_getflor_body_entered"]
+[connection signal="area_entered" from="player/chunkdect" to="baker" method="_on_chunkdect_area_entered"]
+[connection signal="generated" from="generator" to="baker" method="_on_generator_generated"]
+[connection signal="generated" from="generator" to="player" method="_on_generator_generated"]
+[connection signal="lineend" from="generator" to="generator/checkman" method="_on_generator_lineend"]
+[connection signal="setscripts" from="generator" to="generator/checkman" method="_on_generator_setscripts"]
+[connection signal="pressed" from="camholder/cam/center/errorback/goback" to="." method="menuback"]
+[connection signal="botsended" from="playervisman" to="camholder/cam/top/spr" method="_on_playervisman_botsended"]
+[connection signal="timeout" from="actionman/wintime" to="actionman" method="_on_wintime_timeout"]
+[connection signal="timeout" from="loadtime" to="." method="_on_loadtime_timeout"]
+
+[editable path="player/ruedaback"]
+[editable path="player/ruedaback/vis/rueda3"]
+[editable path="player/ruedaback/vis/rueda4"]
+[editable path="player/ruedafront"]
+[editable path="player/ruedafront/vis/rueda3"]
+[editable path="player/ruedafront/vis/rueda4"]

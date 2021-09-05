@@ -1,3 +1,49 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f60d8179417782a29410d250b8901169e566375d2e8254ca1b66ba547c2f1679
-size 1881
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://forall/chunkconts/hills/caves/reformats/toramp.tscn" type="PackedScene" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 27.6635, 1, 24.6873 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 2.71478, 14.0424, 33.8751 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 29.4179, 1.41198, 6.94592 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 27.8403, 0.180368, 1.95412 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 29.6714, 1, 7.326 )
+
+[node name="rampbody" type="StaticBody"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="floor" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.993614, -0.112839, 0, 0.112839, 0.993614, -0.104322, 1.56003, 6.05416 )
+shape = SubResource( 1 )
+
+[node name="side" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.89381, 0.448446, 0, -0.448446, 0.89381, -27.0021, 3.19093, 6.63136 )
+shape = SubResource( 2 )
+
+[node name="side2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.890666, 0.454659, 0, -0.454659, 0.890666, 27.1093, 2.8074, 6.76401 )
+shape = SubResource( 2 )
+
+[node name="uper" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.901734, 0.43229, 0, -0.43229, 0.901734, 0, 25.6443, 25.2793 )
+shape = SubResource( 3 )
+
+[node name="ramp" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.796551, -0.604571, 0, 0.604571, 0.796551, -1.3535, -1.42181, 32.2073 )
+shape = SubResource( 4 )
+
+[node name="toramp" parent="." instance=ExtResource( 1 )]
+
+[node name="forward" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.898656, 0.438653, 0, -0.438653, 0.898656, 2.27374e-13, 1.12184, -25.5211 )
+shape = SubResource( 5 )
