@@ -241,7 +241,7 @@ transform = Transform( -1, 4.03173e-08, -7.7571e-08, 0, 0.887309, 0.461176, 8.74
 current = true
 fov = 74.0
 size = 94.19
-far = 284.9
+far = 850.1
 margin = 2.97
 collision_mask = 4
 script = ExtResource( 6 )
@@ -250,7 +250,6 @@ script = ExtResource( 6 )
 position = Vector2( 1024.08, 600.135 )
 bottom = true
 right = true
-scales = true
 
 [node name="accel" type="TouchScreenButton" parent="camholder/cam/siderbr"]
 position = Vector2( -101.332, -186.594 )
@@ -270,7 +269,6 @@ action = "brake"
 [node name="siderbl" parent="camholder/cam" instance=ExtResource( 9 )]
 position = Vector2( 0.61145, 598.904 )
 bottom = true
-scales = true
 
 [node name="dirl" type="TouchScreenButton" parent="camholder/cam/siderbl"]
 position = Vector2( 165.76, -58.4202 )
@@ -292,7 +290,6 @@ passby_press = true
 action = "changedirr"
 
 [node name="sidertl" parent="camholder/cam" instance=ExtResource( 9 )]
-scales = true
 
 [node name="fps" type="Label" parent="camholder/cam/sidertl"]
 margin_right = 40.0
@@ -318,7 +315,6 @@ position = Vector2( 524.408, 263.702 )
 bottom = true
 right = true
 scaleview = Vector2( 0.5, 0.5 )
-scales = true
 
 [node name="errorback" type="Panel" parent="camholder/cam/center"]
 margin_left = -289.163
@@ -356,7 +352,6 @@ __meta__ = {
 position = Vector2( 512.034, 3.75803 )
 right = true
 scaleview = Vector2( 0.5, 1 )
-scales = true
 
 [node name="spr" type="Sprite" parent="camholder/cam/top"]
 position = Vector2( 0, 27.618 )
@@ -423,10 +418,9 @@ script = ExtResource( 21 )
 script = ExtResource( 32 )
 initresources = [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ]
 
-[connection signal="body_entered" from="player/getflor" to="player" method="_on_getflor_body_entered"]
 [connection signal="area_entered" from="player/chunkdect" to="baker" method="_on_chunkdect_area_entered"]
-[connection signal="generated" from="generator" to="baker" method="_on_generator_generated"]
 [connection signal="generated" from="generator" to="player" method="_on_generator_generated"]
+[connection signal="generated" from="generator" to="baker" method="_on_generator_generated"]
 [connection signal="lineend" from="generator" to="generator/checkman" method="_on_generator_lineend"]
 [connection signal="setscripts" from="generator" to="generator/checkman" method="_on_generator_setscripts"]
 [connection signal="pressed" from="camholder/cam/center/errorback/goback" to="." method="menuback"]

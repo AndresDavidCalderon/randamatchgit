@@ -65,3 +65,4 @@ func defined():
 				tunnel.typestr="cavecont"
 			_:
 				$debug.texture=globals.res.getres("res://forall/sistematic/debug/unknown.png")
+				

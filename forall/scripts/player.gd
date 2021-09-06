@@ -93,8 +93,6 @@ func getvert(sp,dir):
 	if $getflor.get_overlapping_bodies().size()>0:
 		gety=sp*cos(dir-(PI/2))
 	return gety
-func _on_getflor_body_entered(body):
-	prints(body,body.name)
 func isright():
 	if Input.is_action_pressed("changedirr"):
 		return true

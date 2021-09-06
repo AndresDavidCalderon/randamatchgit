@@ -108,6 +108,6 @@ func oncam(_cam):
 
 
 func _on_killdown_area_entered(area):
-	if area!=get_node("dect") and area.name!="killdown":
+	if area!=get_node("dect") and area.get_parent().get("typestr")!=null and area.name!="killdown":
 		$killdown.queue_free()
 		globals.iprint([area.get_parent(),"passed treshold"])

@@ -17,7 +17,8 @@ func _on_generator_generated():
 export(bool) var debugoptiz
 func _on_chunkdect_area_entered(_area):
 	var stage=dect.get_overlapping_areas()[0].get_parent().stage-10 as int
-	if stage>0 and gen.chunksbystage.size()>stage:
+	var checks=get_parent().get_node("generator/checkman")
+	if stage>0 and gen.chunksbystage.size()>stage and checks.stagebyid.has("self") and checks.stagebyid["self"]>stage:
 		var hdone=0
 		while hdone<gen.chunksbystage[stage].size():
 			var inst=gen.chunksbystage[stage][hdone]

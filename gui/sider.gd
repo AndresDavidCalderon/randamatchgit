@@ -1,9 +1,4 @@
 extends Node2D
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 class_name aligner,"res://gui/images/extendericon.png"
 export(bool) var bottom
 export(bool) var right
@@ -11,14 +6,17 @@ export var scaleview=Vector2(1,1)
 export(bool) var invisiblestart
 export(Vector2) var offset
 onready var initscale=scale
-export(bool) var scales
+export(bool) var scalesondesktop
+export(bool) var scalesonmobile=true
 onready var defres=Vector2(ProjectSettings.get("display/window/size/width"),ProjectSettings.get("display/window/size/height"))
-
+var scales=false
 func _ready():
 	if invisiblestart:
 		visible=false
-	prints("connecting sider to root with error",get_tree().root.connect("size_changed", self, "setgui"))
+	get_tree().root.connect("size_changed", self, "setgui")
 	setgui()
+	if (scalesondesktop and (OS.get_name()=="Windows" or OS.get_name()=="OSX" or OS.get_name()=="WUP")) or (scalesonmobile and (OS.get_name()=="Android" or OS.get_name()=="iOS")):
+		scales=true
 func setgui():
 	var base=get_viewport_rect()
 	position=Vector2(0,0)

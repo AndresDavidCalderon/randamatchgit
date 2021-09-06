@@ -11,7 +11,7 @@ func _ready():
 		var res=JSON.parse(fileman.get_as_text())
 		prints("parsed save",res.error)
 		if res.error==OK:
-			$name/name.text=res.result["name"]
+			$topleftmain/name.text=res.result["name"]
 			nameman.usname=res.result["name"]
 		fileman.close()
 	randomize()
@@ -27,7 +27,7 @@ remote func newplayer(id):
 var onserver=null
 func _on_new_pressed():
 	restartinterfaces()
-	if $name/name.text=="username":
+	if $topleftmain/name.text=="username":
 		$nameman.visible=true
 	else:
 		onserver=true
@@ -43,7 +43,7 @@ func _on_comfirm_pressed():
 			startserv()
 		false:
 			$joinman.visible=true
-	$name/name.text=nameman.usname
+	$topleftmain/name.text=nameman.usname
 	var filexisted=fileman.file_exists(saveloc)
 	fileman.open(saveloc,File.WRITE_READ)
 	var fil
@@ -73,7 +73,7 @@ func startserv():
 	page2()
 func _on_join_pressed():
 	onserver=false
-	if $name/name.text!="username":
+	if $topleftmain/name.text!="username":
 		$joinman.visible=true
 	else:
 		$nameman.visible=true

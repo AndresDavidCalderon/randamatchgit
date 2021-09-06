@@ -1,3 +1,155 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a6792e9bb5ffdb8deba4004eeef4633a0e6dbb9800fcfa8ece7badaad72f3378
-size 5492
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://forall/chunkconts/check/left.gltf" type="PackedScene" id=1]
+[ext_resource path="res://forall/chunkconts/check/leftbody.gd" type="Script" id=2]
+[ext_resource path="res://forall/chunkconts/check/elevator.gltf" type="PackedScene" id=3]
+[ext_resource path="res://forall/chunkconts/check/Material_005.material" type="Material" id=4]
+[ext_resource path="res://forall/chunkconts/check/basetext.tscn" type="PackedScene" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 31.7806, 0.311981, 29.6959 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 29.1559, 0.676551, 2.12989 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 18.9001, 0.329193, 18.9062 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 29.5394, 44.6204, 29.5467 )
+
+[sub_resource type="Animation" id=5]
+length = 2.934
+tracks/0/type = "value"
+tracks/0/path = NodePath("all/elevator:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.1, 1.5, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 37, 0 ), Vector3( 0, 37, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.1, 1.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "awake"
+}, {
+"args": [  ],
+"method": "addfor"
+} ]
+}
+
+[node name="check" type="Spatial"]
+script = ExtResource( 2 )
+adforce = 16000.0
+
+[node name="all" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.999974, 0.00720815, 0, -0.00720815, 0.999974, 0, 0.174509, -0.0143356 )
+collision_layer = 3
+collision_mask = 3
+
+[node name="left" parent="all" instance=ExtResource( 1 )]
+
+[node name="Cube" parent="all/left" index="0"]
+use_in_baked_light = true
+material/0 = ExtResource( 4 )
+
+[node name="col" type="CollisionShape" parent="all"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.659009, 0 )
+shape = SubResource( 1 )
+
+[node name="front" type="CollisionShape" parent="all"]
+transform = Transform( 1, 0, 0, 0, 0.895696, 0.444666, 0, -0.444666, 0.895696, 0, -0.780315, 28.3593 )
+shape = SubResource( 2 )
+
+[node name="front2" type="CollisionShape" parent="all"]
+transform = Transform( 1, 0, 0, 0, 0.895696, -0.444666, 0, 0.444666, 0.895696, 0, -0.780315, -28.203 )
+shape = SubResource( 2 )
+
+[node name="front3" type="CollisionShape" parent="all"]
+transform = Transform( -4.37114e-08, 0.444666, 0.895696, 0, 0.895696, -0.444666, -1, -2.00234e-08, -3.91155e-08, -28.4353, -0.780315, 1.74219 )
+shape = SubResource( 2 )
+
+[node name="front4" type="CollisionShape" parent="all"]
+transform = Transform( -4.37114e-08, -0.444666, 0.895696, 0, 0.895696, 0.444666, -1, 1.9437e-08, -3.91521e-08, 28.8439, -0.780315, 1.74219 )
+shape = SubResource( 2 )
+
+[node name="elevator" type="Spatial" parent="all"]
+
+[node name="elevator" parent="all/elevator" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.007, -0.036, -0.017 )
+
+[node name="elevator" parent="all/elevator/elevator" index="0"]
+use_in_baked_light = true
+material/0 = ExtResource( 4 )
+
+[node name="Cube" parent="all/elevator/elevator" index="1"]
+use_in_baked_light = true
+material/0 = ExtResource( 4 )
+
+[node name="Cube001" parent="all/elevator/elevator" index="2"]
+use_in_baked_light = true
+material/0 = ExtResource( 4 )
+
+[node name="Cube002" parent="all/elevator/elevator" index="3"]
+use_in_baked_light = true
+material/0 = ExtResource( 4 )
+
+[node name="Cube003" parent="all/elevator/elevator" index="4"]
+use_in_baked_light = true
+material/0 = ExtResource( 4 )
+
+[node name="appear" type="Spatial" parent="all/elevator"]
+transform = Transform( -1, 0, -8.74228e-08, -6.30154e-10, 0.999974, 0.00720815, 8.74202e-08, 0.00720815, -0.999974, -9.1194, -20.258, -8.29669 )
+
+[node name="body" type="StaticBody" parent="all/elevator"]
+
+[node name="col" type="CollisionShape" parent="all/elevator/body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.57125, 1.86265e-09 )
+shape = SubResource( 3 )
+
+[node name="down" type="CollisionShape" parent="all/elevator/body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25.8878, -8.3819e-09 )
+shape = SubResource( 3 )
+
+[node name="checkarea" type="Area" parent="."]
+
+[node name="col" type="CollisionShape" parent="checkarea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 42.0045, 0 )
+shape = SubResource( 4 )
+
+[node name="seer" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 11.6362, 0 )
+
+[node name="spawn" type="AnimationPlayer" parent="."]
+anims/spawn = SubResource( 5 )
+
+[node name="name" type="Sprite3D" parent="."]
+transform = Transform( 1.3, 8.74228e-08, -8.74228e-08, 1.1365e-07, -1, 0, -1.1365e-07, -7.64274e-15, -1, 0, 39.1014, 0.367638 )
+visible = false
+flip_h = true
+double_sided = false
+
+[node name="view" type="Viewport" parent="."]
+size = Vector2( 6000, 700 )
+transparent_bg = true
+
+[node name="base" parent="view" instance=ExtResource( 5 )]
+
+[connection signal="body_entered" from="checkarea" to="." method="_on_checkarea_body_entered"]
+[connection signal="animation_finished" from="spawn" to="." method="_on_spawn_animation_finished"]
+
+[editable path="all/left"]
+[editable path="all/elevator/elevator"]
+[editable path="view/base"]
