@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6f994abda87da84feff89d2391de4e77bcd6ba03da9ed9e2169ed5b863a04536
-size 171
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://forall/sistematic/globals.gd" type="Script" id=1]
+
+[node name="globals" type="Node"]
+script = ExtResource( 1 )

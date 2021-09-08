@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:695f0d8ffe3c16dbc0366bad08062b834da8f55e95dfffee83edcb029a8c3544
-size 192
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://network/server.gd" type="Script" id=1]
+
+[node name="server" type="Node"]
+script = ExtResource( 1 )
+maxattempts = 120
+maxclients = 5
