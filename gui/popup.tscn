@@ -13,15 +13,8 @@ font_data = ExtResource( 1 )
 
 [node name="popup" type="Panel"]
 margin_right = 318.0
-margin_bottom = 70.0
+margin_bottom = 85.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="centerer" type="CenterContainer" parent="."]
-margin_right = 319.0
-margin_bottom = 107.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -32,7 +25,7 @@ margin_top = 8.70667
 margin_right = 286.724
 margin_bottom = 38.7067
 custom_fonts/font = SubResource( 1 )
-text = "this is a popup"
+text = "popup!"
 align = 1
 autowrap = true
 clip_text = true
@@ -55,19 +48,20 @@ __meta__ = {
 [node name="vorder" type="VBoxContainer" parent="."]
 margin_left = 16.0
 margin_top = 39.0
-margin_right = 298.0
-margin_bottom = 64.0
+margin_right = 300.0
+margin_bottom = 84.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="description" type="Label" parent="vorder"]
-margin_right = 282.0
-margin_bottom = 25.0
+margin_right = 284.0
+margin_bottom = 45.0
 custom_fonts/font = ExtResource( 6 )
 text = "stuff goes here, explains what happened and what to do.
 now im putting some extra space here so yeah"
 align = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

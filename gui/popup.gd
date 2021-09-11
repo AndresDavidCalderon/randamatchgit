@@ -25,6 +25,9 @@ func popup(title:String,desc="",fields:Array=[]):
 	visible=true
 	var added=0
 	$title.text=title
+	var font=$title.get("custom_fonts/font") as DynamicFont
+	while font.get_string_size(title).x>$title.rect_size.x:
+		font.size-=1
 	var desclabel=$vorder/description
 	desclabel.text=desc
 	var instanced=[]

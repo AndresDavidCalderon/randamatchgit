@@ -41,19 +41,6 @@ sync func imloaded():
 		loaded+=1
 		loadedids[str(get_tree().get_rpc_sender_id())]=true
 		rpc("updateload",loaded,loadedids)
-remote func rpconmenu(path:NodePath,funcname:String,args:Array):
-	if get_node_or_null("/root/menu")!=null:
-		get_node(path).callv(funcname,args)
-		print("called",funcname,"on",path)
-	else:
-		if canprint:
-			prints("fuction",funcname,"sended after menu, ignoring.")
-			canprint=false
-			$unlockprint.start($unlockprint.wait_time)
-func rpcmenu(node:Node,funcname:String,args:Array,local:bool):
-	rpc("rpconmenu",node.get_path(),funcname,args)
-	if local:
-		node.callv(funcname,args)
 remote func emergencygo():
 	if get_node_or_null("/root/menu")!=null:
 		get_node("/root/menu").gotomatch()

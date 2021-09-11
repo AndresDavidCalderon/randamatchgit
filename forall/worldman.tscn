@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:95f85182240cebc97fbf45dace347fcbcd13e3e7b15e9dc8acadaeeef69b897c
-size 317
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://forall/worldman.gd" type="Script" id=1]
+
+[node name="worldman" type="Node"]
+script = ExtResource( 1 )
+checkfre = 11
+
+[node name="unlockprint" type="Timer" parent="."]
+
+[connection signal="timeout" from="unlockprint" to="." method="_on_unlockprint_timeout"]
