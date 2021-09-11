@@ -1,49 +1,76 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/LuckiestGuy-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://gui/popup.gd" type="Script" id=2]
+[ext_resource path="res://gui/images/quitpressed.png" type="Texture" id=3]
+[ext_resource path="res://gui/images/quit.png" type="Texture" id=4]
+[ext_resource path="res://gui/images/quithover.png" type="Texture" id=5]
+[ext_resource path="res://gui/smallfont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
+size = 36
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 10
-font_data = ExtResource( 1 )
-
-[node name="popup" type="Node2D"]
+[node name="popup" type="Panel"]
+margin_right = 318.0
+margin_bottom = 70.0
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="back" type="Panel" parent="."]
-margin_left = -0.314987
-margin_right = 321.685
-margin_bottom = 135.0
+[node name="centerer" type="CenterContainer" parent="."]
+margin_right = 319.0
+margin_bottom = 107.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="title" type="Label" parent="."]
-margin_left = 72.2453
-margin_top = 2.78179
-margin_right = 250.245
-margin_bottom = 35.7818
+margin_left = 21.7235
+margin_top = 8.70667
+margin_right = 286.724
+margin_bottom = 38.7067
 custom_fonts/font = SubResource( 1 )
-text = "popup title"
+text = "this is a popup"
+align = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quit" type="TextureButton" parent="."]
+margin_left = 301.759
+margin_top = -15.7403
+margin_right = 333.759
+margin_bottom = 16.2597
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="vorder" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 39.0
+margin_right = 298.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="description" type="Label" parent="vorder"]
+margin_right = 282.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 6 )
+text = "stuff goes here, explains what happened and what to do.
+now im putting some extra space here so yeah"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-margin_left = 6.0
-margin_top = 33.0
-margin_right = 315.0
-margin_bottom = 46.0
-custom_fonts/font = SubResource( 2 )
-text = "stuff goes here, explains what happened and what to do."
-align = 1
-valign = 3
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[connection signal="sort_children" from="vorder" to="." method="_on_vorder_sort_children"]

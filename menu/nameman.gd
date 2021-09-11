@@ -1,14 +1,7 @@
 extends Node
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var buttonscreated=0
 var buttbyrpc={}
 export(float) var buttony
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().connect("connected_to_server",self,"update")
 	get_tree().connect("network_peer_connected",self,"newp")
@@ -54,8 +47,3 @@ func update():
 		else:
 			print("the server doesnt have the id")
 		checked+=1
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-

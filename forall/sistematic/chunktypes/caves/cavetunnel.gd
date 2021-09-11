@@ -17,7 +17,7 @@ func defined():
 			add_child(child)
 			child.rotation_degrees.y=0
 			offset.y=30
-	if not gen.chunkbypos.has(forward+offset):
+	if not gen.chunkbypos.has(forward+worldman.transtopos(offset)):
 		if randman.randbool(70) or cavelong<2 or hilltype!="forward" or not gen.chunkbypos.has(forwup):
 			var tunnel=createcont(Vector3()+offset,get_script(),true)
 			var hillposibs:Array

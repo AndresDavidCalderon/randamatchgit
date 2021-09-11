@@ -1,7 +1,6 @@
 extends TextureButton
 func _on_picbutton_button_up():
-	$frame.border_color.a=0.5
+	$frame.modulate.a=1
 
 func _on_picbutton_button_down():
-	$frame.border_color.a=1
-	
+	$frame.modulate.a=0.5

@@ -108,7 +108,7 @@ func decode(code:String):
 	else:
 		resultip="error"
 	return [resultip,int(portres)]
-func connectserv(ip,port):
+func connectto(ip,port):
 	var error=multman.create_client(ip,port)
 	prints("connecting with error",error)
 	if error==OK:
