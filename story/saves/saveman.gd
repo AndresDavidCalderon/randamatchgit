@@ -12,16 +12,17 @@ func save():
 	fileman.open(savedir,File.WRITE)
 	fileman.store_string(JSON.print(file))
 	fileman.close()
-	print("saved!")
+	prints("saved!",file)
 func _notification(what):
 	match what:
 		NOTIFICATION_WM_QUIT_REQUEST:
 			save()
 func _ready():
-	var openerror=fileman.open(savedir,File.WRITE_READ)
+	var openerror=fileman.open(savedir,File.READ)
 	if openerror==OK:
+		globals.iprint(["loading",fileman.get_as_text()])
 		var result=JSON.parse(fileman.get_as_text()) as JSONParseResult
-		if result.error!=OK and typeof(result.result)==TYPE_DICTIONARY:
+		if result.error==OK and typeof(result.result)==TYPE_DICTIONARY:
 			file=result.result
 			globals.iprint("succesful load")
 		else:
