@@ -21,10 +21,14 @@ func _on_join_pressed():
 	if $edit.start():
 		returns=globals.popuper.popup("join","",[LineEdit,Button]) as Array
 		returns[0].placeholder_text="match code"
+		returns[0].connect("text_changed",self,"codechange")
 		returns[1].text="go"
 		returns[1].connect("pressed",self,"usematch")
+func codechanged(text:String):
+	returns[0].text=text.to_upper()
 func usematch():
-	var codes=server.get_node("decoder").toip(returns[0].text)
+	var codes=server.get_node("encoder").toip(returns[0].text)
+	doclient(codes[0],codes[1])
 func doclientip():
 	doclient(returns[0].text,int(returns[1].text))
 func doclient(ip,port):

@@ -41,4 +41,5 @@ func toip(code:String)->Array:
 		done+=1
 		if code[done]=="M":
 			index=1
+	answer[1]=int(answer[1])
 	return answer

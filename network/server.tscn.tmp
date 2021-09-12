@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://network/server.gd" type="Script" id=1]
+[ext_resource path="res://network/encoder.gd" type="Script" id=2]
+
+[node name="server" type="Node"]
+script = ExtResource( 1 )
+maxattempts = 120
+maxclients = 5
+
+[node name="encoder" type="Node" parent="."]
+script = ExtResource( 2 )
+iptocode = {
+".": "K",
+".254": "V",
+".5": "N",
+"0": "A",
+"1": "B",
+"129": "Z",
+"16": "X",
+"169.254.129.43": "T",
+"19": "Q",
+"2": "C",
+"3": "D",
+"4": "E",
+"4120": "O",
+"41202": "P",
+"5": "F",
+"54": "R",
+"6": "G",
+"7": "H",
+"8": "I",
+"9": "J",
+"9.2": "W"
+}

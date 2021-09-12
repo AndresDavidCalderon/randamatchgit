@@ -60,6 +60,7 @@ script = ExtResource( 4 )
 position = Vector2( 1023.96, -0.078742 )
 script = ExtResource( 21 )
 right = true
+scalesonmobile = false
 
 [node name="titlefri" parent="partyman" instance=ExtResource( 3 )]
 position = Vector2( -3.76288, -5.02569 )
@@ -77,10 +78,10 @@ __meta__ = {
 }
 
 [node name="back" type="TextureButton" parent="partyman/titlefri"]
-margin_left = 93.3073
+margin_left = 93.3074
 margin_top = 22.1735
 margin_right = 173.307
-margin_bottom = 102.173
+margin_bottom = 102.174
 rect_scale = Vector2( -0.673, 0.627 )
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 8 )
@@ -399,11 +400,10 @@ position = Vector2( 3.46497, -1.09236 )
 bypress = true
 
 [node name="popup" parent="cam" instance=ExtResource( 22 )]
-visible = false
-margin_left = -151.488
-margin_top = -33.822
-margin_right = 163.512
-margin_bottom = 36.178
+margin_left = -151.0
+margin_top = -34.0
+margin_right = 164.0
+margin_bottom = 50.0
 
 [connection signal="pressed" from="partyman/titlefri/back" to="partyman" method="_on_back_pressed"]
 [connection signal="pressed" from="partyman/code/ipshow" to="partyman/code" method="_on_ipshow_pressed"]

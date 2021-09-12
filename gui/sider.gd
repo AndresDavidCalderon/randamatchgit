@@ -8,15 +8,11 @@ export(Vector2) var offset
 onready var initscale=scale
 export(bool) var scalesondesktop
 export(bool) var scalesonmobile=true
-onready var defres=Vector2(ProjectSettings.get("display/window/size/width"),ProjectSettings.get("display/window/size/height"))
-var scales=false
 func _ready():
 	if invisiblestart:
 		visible=false
 	get_tree().root.connect("size_changed", self, "setgui")
 	setgui()
-	if (scalesondesktop and (OS.get_name()=="Windows" or OS.get_name()=="OSX" or OS.get_name()=="WUP")) or (scalesonmobile and (OS.get_name()=="Android" or OS.get_name()=="iOS")):
-		scales=true
 func setgui():
 	var base=get_viewport_rect()
 	position=Vector2(0,0)
@@ -25,14 +21,5 @@ func setgui():
 	if right:
 		position.x=base.size.x*scaleview.x
 	position+=offset
-	if scales:
-		var vews=get_viewport_rect().size/defres
-		var minvews
-		if vews.x>vews.y:
-			minvews=vews.y
-		else:
-			minvews=vews.x
-		scale=initscale*(minvews)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	if (scalesondesktop and globals.ostype=="desktop") or (scalesonmobile and globals.ostype=="mobile"):
+		scale=initscale*globals.getguisize()
