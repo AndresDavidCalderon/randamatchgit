@@ -1,3 +1,31 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:688d2ed70d1633fe0b98b4d7a5299c300f9053c5b343efc3c516d0236eb6e002
-size 1093
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts/LuckiestGuy-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://menu/name.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 23
+font_data = ExtResource( 1 )
+
+[node name="name" type="Panel"]
+margin_left = -172.205
+margin_right = 0.794617
+margin_bottom = 23.0
+rect_min_size = Vector2( 173, 23 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="."]
+margin_left = 2.20541
+margin_top = 2.0
+margin_right = 169.205
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "buttdkname"
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

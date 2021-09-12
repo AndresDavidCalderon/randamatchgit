@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://menu/name.png" type="Texture" id=1]
 [ext_resource path="res://fonts/LuckiestGuy-Regular.ttf" type="DynamicFontData" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://menu/party.gd" type="Script" id=21]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=22]
 [ext_resource path="res://menu/nameedit.gd" type="Script" id=23]
+[ext_resource path="res://gui/code.gd" type="Script" id=24]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -89,6 +90,7 @@ __meta__ = {
 
 [node name="code" parent="partyman" instance=ExtResource( 3 )]
 position = Vector2( 1.40765, 600.564 )
+script = ExtResource( 24 )
 bottom = true
 
 [node name="back" type="Panel" parent="partyman/code"]
@@ -165,6 +167,7 @@ __meta__ = {
 
 [node name="tr" parent="partyman" instance=ExtResource( 3 )]
 position = Vector2( 1028.77, -0.417122 )
+script = ExtResource( 14 )
 right = true
 
 [node name="playerico" type="Sprite" parent="partyman/tr"]
@@ -182,12 +185,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="nameman" type="Node" parent="partyman/tr"]
-script = ExtResource( 14 )
+[node name="names" type="VBoxContainer" parent="partyman/tr"]
+margin_left = -206.0
+margin_top = 72.0
+margin_right = -10.0
+margin_bottom = 76.0
 __meta__ = {
-"_editor_description_": "manages names taken from the nameman singleton and puts them in the UI"
+"_edit_use_anchors_": false
 }
-buttony = 90.0
 
 [node name="br" parent="partyman" instance=ExtResource( 3 )]
 position = Vector2( 1053.11, 611.31 )
@@ -392,8 +397,8 @@ margin_right = 163.512
 margin_bottom = 36.178
 
 [connection signal="pressed" from="partyman/titlefri/back" to="partyman" method="_on_back_pressed"]
-[connection signal="pressed" from="partyman/code/ipshow" to="." method="_on_ipshow_pressed"]
-[connection signal="pressed" from="partyman/code/copy" to="." method="_on_copy_pressed"]
+[connection signal="pressed" from="partyman/code/ipshow" to="partyman/code" method="_on_ipshow_pressed"]
+[connection signal="pressed" from="partyman/code/copy" to="partyman/code" method="_on_copy_pressed"]
 [connection signal="pressed" from="partyman/br/start" to="partyman/br" method="_on_start_pressed"]
 [connection signal="pressed" from="topleftmain/multiplayer/create" to="topleftmain/multiplayer" method="_on_create_pressed"]
 [connection signal="pressed" from="topleftmain/multiplayer/join" to="topleftmain/multiplayer" method="_on_join_pressed"]

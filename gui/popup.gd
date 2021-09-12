@@ -7,7 +7,6 @@ var addedchild=[]
 func _on_quit_pressed():
 	unpopup()
 func unpopup():
-	globals.iprint("unpopuping")
 	if visible:
 		var cleared=0
 		while cleared<addedchild.size():

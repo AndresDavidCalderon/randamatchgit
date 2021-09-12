@@ -1,14 +1,8 @@
 extends Node
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var namebyrpc={}
 export(Array,Color) var colorbyorder
 export(String) var usname
 signal updated
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	server.connect("updated",self,"update")
 	randomize()
@@ -25,6 +19,3 @@ remote func setwhole(list):
 	namebyrpc=list
 	prints("the server told all the list",list)
 	emit_signal("updated")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

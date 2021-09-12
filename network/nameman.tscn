@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b881bf98dde517ba320066d75deeb222a55a14e0b983d35932361369dbc4805c
-size 395
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://network/nameman.gd" type="Script" id=1]
+
+[node name="nameman" type="Node"]
+script = ExtResource( 1 )
+colorbyorder = [ Color( 0, 0, 0, 1 ), Color( 0.313726, 0, 0, 1 ), Color( 0.0235294, 0.0235294, 0.243137, 1 ), Color( 0, 0.258824, 0.27451, 1 ), Color( 0.113725, 0.345098, 0, 1 ), Color( 0.729412, 0.717647, 0, 1 ) ]
+usname = "idkname"
