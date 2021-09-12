@@ -8,9 +8,11 @@ func _pressed():
 func onfile(file:Dictionary):
 	if file.has("name"):
 		label.text=file["name"]
+		nameman.usname=file["name"]
 func start():
 	if saver.file.has("name"):
 		label.text=saver.file["name"]
+		nameman.usname=saver.file["name"]
 		return true
 	else:
 		askforname()

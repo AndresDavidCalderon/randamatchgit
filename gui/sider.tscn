@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:22d4e58b82fc7904635ff1b32d2fb2864242ab3cab16b22aa4c11f7e4c8d2ff4
-size 155
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gui/sider.gd" type="Script" id=1]
+
+[node name="sider" type="Node2D"]
+script = ExtResource( 1 )

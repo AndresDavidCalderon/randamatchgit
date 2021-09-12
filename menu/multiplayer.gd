@@ -25,14 +25,6 @@ func _on_join_pressed():
 		returns[1].connect("pressed",self,"usematch")
 func usematch():
 	var codes=server.get_node("decoder").toip(returns[0].text)
-func byip():
-	returns=globals.popuper.popup("join by ip","",[LineEdit,LineEdit,Button])
-	returns[0].placeholder_text="ip"
-	returns[0].text="127.0.0.1"
-	returns[1].placeholder_text="port"
-	returns[1].text="41202"
-	returns[2].text="go"
-	returns[2].connect("pressed",self,"doclientip")
 func doclientip():
 	doclient(returns[0].text,int(returns[1].text))
 func doclient(ip,port):
@@ -48,3 +40,13 @@ func clientfail():
 func clientsuccess():
 	globals.camera.page(2)
 	get_tree().disconnect("connected_to_server",self,"clientsuccess")
+
+
+func _on_ip_pressed():
+	returns=globals.popuper.popup("join by ip","",[LineEdit,LineEdit,Button])
+	returns[0].placeholder_text="ip"
+	returns[0].text="127.0.0.1"
+	returns[1].placeholder_text="port"
+	returns[1].text="41202"
+	returns[2].text="go"
+	returns[2].connect("pressed",self,"doclientip")

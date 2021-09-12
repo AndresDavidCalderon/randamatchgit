@@ -18,11 +18,6 @@ func serverfail():
 	error.visible=true
 	error.get_node("title").text="the player who hosted the match disconnected"
 	$player/sync.set_process(false)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func menuback():
 	server.kill()
 	get_tree().change_scene("res://menu/menu.tscn")

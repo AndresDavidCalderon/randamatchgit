@@ -266,6 +266,16 @@ margin_top = 339.288
 margin_right = -43.3659
 margin_bottom = 519.288
 
+[node name="ip" type="Button" parent="topleftmain/multiplayer/join"]
+margin_left = 268.93
+margin_top = 189.153
+margin_right = 319.93
+margin_bottom = 209.153
+text = "use ip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="name" type="Label" parent="topleftmain/multiplayer"]
 margin_left = -391.264
 margin_top = 34.9445
@@ -385,7 +395,6 @@ right = true
 scaleview = Vector2( 0.5, -0.5 )
 
 [node name="console" parent="cam/topright" instance=ExtResource( 11 )]
-visible = false
 position = Vector2( 3.46497, -1.09236 )
 bypress = true
 
@@ -402,6 +411,7 @@ margin_bottom = 36.178
 [connection signal="pressed" from="partyman/br/start" to="partyman/br" method="_on_start_pressed"]
 [connection signal="pressed" from="topleftmain/multiplayer/create" to="topleftmain/multiplayer" method="_on_create_pressed"]
 [connection signal="pressed" from="topleftmain/multiplayer/join" to="topleftmain/multiplayer" method="_on_join_pressed"]
+[connection signal="pressed" from="topleftmain/multiplayer/join/ip" to="topleftmain/multiplayer" method="_on_ip_pressed"]
 [connection signal="pressed" from="aligner/close" to="." method="_on_close_pressed"]
 [connection signal="timeout" from="connectout" to="." method="_on_connectout_timeout"]
 [connection signal="pressed" from="cam/error/backtotitle" to="cam/error" method="_on_backtotitle_pressed"]
