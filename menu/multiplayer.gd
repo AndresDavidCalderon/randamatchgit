@@ -24,17 +24,21 @@ func _on_join_pressed():
 		returns[0].connect("text_changed",self,"codechange")
 		returns[1].text="go"
 		returns[1].connect("pressed",self,"usematch")
-func codechanged(text:String):
+func codechange(text:String):
 	returns[0].text=text.to_upper()
 func usematch():
 	var codes=server.get_node("encoder").toip(returns[0].text)
 	doclient(codes[0],codes[1])
 func doclientip():
 	doclient(returns[0].text,int(returns[1].text))
+func connectout():
+	globals.popuper.popup("it took too long to connect","it may just not be doing anything, try again later.")
 func doclient(ip,port):
 	globals.popuper.unpopup()
 	var error=server.connectto(ip,port)
 	if error==OK:
+		$connectout.start()
+		$connectout.connect("timeout",self,"connectout")
 		get_tree().connect("connected_to_server",self,"clientsuccess")
 		get_tree().connect("connection_failed",self,"clientfail")
 	else:

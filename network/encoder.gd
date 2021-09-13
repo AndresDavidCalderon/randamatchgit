@@ -33,13 +33,17 @@ func tocode(ip:String,port)->String:
 					break
 	return result
 func toip(code:String)->Array:
+	code=code.to_upper()
 	var index=0
 	var answer=["",""]
 	var done=0
 	while done<code.length():
-		answer[index]+=codetoip[code[done]]
-		done+=1
 		if code[done]=="M":
 			index=1
+			done+=1
+		else:
+			answer[index]+=codetoip[code[done]]
+		done+=1
+	print(answer)
 	answer[1]=int(answer[1])
 	return answer

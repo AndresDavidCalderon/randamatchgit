@@ -21,7 +21,8 @@ func unpopup():
 func popup(title:String,desc="",fields:Array=[]):
 	if visible:
 		unpopup()
-	rect_scale=globals.getguisize()
+	if globals.ostype=="mobile":
+		rect_scale=globals.getguisize()
 	visible=true
 	var added=0
 	$title.text=title
