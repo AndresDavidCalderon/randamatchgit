@@ -11,7 +11,9 @@ export(bool) var scalesonmobile=true
 func _ready():
 	if invisiblestart:
 		visible=false
-	get_tree().root.connect("size_changed", self, "setgui")
+	var error=get_tree().root.connect("size_changed", self, "setgui")
+	if error!=OK:
+		globals.popuper.popup("the UI couldnt load correctly")
 	setgui()
 func setgui():
 	var base=get_viewport_rect()

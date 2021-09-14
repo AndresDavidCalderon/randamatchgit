@@ -46,6 +46,7 @@ func doclient(ip,port):
 func clientfail():
 	globals.popuper.popup("we had trouble connecting you","check your connection")
 func clientsuccess():
+	$connectout.stop()
 	globals.camera.page(2)
 	get_tree().disconnect("connected_to_server",self,"clientsuccess")
 

@@ -12,6 +12,7 @@ var hoverride=0
 var winned=0
 signal winupdate
 signal allready
+signal mustgo
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	winorder.resize(5)
@@ -43,7 +44,7 @@ sync func imloaded():
 		rpc("updateload",loaded,loadedids)
 remote func emergencygo():
 	if get_node_or_null("/root/menu")!=null:
-		get_node("/root/menu").gotomatch()
+		emit_signal("mustgo")
 	else:
 		rpc("imloaded")
 var canprint=true

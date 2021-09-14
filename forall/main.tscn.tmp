@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://forall/visual/carrep.tscn" type="PackedScene" id=1]
 [ext_resource path="res://models/ruedabody.tscn" type="PackedScene" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://forall/sistematic/debug/tohill.png" type="Texture" id=36]
 [ext_resource path="res://forall/sistematic/chunktypes/caves/cavetunnel.gd" type="Script" id=37]
 [ext_resource path="res://forall/chunkconts/hills/caves/cavetunnel.tscn" type="PackedScene" id=38]
+[ext_resource path="res://gui/popup.tscn" type="PackedScene" id=39]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.23
@@ -66,17 +67,6 @@ extents = Vector2( 40, 45 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 40, 45 )
-
-[sub_resource type="DynamicFont" id=10]
-outline_size = 1
-outline_color = Color( 1, 0, 0, 1 )
-font_data = ExtResource( 16 )
-
-[sub_resource type="DynamicFont" id=11]
-size = 32
-outline_size = 1
-outline_color = Color( 0.2, 0.0980392, 0.0980392, 1 )
-font_data = ExtResource( 16 )
 
 [sub_resource type="DynamicFont" id=12]
 size = 64
@@ -316,37 +306,11 @@ bottom = true
 right = true
 scaleview = Vector2( 0.5, 0.5 )
 
-[node name="errorback" type="Panel" parent="camholder/cam/center"]
-margin_left = -289.163
-margin_top = -61.5676
-margin_right = 282.837
-margin_bottom = 69.4324
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="title" type="Label" parent="camholder/cam/center/errorback"]
-margin_left = 83.3409
-margin_top = 7.88093
-margin_right = 496.34
-margin_bottom = 31.881
-custom_fonts/font = SubResource( 10 )
-text = "error example"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="goback" type="Button" parent="camholder/cam/center/errorback"]
-margin_left = 112.903
-margin_top = 58.4007
-margin_right = 463.902
-margin_bottom = 97.4007
-custom_fonts/font = SubResource( 11 )
-text = "back to the menu"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="popup" parent="camholder/cam/center" instance=ExtResource( 39 )]
+margin_left = -155.671
+margin_top = -43.5733
+margin_right = 162.329
+margin_bottom = 41.4267
 
 [node name="top" parent="camholder/cam" instance=ExtResource( 9 )]
 position = Vector2( 512.034, 3.75803 )
@@ -423,7 +387,6 @@ initresources = [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 35 ), ExtRe
 [connection signal="generated" from="generator" to="player" method="_on_generator_generated"]
 [connection signal="lineend" from="generator" to="generator/checkman" method="_on_generator_lineend"]
 [connection signal="setscripts" from="generator" to="generator/checkman" method="_on_generator_setscripts"]
-[connection signal="pressed" from="camholder/cam/center/errorback/goback" to="." method="menuback"]
 [connection signal="botsended" from="playervisman" to="camholder/cam/top/spr" method="_on_playervisman_botsended"]
 [connection signal="timeout" from="actionman/wintime" to="actionman" method="_on_wintime_timeout"]
 [connection signal="timeout" from="loadtime" to="." method="_on_loadtime_timeout"]

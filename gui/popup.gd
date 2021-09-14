@@ -2,6 +2,7 @@ extends Panel
 signal closed
 func _init():
 	globals.popuper=self
+	visible=false
 var normalsize=rect_size.y
 var addedchild=[]
 func _on_quit_pressed():
@@ -18,7 +19,8 @@ func unpopup():
 		$vorder.queue_sort()
 	else:
 		globals.iprint("already unpopuped")
-func popup(title:String,desc="",fields:Array=[]):
+func popup(title:String,desc="",fields:Array=[],canout=true):
+	$quit.visible=canout
 	if visible:
 		unpopup()
 	if globals.ostype=="mobile":

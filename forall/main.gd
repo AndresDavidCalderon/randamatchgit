@@ -11,12 +11,12 @@ func _ready():
 		get_tree().connect("server_disconnected",self,"serverfail")
 	else:
 		worldman.emit_signal("allready")
-	error.visible=false
 
 func serverfail():
 	$loadtime.disconnect("timeout",self,"serverfail")
-	error.visible=true
-	error.get_node("title").text="the player who hosted the match disconnected"
+	var button=globals.popuper.popup("seems like you got disconnected","",[Button],false)
+	button[0].text="back to menu"
+	button[0].connect("pressed",self,"menuback")
 	$player/sync.set_process(false)
 func menuback():
 	server.kill()

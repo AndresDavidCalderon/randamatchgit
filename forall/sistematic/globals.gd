@@ -23,7 +23,6 @@ func iprint(text):
 			console.printsline([text])
 func getguisize():
 	var vews=get_viewport_rect().size/defres
-	var minvews
 	if vews.x>vews.y:
 		return Vector2(vews.y,vews.y)
 	else:

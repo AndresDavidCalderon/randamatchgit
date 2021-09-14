@@ -37,7 +37,7 @@ func start():
 func _ready():
 	if worldman.hoverride!=0:
 		terrwide=worldman.hoverride
-	worldman.connect("allready",self,"start")
+	var error=worldman.connect("allready",self,"start")
 	box.width=(60*(terrwide+1))/2
 	get_node("/root/main/floor/col").shape.extents.x=box.width-60
 	pos.x=startpos

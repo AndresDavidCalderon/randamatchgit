@@ -1,21 +1,14 @@
 extends KinematicBody
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var myname=""
 var myid:String
 var predicts=false
 onready var generator=get_node("/root/main/generator")
 export(float) var gravity
-# Called when the node enters the scene tree for the first time.
+export(float) var transpeed
 func settran(position,rotationarg):
+	$trans.interpolate_property(self,"translation",translation,position,transpeed)
 	translation=position
 	rotation=rotationarg
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 func _integrate_forces(state):
 	if not predicts:
 		state.transform.origin=translation
