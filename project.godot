@@ -50,6 +50,7 @@ worldman="*res://forall/worldman.tscn"
 randman="*res://forall/sistematic/randman.gd"
 globals="*res://forall/sistematic/globals.tscn"
 saver="*res://story/saves/saveman.gd"
+math="*res://forall/sistematic/math.gd"
 
 [debug]
 

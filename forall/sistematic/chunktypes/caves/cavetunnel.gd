@@ -11,15 +11,15 @@ func defined():
 			var child=globals.res.getres("res://forall/chunkconts/hills/caves/todownbody.tscn").instance() as StaticBody
 			add_child(child)
 			child.translation.y=-30
-			offset.y=-30
+			offset.y=-1
 		"up":
 			var child=globals.res.getres("res://forall/chunkconts/hills/caves/todownbody.tscn").instance() as StaticBody
 			add_child(child)
 			child.rotation_degrees.y=0
-			offset.y=30
+			offset.y=1
 	if not gen.chunkbypos.has(forward+worldman.transtopos(offset)):
 		if randman.randbool(70) or cavelong<2 or hilltype!="forward" or not gen.chunkbypos.has(forwup):
-			var tunnel=createcont(Vector3()+offset,get_script(),true)
+			var tunnel=createcont(Vector3()+worldman.postotrans(offset),get_script(),true)
 			var hillposibs:Array
 			match hilltype:
 				"forward":
@@ -47,7 +47,7 @@ func defined():
 			continuing.add_child(ramp)
 			ramp.rotation_degrees.y=0
 	else:
-		match gen.chunkbypos[forward+worldman.transtopos(offset)].typestr:
+		match gen.chunkbypos[forward+offset].typestr:
 			"hill":
 				$debug.texture=globals.res.getres("res://forall/sistematic/debug/tohill.png")
 				gen.chunkbypos[forward+offset].queue_free()
@@ -58,7 +58,7 @@ func defined():
 			"cavein","caveout":
 				$debug.texture=globals.res.getres("res://forall/sistematic/debug/replace.png")
 				globals.console.printsline(["merging caves"])
-				gen.chunkbypos[forward+worldman.transtopos(offset)].queue_free()
+				gen.chunkbypos[forward+offset].queue_free()
 				var replace=createcont(Vector3(0,30,0),globals.res.getres("res://forall/sistematic/chunktypes/plain.gd"),true)
 				replace.typestr="plain"
 				var tunnel=createcont(Vector3(),get_script(),true)

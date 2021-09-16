@@ -47,9 +47,10 @@ remote func emergencygo():
 		emit_signal("mustgo")
 	else:
 		rpc("imloaded")
-var canprint=true
 onready var chunkscript=preload("res://forall/sistematic/chunk.gd")
-func _on_unlockprint_timeout():
-	canprint=true
+
 func transtopos(trans):
 	return Vector3(round(trans.x/60),round(trans.y/30),round(trans.z/60))
+
+func postotrans(trans):
+	return Vector3(round(trans.x*60),round(trans.y*30),round(trans.z*60))

@@ -68,11 +68,11 @@ extents = Vector2( 40, 45 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 40, 45 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=10]
 size = 64
 font_data = ExtResource( 16 )
 
-[sub_resource type="ProceduralSky" id=13]
+[sub_resource type="ProceduralSky" id=11]
 sky_top_color = Color( 0.247059, 0.321569, 0.364706, 1 )
 sky_horizon_color = Color( 0.203922, 0.356863, 0.478431, 1 )
 ground_bottom_color = Color( 0.141176, 0.25098, 0.12549, 1 )
@@ -80,9 +80,9 @@ ground_energy = 0.47
 sun_latitude = 127.89
 sun_longitude = -118.42
 
-[sub_resource type="Environment" id=14]
+[sub_resource type="Environment" id=12]
 background_mode = 2
-background_sky = SubResource( 13 )
+background_sky = SubResource( 11 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 fog_depth_begin = 19.0
 fog_transmit_enabled = true
@@ -194,7 +194,7 @@ hillprov = 50
 betweencaves = 5
 genmode = "byvis"
 outsidechunks = 8
-leng = 30
+leng = 100
 stepbystep = true
 cavechance = 70
 chunk = ExtResource( 23 )
@@ -330,7 +330,7 @@ margin_left = -28.0722
 margin_top = 45.8081
 margin_right = 35.9278
 margin_bottom = 109.808
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "#1"
 __meta__ = {
@@ -359,7 +359,7 @@ script = ExtResource( 13 )
 playersource = ExtResource( 14 )
 
 [node name="env" type="WorldEnvironment" parent="."]
-environment = SubResource( 14 )
+environment = SubResource( 12 )
 
 [node name="actionman" type="Node" parent="."]
 script = ExtResource( 17 )

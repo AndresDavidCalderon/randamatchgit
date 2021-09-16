@@ -5,7 +5,3 @@
 [node name="worldman" type="Node"]
 script = ExtResource( 1 )
 checkfre = 11
-
-[node name="unlockprint" type="Timer" parent="."]
-
-[connection signal="timeout" from="unlockprint" to="." method="_on_unlockprint_timeout"]

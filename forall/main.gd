@@ -1,17 +1,10 @@
 extends Node
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-onready var error=$camholder/cam/center/errorback
 func _ready():
 	if server.players>1:
 		worldman.rpc("imloaded")
 		get_tree().connect("server_disconnected",self,"serverfail")
 	else:
 		worldman.emit_signal("allready")
-
 func serverfail():
 	$loadtime.disconnect("timeout",self,"serverfail")
 	var button=globals.popuper.popup("seems like you got disconnected","",[Button],false)
@@ -29,7 +22,7 @@ func _on_loadtime_timeout():
 		while checked<server.players:
 			if not worldman.loadedids.has(str(server.idbyorder[checked+1])):
 				worldman.rpc_id(server.idbyorder[checked+1],"emergencygo")
-				prints(nameman.namebyrpc[str(server.idbyorder[checked+1])],"isnt here!")
+				globals.iprint([nameman.namebyrpc[str(server.idbyorder[checked+1])],"isnt here!"])
 			checked+=1
 	tries+=1
 	if tries>maxtries:

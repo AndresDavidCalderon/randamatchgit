@@ -6,7 +6,8 @@ onready var generator=get_node("/root/main/generator")
 export(float) var gravity
 export(float) var transpeed
 func settran(position,rotationarg):
-	$trans.interpolate_property(self,"translation",translation,position,transpeed)
+	if translation.distance_to(position)>0:
+		$trans.interpolate_property(self,"translation",translation,position,transpeed*(30/translation.distance_to(position)))
 	translation=position
 	rotation=rotationarg
 func _integrate_forces(state):
