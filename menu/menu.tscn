@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://menu/name.png" type="Texture" id=1]
 [ext_resource path="res://fonts/LuckiestGuy-Regular.ttf" type="DynamicFontData" id=2]
@@ -25,6 +25,8 @@
 [ext_resource path="res://menu/nameedit.gd" type="Script" id=23]
 [ext_resource path="res://gui/code.gd" type="Script" id=24]
 [ext_resource path="res://menu/details.gd" type="Script" id=25]
+[ext_resource path="res://story/onmenu.gd" type="Script" id=26]
+[ext_resource path="res://gui/images/loadbackonstory.png" type="Texture" id=27]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -204,19 +206,19 @@ right = true
 
 [node name="start" type="Button" parent="partyman/br"]
 margin_left = -77.5503
-margin_top = -96.7934
+margin_top = -97.7934
 margin_right = -12.5503
-margin_bottom = -10.7934
+margin_bottom = -11.7934
 icon = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="load" type="TextureProgress" parent="partyman/br"]
-margin_left = -189.561
-margin_top = -55.6622
-margin_right = -89.5607
-margin_bottom = -50.6622
+margin_left = -190.0
+margin_top = -56.0
+margin_right = -90.0
+margin_bottom = -40.0
 texture_progress = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -308,9 +310,40 @@ one_shot = true
 
 [node name="story" type="Node2D" parent="topleftmain"]
 position = Vector2( -32.0917, 32.0917 )
+script = ExtResource( 26 )
+
+[node name="picbutton" parent="topleftmain/story" instance=ExtResource( 17 )]
+margin_left = -334.075
+margin_top = 66.5381
+margin_right = -14.0752
+margin_bottom = 246.538
+
+[node name="title" parent="topleftmain/story/picbutton" index="0"]
+text = "continue"
+
+[node name="bottom" type="Node2D" parent="topleftmain/story"]
+position = Vector2( -274.631, 544.764 )
+script = ExtResource( 5 )
+bottom = true
+scaleview = Vector2( 1, 0.9 )
+fromzero = false
+
+[node name="load" type="TextureProgress" parent="topleftmain/story/bottom"]
+visible = false
+margin_left = -72.7675
+margin_top = -28.8865
+margin_right = 69.2325
+margin_bottom = -12.8865
+value = 3.0
+rounded = true
+texture_under = ExtResource( 27 )
+texture_progress = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="aligner" type="Node2D" parent="."]
-position = Vector2( -0.337296, 600.125 )
+position = Vector2( -4.26588, 601.809 )
 script = ExtResource( 5 )
 bottom = true
 
@@ -418,11 +451,13 @@ margin_bottom = 37.0
 [connection signal="pressed" from="topleftmain/multiplayer/create" to="topleftmain/multiplayer" method="_on_create_pressed"]
 [connection signal="pressed" from="topleftmain/multiplayer/join" to="topleftmain/multiplayer" method="_on_join_pressed"]
 [connection signal="pressed" from="topleftmain/multiplayer/join/ip" to="topleftmain/multiplayer" method="_on_ip_pressed"]
+[connection signal="pressed" from="topleftmain/story/picbutton" to="topleftmain/story" method="_on_picbutton_pressed"]
 [connection signal="pressed" from="aligner/close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="story" to="." method="_on_story_pressed"]
 [connection signal="pressed" from="multiplayer" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="cam/error/backtotitle" to="cam/error" method="_on_backtotitle_pressed"]
 
 [editable path="topleftmain/multiplayer/create"]
+[editable path="topleftmain/story/picbutton"]
 [editable path="story"]
 [editable path="multiplayer"]

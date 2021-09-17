@@ -8,6 +8,7 @@ export(Vector2) var offset
 onready var initscale=scale
 export(bool) var scalesondesktop
 export(bool) var scalesonmobile=true
+export(bool) var fromzero=true
 func _ready():
 	if invisiblestart:
 		visible=false
@@ -17,7 +18,8 @@ func _ready():
 	setgui()
 func setgui():
 	var base=get_viewport_rect()
-	position=Vector2(0,0)
+	if fromzero:
+		position=Vector2(0,0)
 	if bottom:
 		position.y=base.size.y*scaleview.y
 	if right:
