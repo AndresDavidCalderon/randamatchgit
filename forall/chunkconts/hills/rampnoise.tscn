@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:150cb33c2ade15f3c8504599035a424ac0fd0a25a61ce4f5edf3d2a02fa15f86
-size 1464
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://forall/chunkconts/hills/fromblendernomat/tcsn/rampnoise.tscn" type="PackedScene" id=1]
+[ext_resource path="res://forall/chunkconts/collis/rampnoisebody.tscn" type="PackedScene" id=2]
+
+[sub_resource type="HeightMapShape" id=1]
+map_width = 8
+map_depth = 8
+map_data = PoolRealArray( -13.45, -13.369, -13.5, -13.463, -13.594, -13.382, -13.224, -13.305, -9.129, -8.83, -8.343, -8.243, -8.152, -6.429, -5.168, -8.362, -4.738, -3.862, -3.626, -3.884, -1.806, 1.101, -1.294, -4.88, -0.441, -0.564, -1.023, 0.779, 3.298, 2.908, 1.043, -0.456, 3.66, 3.018, 4.085, 6.247, 6.015, 6.241, 5.795, 4.138, 8.014, 8.667, 9.687, 9.592, 9.785, 11.267, 10.894, 8.42, 13.127, 13.238, 14.028, 13.299, 14.015, 14.995, 13.596, 12.274, 16.424, 16.272, 16.341, 16.398, 15.261, 15.851, 16.035, 14.91 )
+
+[node name="rampnoise" type="Spatial"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+
+[node name="body" parent="." instance=ExtResource( 2 )]
+collision_layer = 3
+collision_mask = 3
+
+[node name="col" parent="body" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.446385, -0.89484, 0, 0.89484, 0.446385, -0.0391808, 14.1162, 0.498316 )
+
+[node name="rub" type="CollisionShape" parent="body"]
+transform = Transform( 8.15162, 0, 0, 0, 1, 0, 0, 0, 8.70529, -0.470945, 13.4756, 0.708369 )
+shape = SubResource( 1 )
+
+[node name="rampnoise" parent="." instance=ExtResource( 1 )]
+
+[editable path="body"]

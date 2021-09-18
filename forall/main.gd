@@ -26,4 +26,5 @@ func _on_loadtime_timeout():
 			checked+=1
 	tries+=1
 	if tries>maxtries:
+		globals.iprint("we waited to long for others to load in, started the race.")
 		worldman.emit_signal("allready")

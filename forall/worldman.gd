@@ -17,7 +17,7 @@ signal mustgo
 func _ready():
 	winorder.resize(5)
 var wseed:int
-export(int) var checkfre
+var checkfre=15
 sync func win():
 	if server.type=="server":
 		var id=str(get_tree().get_rpc_sender_id())

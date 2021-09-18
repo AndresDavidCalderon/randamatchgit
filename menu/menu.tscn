@@ -107,10 +107,10 @@ __meta__ = {
 }
 
 [node name="title" type="Label" parent="partyman/code"]
-margin_left = 6.36389
-margin_top = -168.999
-margin_right = 46.3639
-margin_bottom = -154.999
+margin_left = 6.0
+margin_top = -169.0
+margin_right = 195.0
+margin_bottom = -126.0
 custom_fonts/font = SubResource( 1 )
 text = "match code:"
 __meta__ = {
@@ -118,10 +118,10 @@ __meta__ = {
 }
 
 [node name="code" type="Label" parent="partyman/code"]
-margin_left = 3.10913
-margin_top = -116.891
-margin_right = 665.109
-margin_bottom = -35.8909
+margin_left = 3.0
+margin_top = -117.0
+margin_right = 665.0
+margin_bottom = -53.0
 custom_fonts/font = SubResource( 2 )
 text = "code test"
 __meta__ = {
@@ -215,10 +215,10 @@ __meta__ = {
 }
 
 [node name="load" type="TextureProgress" parent="partyman/br"]
-margin_left = -190.0
-margin_top = -56.0
-margin_right = -90.0
-margin_bottom = -40.0
+margin_left = -244.729
+margin_top = -58.6697
+margin_right = -102.729
+margin_bottom = -42.6697
 texture_progress = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false

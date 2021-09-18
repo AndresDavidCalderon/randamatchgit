@@ -8,8 +8,7 @@ func _process(_delta):
 	match error:
 		OK:
 			if loader.get_stage()!=0:
-				prints((loader.get_stage()/loader.get_stage_count())*100)
-				$bottom/load.value=(loader.get_stage()/loader.get_stage_count())*100
+				$bottom/load.value=math.getloadpercentage(loader)
 		ERR_FILE_EOF:
 			get_tree().change_scene_to(loader.get_resource())
 func _on_picbutton_pressed():

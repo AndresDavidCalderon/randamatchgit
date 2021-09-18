@@ -12,7 +12,7 @@ func servupd(type:String):
 		$start.visible=true
 func _process(_delta):
 	var error=loader.poll()
-	$load.value=(float(loader.get_stage())/float(loader.get_stage_count()))*100
+	$load.value=math.getloadpercentage(loader)
 	match error:
 		OK:
 			pass

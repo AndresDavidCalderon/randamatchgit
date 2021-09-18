@@ -75,8 +75,8 @@ func _integrate_forces(state):
 			if isleft():
 				add_torque(Vector3(0,-rotspeed,0))
 		add_central_force(Vector3(go.x,-getvert(speed,rotation.x),go.y))
-		#bajar o subir partes del carro, o gravedad angular. esto ya esta
-		#en las fisicas normales, pero es necesario un empuje extra. ↓
+	#bajar o subir partes del carro, o gravedad angular. esto ya esta
+	#en las fisicas normales, pero es necesario un empuje extra. ↓
 	if balancing:
 		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
 			addlocaltorque("x",-rotgrav)

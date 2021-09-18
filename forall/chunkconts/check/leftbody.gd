@@ -1,19 +1,9 @@
 extends Spatial
-
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 onready var player:RigidBody=get_node("/root/main/player")
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(false)
 
 onready var checkman=get_node("/root/main/generator/checkman")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 onready var pos=$all/elevator/appear
 var connected=false
 func newcheck():
