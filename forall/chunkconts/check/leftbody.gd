@@ -30,7 +30,7 @@ func _on_checkarea_body_entered(body):
 		$name.texture=$view.get_texture()
 		$view/base/label.text=body.myname
 		checkman.stagebyid[body.myid]=get_parent().stage
-onready var holder:Spatial=get_node("/root/main/camholder")
+onready var holder:Spatial=get_node("/root/main/camhold")
 func resetphysics(state:PhysicsDirectBodyState):
 	player.translation=pos.global_transform.origin
 	state.transform.origin=pos.global_transform.origin

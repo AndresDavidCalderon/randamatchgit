@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gui/debug/output.gd"
 }, {
+"base": "RigidBody",
+"class": "player",
+"language": "GDScript",
+"path": "res://forall/scripts/player.gd"
+}, {
 "base": "Node",
 "class": "resman",
 "language": "GDScript",
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "aligner": "res://gui/images/extendericon.png",
 "input": "res://gui/debug/input.png",
 "output": "res://gui/debug/output.png",
+"player": "res://classicons/player.png",
 "resman": "res://forall/sistematic/resman.png"
 }
 
@@ -51,7 +57,7 @@ randman="*res://forall/sistematic/randman.gd"
 globals="*res://forall/sistematic/globals.tscn"
 saver="*res://story/saves/saveman.gd"
 math="*res://forall/sistematic/math.gd"
-story="*res://story/storyman.gd"
+story="*res://story/storyman.tscn"
 
 [debug]
 
@@ -132,7 +138,6 @@ common/enable_pause_aware_picking=true
 quality/driver/fallback_to_gles2=true
 quality/intended_usage/framebuffer_allocation.mobile=2
 vram_compression/import_etc=true
-quality/shading/force_vertex_shading.mobile=false
 gles2/compatibility/disable_half_float=true
 environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
 environment/default_environment="res://default_env.tres"

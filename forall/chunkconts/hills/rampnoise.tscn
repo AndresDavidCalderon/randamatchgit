@@ -25,3 +25,4 @@ shape = SubResource( 1 )
 [node name="rampnoise" parent="." instance=ExtResource( 1 )]
 
 [editable path="body"]
+[editable path="rampnoise"]

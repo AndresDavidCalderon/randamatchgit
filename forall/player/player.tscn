@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://forall/scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://models/ruedabody.tscn" type="PackedScene" id=3]
+[ext_resource path="res://forall/visual/carrep.tscn" type="PackedScene" id=4]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.23
+rough = true
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 3.84104, 3.18178, 8.40115 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 5.21962, 1.1307, 8.01676 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 4.37119, 1.93052, 2.04197 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 3.96996, 0.843558, 1.26515 )
+
+[sub_resource type="CylinderShape" id=6]
+radius = 1.96
+height = 8.77372
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 7.17086, 7.65976, 12.9206 )
+
+[node name="player" type="RigidBody"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0103111, 15.0876, 22.8899 )
+mass = 345.214
+physics_material_override = SubResource( 1 )
+sleeping = true
+can_sleep = false
+angular_damp = 2.306
+script = ExtResource( 1 )
+speed = 16000.0
+rotspeed = 12000.0
+balancing = true
+rotgrav = 6000.0
+rotonair = 10000.0
+
+[node name="col" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, -5.68434e-14, 0, 0.999999, 0, 0, 0, 0.999999, -0.194292, 2.19102, -4.53217 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="getflor" type="Area" parent="."]
+transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 0.532305, -4.97684, -6.03905 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="getflor"]
+transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.11499, 1.58941 )
+shape = SubResource( 3 )
+
+[node name="getfront" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.999999, 0, 0, 0, 1, 1.36948, -3.60535, -10.1944 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="getfront"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420212 )
+shape = SubResource( 4 )
+
+[node name="getright" type="Area" parent="."]
+transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -3.71438, -4.79198, -4.37423 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="getright"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420213 )
+shape = SubResource( 5 )
+
+[node name="getback" type="Area" parent="."]
+transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 1.18189, -4.57895, 1.18832 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="getback"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4215, 2.23199, 0.930443 )
+shape = SubResource( 4 )
+
+[node name="vis" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98536, 0, 0 )
+
+[node name="ruedaback" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0771024, -1.00491, 1.71085 )
+shape = SubResource( 6 )
+
+[node name="ruedafront" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0771014, -1.00491, -10.4764 )
+shape = SubResource( 6 )
+
+[node name="chunkdect" type="Area" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="col" type="CollisionShape" parent="chunkdect"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.61572 )
+shape = SubResource( 7 )

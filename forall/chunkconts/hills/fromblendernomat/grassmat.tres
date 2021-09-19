@@ -4,5 +4,6 @@
 
 [resource]
 flags_ensure_correct_normals = true
+params_specular_mode = 4
 albedo_texture = ExtResource( 1 )
 metallic_specular = 0.0

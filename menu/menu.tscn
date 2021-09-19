@@ -309,6 +309,7 @@ wait_time = 12.419
 one_shot = true
 
 [node name="story" type="Node2D" parent="topleftmain"]
+visible = false
 position = Vector2( -32.0917, 32.0917 )
 script = ExtResource( 26 )
 
@@ -439,9 +440,9 @@ position = Vector2( 3.46497, -1.09236 )
 bypress = true
 
 [node name="popup" parent="cam" instance=ExtResource( 22 )]
-margin_left = -153.0
+margin_left = -152.5
 margin_top = -47.0
-margin_right = 162.0
+margin_right = 162.5
 margin_bottom = 37.0
 
 [connection signal="pressed" from="partyman/titlefri/back" to="partyman" method="_on_back_pressed"]

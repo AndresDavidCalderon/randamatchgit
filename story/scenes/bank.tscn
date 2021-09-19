@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
+
+[node name="main" type="Node"]
+
+[node name="floor" type="CSGBox" parent="."]
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+width = 185.705
+depth = 205.694
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.34365, 11.1013, -9.89315 )

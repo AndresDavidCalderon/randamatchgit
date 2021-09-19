@@ -13,6 +13,6 @@ func _process(_delta):
 			get_tree().change_scene_to(loader.get_resource())
 func _on_picbutton_pressed():
 	$bottom/load.visible=true
-	loader=ResourceLoader.load_interactive(story.scnbymission["peterpan"])
+	loader=ResourceLoader.load_interactive(story.scnbycontract["bank"],"PackedScene")
 	$picbutton.disabled=true
 	set_process(true)

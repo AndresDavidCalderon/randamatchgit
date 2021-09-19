@@ -1,2 +1,2 @@
 extends Node
-var scnbymission={"peterpan":"res://story/mansion.tscn"}
+export(Dictionary) var scnbycontract 

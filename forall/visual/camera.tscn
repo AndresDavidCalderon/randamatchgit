@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://gui/popup.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gui/sider.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gui/debug/console.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gui/sider.gd" type="Script" id=9]
+[ext_resource path="res://forall/scripts/cam.gd" type="Script" id=10]
+
+[node name="cam" type="ClippedCamera"]
+transform = Transform( -1, 4.03173e-08, -7.7571e-08, 0, 0.887309, 0.461176, 8.74228e-08, 0.461176, -0.887309, 1.026, 16.1351, -17.1835 )
+current = true
+fov = 74.0
+size = 94.19
+far = 850.1
+margin = 2.97
+collision_mask = 4
+script = ExtResource( 10 )
+
+[node name="sidertl" parent="." instance=ExtResource( 2 )]
+
+[node name="fps" type="Label" parent="sidertl"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 3.31955, 3.31955 )
+text = "fps: "
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="center" parent="." instance=ExtResource( 2 )]
+position = Vector2( 524.408, 263.702 )
+bottom = true
+right = true
+scaleview = Vector2( 0.5, 0.5 )
+
+[node name="popup" parent="center" instance=ExtResource( 1 )]
+visible = false
+margin_left = -155.671
+margin_top = -43.5733
+margin_right = 162.329
+margin_bottom = 41.4267
+
+[node name="topright" type="Node2D" parent="."]
+position = Vector2( 1024.51, -0.747765 )
+script = ExtResource( 9 )
+right = true
+
+[node name="console" parent="topright" instance=ExtResource( 3 )]
+bypress = true

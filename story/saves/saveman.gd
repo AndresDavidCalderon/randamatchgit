@@ -48,7 +48,9 @@ func waitforfile(who:Node,method="onfile"):
 	else:
 		globals.iprint("couldnt notify on file loading")
 func tofolder():
-	OS.shell_open("file://"+savedir)
+	var error=OS.shell_open("file://"+savedir)
+	if error!=OK:
+		globals.popuper.popup("couldnt open the folder","error "+str(error))
 func reset():
 	file={}
 func quiterror():

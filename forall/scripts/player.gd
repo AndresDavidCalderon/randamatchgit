@@ -1,28 +1,23 @@
 extends RigidBody
-# Declare member variables here. Examples:
+class_name player,"res://classicons/player.png"
 export(float) var speed
 export(float) var rotspeed
 export(bool) var balancing
 export(float) var rotgrav
 export(float) var rotonair
-onready var holder=get_node("/root/main/camholder")
-onready var cam:ClippedCamera=get_node("/root/main/camholder/cam")
 export(float) var goupspeed
-onready var gen=get_node("/root/main/generator")
 onready var initrot=rotation
 onready var inittrans=translation
 var hastokill=false
 signal kill
 signal onfis(state)
+func _init():
+	globals.playernd=self
 func kill():
 	hastokill=true
 	sleeping=true
 	emit_signal("kill")
 var ruedarot=0
-# Called when the node enters the scene tree for the first time.
-func _process(_delta):
-	cam.get_node("sidertl/fps").text="fps: "+str(Engine.get_frames_per_second())
-	get_node("/root/main/camholder/cam/sidertl/rot").text="rot="+str(rotation_degrees)
 var tocallonint=[]
 var tocallonintargs=[]
 func callonint(funct:String,args:Array):
@@ -30,7 +25,6 @@ func callonint(funct:String,args:Array):
 	tocallonintargs.resize(tocallonintargs.size()+1)
 	tocallonint[tocallonint.size()-1]=funct
 	tocallonintargs[tocallonintargs.size()-1]=args
-export(bool) var reportbalancing
 func _integrate_forces(state):
 	var done=0
 	while done<tocallonint.size():
@@ -80,12 +74,8 @@ func _integrate_forces(state):
 	if balancing:
 		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
 			addlocaltorque("x",-rotgrav)
-			if reportbalancing:
-				print("lower front")
 		if $getback.get_overlapping_bodies().size()<1 and rotation.x<0:
 			addlocaltorque("x",rotgrav)
-			if reportbalancing:
-				print("lower back")
 func tospatial(sp,dir):
 	return Vector2(sp*-cos(dir+(PI*1.5)),sp*sin(dir+(PI*1.5)))
 func getvert(sp,dir):
@@ -94,26 +84,9 @@ func getvert(sp,dir):
 		gety=sp*cos(dir-(PI/2))
 	return gety
 func isright():
-	if Input.is_action_pressed("changedirr"):
-		return true
-	else:
-		return false
+	return Input.is_action_pressed("changedirr")
 func isleft():
-	if Input.is_action_pressed("changedirl"):
-		return true
-	else:
-		return false
+	return Input.is_action_pressed("changedirl")
 var isripres=false
-func _on_generator_generated():
-	if server.type!="none" and server.players>1:
-		var totalspace=gen.terrwide*30
-		var partwide=totalspace/server.players
-		var myspace=partwide*server.orderbyid[str(get_tree().get_network_unique_id())]
-		translation.x=myspace-(totalspace/2)
-	inittrans=translation
-	initrot=rotation
-	sleeping=false
-	mode=MODE_RIGID
-	$col.disabled=false
 func addlocaltorque(axisarg:String,num:float):
 	add_torque(get_indexed("transform:basis:"+axisarg)*num)

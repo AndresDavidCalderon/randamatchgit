@@ -5,6 +5,7 @@ var camera
 var ostype:String
 var popuper:Panel
 var UIscale
+var playernd:player
 export(Dictionary) var consoleshorts
 onready var defres=Vector2(ProjectSettings.get("display/window/size/width"),ProjectSettings.get("display/window/size/height"))
 func _init():
