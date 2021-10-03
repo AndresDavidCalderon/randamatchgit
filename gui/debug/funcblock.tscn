@@ -1,3 +1,130 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e2f2e9c1fc81c8a5d66333e8584dd21b523c71bf67af8d538d302bcf7125037b
-size 3170
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://gui/debug/funcblock.gd" type="Script" id=1]
+[ext_resource path="res://gui/debug/input.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gui/debug/output.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.25098, 0.341176, 0.839216, 1 )
+
+[node name="runblock" type="Panel"]
+margin_right = 224.0
+margin_bottom = 111.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+typename = "func"
+argument = ExtResource( 2 )
+
+[node name="funcname" type="LineEdit" parent="."]
+margin_left = 2.97043
+margin_top = 23.496
+margin_right = 136.971
+margin_bottom = 47.496
+placeholder_text = "function name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="argcount" type="SpinBox" parent="."]
+margin_left = 3.59
+margin_top = 83.3194
+margin_right = 105.59
+margin_bottom = 107.319
+max_value = 9.0
+rounded = true
+suffix = "args"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="move" type="Button" parent="."]
+margin_left = -23.8106
+margin_top = -18.2973
+margin_right = 24.1894
+margin_bottom = 1.7027
+text = "move"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="run" type="Button" parent="."]
+margin_left = 187.395
+margin_top = 2.96151
+margin_right = 220.395
+margin_bottom = 22.9616
+text = "run"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="return" parent="." instance=ExtResource( 3 )]
+margin_left = 160.405
+margin_top = 86.1555
+margin_right = 172.405
+margin_bottom = 106.155
+savename = "return"
+toblock = NodePath("..")
+
+[node name="title" type="Label" parent="return"]
+margin_left = 19.7189
+margin_top = 1.21358
+margin_right = 59.7189
+margin_bottom = 15.2137
+text = "return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="from" parent="." instance=ExtResource( 2 )]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 18.0
+margin_bottom = 21.0
+savename = "executer"
+
+[node name="title" type="Label" parent="from"]
+margin_left = 25.4792
+margin_top = 4.04432
+margin_right = 65.4792
+margin_bottom = 18.0443
+text = "from"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="debugprint" type="CheckBox" parent="."]
+margin_left = 152.935
+margin_top = 22.936
+margin_right = 176.935
+margin_bottom = 46.936
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="debugprint"]
+margin_left = 22.4134
+margin_top = 6.68468
+margin_right = 91.4134
+margin_bottom = 20.6847
+rect_scale = Vector2( 0.6416, 0.6416 )
+text = "debugprint"
+
+[node name="args" type="Control" parent="."]
+margin_left = 5.99057
+margin_top = 60.9699
+margin_right = 45.9906
+margin_bottom = 100.97
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="text_entered" from="funcname" to="." method="_on_funcname_text_entered"]
+[connection signal="value_changed" from="argcount" to="." method="_on_argcount_value_changed"]
+[connection signal="button_down" from="move" to="." method="_on_move_button_down"]
+[connection signal="button_up" from="move" to="." method="_on_move_button_up"]
+[connection signal="pressed" from="run" to="." method="_on_run_pressed" binds= [ true ]]
+[connection signal="needsfill" from="return" to="." method="_on_return_needsfill"]

@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://forall/visual/camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://forall/visual/camholder.gd" type="Script" id=3]
+[ext_resource path="res://story/images/point.png" type="Texture" id=4]
+[ext_resource path="res://story/technical/pointview.gd" type="Script" id=5]
+[ext_resource path="res://gui/sider.gd" type="Script" id=6]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("targetworld")
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_fixed_size = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+params_cull_mode = 2
+params_billboard_mode = 1
+albedo_texture = ExtResource( 4 )
 
 [node name="main" type="Node"]
 
@@ -12,4 +31,57 @@ width = 185.705
 depth = 205.694
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.34365, 11.1013, -9.89315 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.34365, 3.94204, -9.89315 )
+
+[node name="camhold" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, -7.10543e-15, 1, 0, 1.42109e-14, 0, 1, -1.6593, 10.2818, -6.58997 )
+script = ExtResource( 3 )
+
+[node name="cam" parent="camhold" instance=ExtResource( 2 )]
+transform = Transform( -1, 4.03173e-08, -7.7571e-08, -7.10543e-15, 0.887309, 0.461176, 8.74228e-08, 0.461176, -0.887309, 0.417, 18.623, -19.116 )
+
+[node name="customcenter" type="Node2D" parent="camhold/cam"]
+position = Vector2( 512.002, 302.354 )
+script = ExtResource( 6 )
+bottom = true
+right = true
+scaleview = Vector2( 0.5, 0.5 )
+
+[node name="render" type="Sprite" parent="camhold/cam/customcenter"]
+z_index = -1
+texture = SubResource( 1 )
+
+[node name="totarget" type="RemoteTransform" parent="camhold/cam"]
+remote_path = NodePath("../../../targetworld/remotecam")
+
+[node name="sun" type="DirectionalLight" parent="."]
+transform = Transform( -0.732448, 0.288008, -0.616905, 0, 0.906116, 0.423029, 0.680823, 0.309847, -0.663683, -169.992, 113.424, -175.54 )
+shadow_enabled = true
+
+[node name="building" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -72.4725, 16.1394, -9.31192 )
+use_collision = true
+collision_layer = 5
+collision_mask = 5
+width = 90.8993
+height = 32.3035
+depth = 111.012
+
+[node name="targetworld" type="Viewport" parent="."]
+size = Vector2( 1024, 600 )
+transparent_bg = true
+render_target_v_flip = true
+script = ExtResource( 5 )
+
+[node name="point" type="Sprite3D" parent="targetworld"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7022, 6.4516, 81.5529 )
+material_override = SubResource( 2 )
+centered = false
+offset = Vector2( -8.397, 0 )
+pixel_size = 0.0055
+texture = ExtResource( 4 )
+
+[node name="remotecam" type="Camera" parent="targetworld"]
+transform = Transform( -1, 4.03173e-08, -7.7571e-08, 0, 0.887309, 0.461176, 8.74228e-08, 0.461176, -0.887309, -1.2423, 28.9048, -25.706 )
+fov = 74.0
+far = 1008.4

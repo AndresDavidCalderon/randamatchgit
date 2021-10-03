@@ -158,7 +158,6 @@ initresources = [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 35 ), ExtRe
 script = ExtResource( 6 )
 
 [node name="cam" parent="camhold" instance=ExtResource( 3 )]
-transform = Transform( -1, 4.03173e-08, -7.7571e-08, 0, 0.887309, 0.461176, 8.74228e-08, 0.461176, -0.887309, 1.026, 16.1351, -17.1835 )
 
 [node name="centre" type="Node2D" parent="camhold/cam"]
 position = Vector2( 514.088, 290.718 )

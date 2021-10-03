@@ -159,5 +159,5 @@ func win(body):
 	if body==player:
 		print("winn")
 		checkwall.disconnect("body_entered",self,"win")
-		get_node("/root/main/camholder").set_process(false)
+		get_node("/root/main/camhold").set_process(false)
 		get_node("/root/main/actionman").onwin()

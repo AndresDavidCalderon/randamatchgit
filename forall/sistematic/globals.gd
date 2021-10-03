@@ -1,7 +1,7 @@
 extends Node2D
 var console:Node2D
 var res:resman
-var camera
+var camera:Camera
 var ostype:String
 var popuper:Panel
 var UIscale
