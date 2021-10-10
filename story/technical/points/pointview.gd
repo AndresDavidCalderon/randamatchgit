@@ -8,4 +8,7 @@ func _ready():
 	if error!=OK:
 		globals.popuper.popup("error loading the world UI")
 func setsize():
-	size=get_parent().get_parent().size
+	if get_parent().get_parent() is Viewport:
+		size=get_parent().get_parent().size
+	else:
+		globals.iprint("seems like the targetworld is in the wrong place")

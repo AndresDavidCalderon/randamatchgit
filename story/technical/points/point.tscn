@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://story/technical/points/point.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 6.78066, 5.77252, 5.88821 )
+
+[node name="point" type="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7022, 6.4516, 81.5529 )
+script = ExtResource( 1 )
+
+[node name="col" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="rt" type="RemoteTransform" parent="."]

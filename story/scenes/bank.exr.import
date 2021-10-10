@@ -1,0 +1,24 @@
+[remap]
+
+importer="texture_array"
+type="TextureArray"
+path="res://.import/bank.exr-21c04004dbbc64dd55b4d9696a1a9c72.texarr"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://story/scenes/bank.exr"
+dest_files=[ "res://.import/bank.exr-21c04004dbbc64dd55b4d9696a1a9c72.texarr" ]
+
+[params]
+
+compress/mode=0
+compress/no_bptc_if_rgb=false
+flags/repeat=false
+flags/filter=true
+flags/mipmaps=false
+flags/srgb=false
+slices/horizontal=1
+slices/vertical=2

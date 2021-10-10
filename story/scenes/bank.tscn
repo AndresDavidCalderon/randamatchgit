@@ -1,13 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://forall/visual/camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://forall/visual/camholder.gd" type="Script" id=3]
 [ext_resource path="res://story/images/point.png" type="Texture" id=4]
-[ext_resource path="res://story/technical/pointview.gd" type="Script" id=5]
+[ext_resource path="res://story/technical/points/pointview.gd" type="Script" id=5]
 [ext_resource path="res://gui/sider.gd" type="Script" id=6]
+[ext_resource path="res://story/technical/points/point.tscn" type="PackedScene" id=7]
+[ext_resource path="res://story/technical/points/pointspr.tscn" type="PackedScene" id=8]
+[ext_resource path="res://story/technical/missionui}.tscn" type="PackedScene" id=9]
 
-[sub_resource type="ViewportTexture" id=1]
+[sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("targetworld")
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -49,10 +52,12 @@ scaleview = Vector2( 0.5, 0.5 )
 
 [node name="render" type="Sprite" parent="camhold/cam/customcenter"]
 z_index = -1
-texture = SubResource( 1 )
+texture = SubResource( 3 )
 
 [node name="totarget" type="RemoteTransform" parent="camhold/cam"]
 remote_path = NodePath("../../../targetworld/remotecam")
+
+[node name="mission" parent="camhold/cam" instance=ExtResource( 9 )]
 
 [node name="sun" type="DirectionalLight" parent="."]
 transform = Transform( -0.732448, 0.288008, -0.616905, 0, 0.906116, 0.423029, 0.680823, 0.309847, -0.663683, -169.992, 113.424, -175.54 )
@@ -73,15 +78,18 @@ transparent_bg = true
 render_target_v_flip = true
 script = ExtResource( 5 )
 
-[node name="point" type="Sprite3D" parent="targetworld"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.7022, 6.4516, 81.5529 )
-material_override = SubResource( 2 )
-centered = false
-offset = Vector2( -8.397, 0 )
-pixel_size = 0.0055
-texture = ExtResource( 4 )
-
 [node name="remotecam" type="Camera" parent="targetworld"]
 transform = Transform( -1, 4.03173e-08, -7.7571e-08, 0, 0.887309, 0.461176, 8.74228e-08, 0.461176, -0.887309, -1.2423, 28.9048, -25.706 )
 fov = 74.0
 far = 1008.4
+
+[node name="point" parent="targetworld" instance=ExtResource( 8 )]
+material_override = SubResource( 2 )
+centered = false
+
+[node name="point" parent="." instance=ExtResource( 7 )]
+
+[node name="rt" parent="point" index="1"]
+remote_path = NodePath("../../targetworld/point")
+
+[editable path="point"]

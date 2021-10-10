@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://story/technical/missionUI.gd" type="Script" id=1]
+
+[node name="mission" type="Node2D"]
+position = Vector2( 2.66968, 170.859 )
+script = ExtResource( 1 )
+bottom = true
+scaleview = Vector2( 1, 0.3 )
+steps = [ NodePath("../../../point") ]
+
+[node name="instruccions" type="Label" parent="."]
+margin_left = 13.7214
+margin_top = 3.97157
+margin_right = 108.721
+margin_bottom = 17.9716
+text = "go to the place"
+__meta__ = {
+"_edit_use_anchors_": false
+}
