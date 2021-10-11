@@ -34,6 +34,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.691, 1.103, -4.925 )
 script = ExtResource( 3 )
 cameradistance = 14.166
 cameraangle = -3.777
+turnspeed = 0.0
 offset = Vector3( 3.865, 8.222, 0.01 )
 totarget = NodePath("../player")
 
@@ -96,6 +97,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.691, 1.103, -4.925 )
 script = ExtResource( 4 )
 forwardspeed = 20.0
 backspeed = 10.0
+turnspeed = 0.7
 
 [node name="visual" type="CSGCylinder" parent="player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.64587, 0 )

@@ -1,4 +1,5 @@
 extends Node2D
+signal pausing
 var console:Node2D
 var res:resman
 var camera:Camera
@@ -18,6 +19,7 @@ func _init():
 func _input(event):
 	if event.is_action_pressed("pause"):
 		paused=not paused
+		emit_signal("pausing")
 func iprint(text):
 	if console==null or Engine.editor_hint:
 			prints(text)

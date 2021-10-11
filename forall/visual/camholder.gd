@@ -3,6 +3,8 @@ extends Spatial
 export(Vector3) var baserot
 export(float) var cameradistance=10 setget camdist
 export(float) var cameraangle setget camangle
+export(float) var turnspeed=0.15
+var managemouse:bool
 export(Vector3) var offset setget setoff
 export(NodePath) var totarget
 var target:Spatial
@@ -14,6 +16,19 @@ func _process(_delta):
 		rotation+=baserot
 	else:
 		target=get_node(totarget)
+func _ready():
+	globals.connect("pausing",self,"pause")
+	pause()
+func pause():
+	if managemouse:
+		if globals.paused:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+func _input(event):
+	if managemouse and not globals.paused:
+		if event is InputEventMouseMotion:
+			baserot.y-=sign(event.relative.x)*turnspeed
 
 func camdist(value):
 	cameradistance=value
