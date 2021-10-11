@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://models/car/car.gltf" type="PackedScene" id=1]
 [ext_resource path="res://models/placamat.material" type="Material" id=2]
 [ext_resource path="res://models/placa.gltf" type="PackedScene" id=3]
+[ext_resource path="res://forall/visual/carrep.gd" type="Script" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0, 0, 0, 0.745098 )
@@ -19,6 +20,7 @@ transmission_enabled = true
 transmission = Color( 0.843137, 0.776471, 0.0784314, 1 )
 
 [node name="vis" type="Spatial"]
+script = ExtResource( 4 )
 
 [node name="front" type="CSGBox" parent="."]
 transform = Transform( -1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, -3.18914, 3.92532, -6.8598 )
@@ -85,6 +87,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96845, 0, 0 )
 
 [node name="placa" parent="placa" index="0"]
 material/0 = ExtResource( 2 )
+
+[node name="driverseat" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.63805, 0.32627, -7.08824 )
+
+[node name="rt" type="RemoteTransform" parent="driverseat"]
 
 [editable path="car3"]
 [editable path="car4"]

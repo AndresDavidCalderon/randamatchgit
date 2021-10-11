@@ -1,28 +1,16 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://forall/visual/camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://forall/visual/camholder.gd" type="Script" id=3]
-[ext_resource path="res://story/images/point.png" type="Texture" id=4]
 [ext_resource path="res://story/technical/points/pointview.gd" type="Script" id=5]
 [ext_resource path="res://gui/sider.gd" type="Script" id=6]
 [ext_resource path="res://story/technical/points/point.tscn" type="PackedScene" id=7]
 [ext_resource path="res://story/technical/points/pointspr.tscn" type="PackedScene" id=8]
 [ext_resource path="res://story/technical/missionui}.tscn" type="PackedScene" id=9]
 
-[sub_resource type="ViewportTexture" id=3]
+[sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("targetworld")
-
-[sub_resource type="SpatialMaterial" id=2]
-flags_transparent = true
-flags_unshaded = true
-flags_no_depth_test = true
-flags_fixed_size = true
-flags_do_not_receive_shadows = true
-flags_disable_ambient_light = true
-params_cull_mode = 2
-params_billboard_mode = 1
-albedo_texture = ExtResource( 4 )
 
 [node name="main" type="Node"]
 
@@ -52,7 +40,7 @@ scaleview = Vector2( 0.5, 0.5 )
 
 [node name="render" type="Sprite" parent="camhold/cam/customcenter"]
 z_index = -1
-texture = SubResource( 3 )
+texture = SubResource( 1 )
 
 [node name="totarget" type="RemoteTransform" parent="camhold/cam"]
 remote_path = NodePath("../../../targetworld/remotecam")
@@ -84,12 +72,15 @@ fov = 74.0
 far = 1008.4
 
 [node name="point" parent="targetworld" instance=ExtResource( 8 )]
-material_override = SubResource( 2 )
 centered = false
 
 [node name="point" parent="." instance=ExtResource( 7 )]
+caption = "go to the place"
 
 [node name="rt" parent="point" index="1"]
 remote_path = NodePath("../../targetworld/point")
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01879, 6.67009, -4.92479 )
 
 [editable path="point"]
