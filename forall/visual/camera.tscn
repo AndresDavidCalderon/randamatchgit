@@ -8,6 +8,7 @@
 
 [node name="cam" type="ClippedCamera"]
 transform = Transform( -1, 4.03173e-08, -7.7571e-08, 0, 0.887309, 0.461176, 8.74228e-08, 0.461176, -0.887309, 1.026, 16.1351, -17.1835 )
+cull_mask = 1048573
 current = true
 fov = 74.0
 size = 94.19

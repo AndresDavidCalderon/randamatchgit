@@ -6,6 +6,7 @@ var ostype:String
 var popuper:Panel
 var UIscale
 var playernd:player
+var paused=false
 export(Dictionary) var consoleshorts
 onready var defres=Vector2(ProjectSettings.get("display/window/size/width"),ProjectSettings.get("display/window/size/height"))
 func _init():
@@ -14,6 +15,9 @@ func _init():
 			ostype="mobile"
 		"Windows","OSX","HTML5","UWP":
 			ostype="desktop"
+func _input(event):
+	if event.is_action_pressed("pause"):
+		paused=not paused
 func iprint(text):
 	if console==null or Engine.editor_hint:
 			prints(text)

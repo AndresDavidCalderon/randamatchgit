@@ -78,8 +78,12 @@ script = ExtResource( 5 )
 
 [node name="remotecam" type="Camera" parent="targetworld"]
 transform = Transform( -1, 5.18859e-08, -7.03605e-08, 0, 0.80483, 0.593505, 8.74228e-08, 0.593505, -0.80483, 21.556, 17.7326, -16.3162 )
+cull_mask = 2
 fov = 74.0
 far = 1008.4
+
+[node name="point" parent="targetworld" instance=ExtResource( 8 )]
+centered = false
 
 [node name="point" parent="." instance=ExtResource( 7 )]
 caption = "go to the place"
@@ -101,8 +105,5 @@ height = 11.3032
 [node name="col" type="CollisionShape" parent="player"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.73811, 0 )
 shape = SubResource( 2 )
-
-[node name="point2" parent="." instance=ExtResource( 8 )]
-centered = false
 
 [editable path="point"]
