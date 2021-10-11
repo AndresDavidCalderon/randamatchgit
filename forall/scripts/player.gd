@@ -1,11 +1,13 @@
 extends RigidBody
 class_name player,"res://classicons/player.png"
+signal needsorders
 export(float) var speed
 export(float) var rotspeed
 export(bool) var balancing
 export(float) var rotgrav
 export(float) var rotonair
 export(float) var goupspeed
+var byinput=false
 onready var initrot=rotation
 onready var inittrans=translation
 var hastokill=false
@@ -20,13 +22,17 @@ func kill():
 var ruedarot=0
 var tocallonint=[]
 var tocallonintargs=[]
+#function to call on integrate forces
 func callonint(funct:String,args:Array):
 	tocallonint.resize(tocallonint.size()+1)
 	tocallonintargs.resize(tocallonintargs.size()+1)
 	tocallonint[tocallonint.size()-1]=funct
 	tocallonintargs[tocallonintargs.size()-1]=args
+var orders=[]
 func _integrate_forces(state):
 	var done=0
+	orders=[]
+	emit_signal("needsorders")
 	while done<tocallonint.size():
 		callv(tocallonint[done],tocallonintargs[done])
 		done+=1
@@ -36,13 +42,13 @@ func _integrate_forces(state):
 	var actspeed=speed
 	if $getflor.get_overlapping_bodies().size()<1:
 		actspeed=speed/4
-		if Input.is_action_pressed("changedirl"):
+		if orders.has("r"):
 			addlocaltorque("z",rotonair)
-		elif Input.is_action_pressed("changedirr"):
+		elif orders.has("l"):
 			addlocaltorque("z",-rotonair)
-		if Input.is_action_pressed("forward"):
+		if orders.has("accel"):
 			addlocaltorque("x",-rotonair)
-		elif Input.is_action_pressed("brake"):
+		elif orders.has("break"):
 			addlocaltorque("x",rotonair)
 	if hastokill:
 		state.transform.origin=inittrans
@@ -53,7 +59,7 @@ func _integrate_forces(state):
 		state.angular_velocity=Vector3()
 		sleeping=false
 		hastokill=false
-	if Input.is_action_pressed("forward"):
+	if orders.has("accel"):
 		var go=tospatial(actspeed,rotation.y)
 		if $getfront.get_overlapping_bodies().size()>0:
 			if isleft():
@@ -61,7 +67,7 @@ func _integrate_forces(state):
 			if isright():
 				add_torque(Vector3(0,-rotspeed,0))
 		add_central_force(Vector3(go.x,getvert(speed,rotation.x),go.y))
-	if Input.is_action_pressed("brake"):
+	if orders.has("break"):
 		var go=tospatial(-(actspeed/2),rotation.y)
 		if $getfront.get_overlapping_bodies().size()>0:
 			if isright():
