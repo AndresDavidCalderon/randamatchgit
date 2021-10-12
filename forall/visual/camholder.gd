@@ -42,7 +42,7 @@ func camangle(value):
 	updatethird()
 
 func updatethird():
-	if get_node("cam")!=null:
+	if is_inside_tree() and get_node("cam")!=null:
 		var vec=Vector2(cameradistance,0).rotated(cameraangle)
 		$cam.translation.z=vec.x
 		$cam.translation.y=vec.y

@@ -5,8 +5,9 @@
 [ext_resource path="res://forall/visual/carrep.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.23
+friction = 0.76
 rough = true
+absorbent = true
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 3.84104, 3.18178, 8.40115 )
@@ -27,7 +28,7 @@ height = 8.77372
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 7.17086, 7.65976, 12.9206 )
 
-[node name="player" type="RigidBody"]
+[node name="car" type="RigidBody"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0103111, 15.0876, 22.8899 )
 mass = 345.214
 physics_material_override = SubResource( 1 )
@@ -44,7 +45,6 @@ rotonair = 10000.0
 [node name="col" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, -5.68434e-14, 0, 0.999999, 0, 0, 0, 0.999999, -0.194292, 2.19102, -4.53217 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="getflor" type="Area" parent="."]
 transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 0.532305, -4.97684, -6.03905 )

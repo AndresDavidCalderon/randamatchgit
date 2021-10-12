@@ -32,14 +32,14 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.3436
 [node name="camhold" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.691, 1.103, -4.925 )
 script = ExtResource( 3 )
-cameradistance = 14.166
-cameraangle = -3.777
+cameradistance = 15.32
+cameraangle = -3.622
 turnspeed = 0.0
-offset = Vector3( 3.865, 8.222, 0.01 )
+offset = Vector3( 3.708, 11.88, 0.01 )
 totarget = NodePath("../player")
 
 [node name="cam" parent="camhold" instance=ExtResource( 2 )]
-transform = Transform( -1, 5.18859e-08, -7.03605e-08, 0, 0.80483, 0.593505, 8.74228e-08, 0.593505, -0.80483, 3.865, 16.6296, -11.3912 )
+transform = Transform( -1, 4.04016e-08, -7.75271e-08, 0, 0.886806, 0.462141, 8.74228e-08, 0.462141, -0.886806, 3.708, 18.96, -13.5759 )
 
 [node name="customcenter" type="Node2D" parent="camhold/cam"]
 position = Vector2( 512.002, 302.354 )
@@ -78,7 +78,7 @@ render_target_v_flip = true
 script = ExtResource( 5 )
 
 [node name="remotecam" type="Camera" parent="targetworld"]
-transform = Transform( -1, 5.18859e-08, -7.03605e-08, 0, 0.80483, 0.593505, 8.74228e-08, 0.593505, -0.80483, 21.556, 17.7326, -16.3162 )
+transform = Transform( -1, 4.04017e-08, -7.75271e-08, 0, 0.886806, 0.462141, 8.74228e-08, 0.462141, -0.886806, 21.399, 20.063, -18.5009 )
 cull_mask = 2
 fov = 74.0
 far = 1008.4
@@ -96,7 +96,6 @@ remote_path = NodePath("../../targetworld/point")
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.691, 1.103, -4.925 )
 script = ExtResource( 4 )
 forwardspeed = 20.0
-backspeed = 10.0
 turnspeed = 0.7
 
 [node name="visual" type="CSGCylinder" parent="player"]
