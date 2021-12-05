@@ -5,16 +5,9 @@ func _on_create_pressed():
 	if $edit.start():
 		var port=server.startserv(41202)
 		get_node(tocode).get_node("port").text=str(port)
-		var index
-		match OS.get_name():
-			"Android":
-				index=0
-			"Windows":
-				index=1
-		var ip=IP.get_local_addresses()[index]
+		var ip=IP.get_local_addresses()[4]
 		get_node(tocode).setcode(ip,port)
 		get_node("/root/menu/cam").page(2)
-
 var returns:Array
 func _on_join_pressed():
 	if $edit.start():

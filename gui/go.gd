@@ -19,7 +19,7 @@ func _process(_delta):
 		ERR_FILE_EOF:
 			get_tree().change_scene_to(loader.get_resource())
 		_:
-			var buts=globals.popup("we couldnt load the game","an error ocurred while trying to show you your terrain")
+			globals.popup("we couldnt load the game","an error ocurred while trying to show you your terrain")
 			globals.popuper.connect("closed",self,"back")
 remote func start():
 	set_process(true)

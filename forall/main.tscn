@@ -155,9 +155,15 @@ script = ExtResource( 32 )
 initresources = [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ]
 
 [node name="camhold" type="Spatial" parent="."]
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.0103111, 15.0876, 22.8899 )
 script = ExtResource( 6 )
+cameradistance = 22.547
+cameraangle = 0.677
+turnspeed = 1.097
+totarget = NodePath("../player")
 
 [node name="cam" parent="camhold" instance=ExtResource( 3 )]
+transform = Transform( 1, -1.42189e-07, 6.81422e-08, 6.81422e-08, 0.779456, 0.626458, -1.42189e-07, -0.626458, 0.779456, 0, 14.1247, 17.5744 )
 
 [node name="centre" type="Node2D" parent="camhold/cam"]
 position = Vector2( 514.088, 290.718 )
@@ -253,8 +259,8 @@ margin_left = -28.0
 margin_top = 46.0
 margin_right = 36.0
 margin_bottom = 110.0
-custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
 text = "#1"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -284,8 +290,8 @@ text = "spectate"
 
 [node name="movement" parent="camhold/cam" instance=ExtResource( 7 )]
 
-[connection signal="generated" from="generator" to="baker" method="_on_generator_generated"]
 [connection signal="generated" from="generator" to="player" method="_on_generator_generated"]
+[connection signal="generated" from="generator" to="baker" method="_on_generator_generated"]
 [connection signal="lineend" from="generator" to="generator/checkman" method="_on_generator_lineend"]
 [connection signal="setscripts" from="generator" to="generator/checkman" method="_on_generator_setscripts"]
 [connection signal="timeout" from="actionman/wintime" to="actionman" method="_on_wintime_timeout"]

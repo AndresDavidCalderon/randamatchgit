@@ -2,10 +2,8 @@ extends Node
 export var iptocode:Dictionary
 var codetoip:Dictionary={}
 func _ready():
-	var transferred=0
-	while transferred<iptocode.keys().size():
-		codetoip[iptocode[iptocode.keys()[transferred]]]=iptocode.keys()[transferred]
-		transferred+=1
+	for i in iptocode.keys():
+		codetoip[iptocode[i]]=i
 func tocode(ip:String,port)->String:
 	port=str(port)
 	var done=0
@@ -13,15 +11,16 @@ func tocode(ip:String,port)->String:
 	var string=ip
 	while true:
 		var rest=string.right(done)
-		var got=rest.length()
 		var added:String
-		while got>0:
-			var now=rest.left(got)
+		#numbers taken into account from rest
+		var i=rest.length()
+		while i>0:
+			var now=rest.left(i)
 			if iptocode.has(now):
 				result+=iptocode[now]
 				added=now
 				break
-			got-=1
+			i-=1
 		done+=added.length()
 		if done==string.length():
 			match string:
