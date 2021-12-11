@@ -3,6 +3,8 @@ export(float) var forwardspeed=23
 export(float) var backspeed=10
 export(float) var turnspeed
 export(float) var sidespeed=10
+func _init():
+	globals.playernd=self
 func _ready():
 	globals.connect("pausing",self,"pause")
 	pause()
@@ -18,10 +20,7 @@ func _input(event):
 
 func _process(_delta):
 	if not globals.paused:
-		if Input.is_action_pressed("forward"):
-			moveonsurface(Vector2(forwardspeed,0))
-		if Input.is_action_pressed("back"):
-			moveonsurface(Vector2(-backspeed,0))
+		moveonsurface(Vector2(Input.get_axis("back","forward")*forwardspeed,0))
 		if Input.is_action_pressed("right"):
 			moveonsurface(Vector2(0,-sidespeed))
 		if Input.is_action_pressed("left"):

@@ -1,5 +1,5 @@
 extends RigidBody
-class_name player,"res://classicons/player.png"
+class_name car,"res://classicons/player.png"
 signal needsorders
 export(float) var speed
 export(float) var rotspeed
@@ -7,6 +7,7 @@ export(bool) var balancing
 export(float) var rotgrav
 export(float) var rotonair
 export(float) var goupspeed
+export(float) var vrotlimit
 var byinput=false
 onready var initrot=rotation
 onready var inittrans=translation
@@ -42,9 +43,9 @@ func _integrate_forces(state):
 	var actspeed=speed
 	if $getflor.get_overlapping_bodies().size()<1:
 		actspeed=speed/4
-		if orders.has("r"):
+		if orders.has("l"):
 			addlocaltorque("z",rotonair)
-		elif orders.has("l"):
+		elif orders.has("r"):
 			addlocaltorque("z",-rotonair)
 		if orders.has("accel"):
 			addlocaltorque("x",-rotonair)
@@ -62,19 +63,19 @@ func _integrate_forces(state):
 	if orders.has("accel"):
 		var go=tospatial(actspeed,rotation.y)
 		if $getfront.get_overlapping_bodies().size()>0:
-			if isleft():
+			if orders.has("left"):
 				add_torque(Vector3(0,rotspeed,0))
-			if isright():
+			if orders.has("right"):
 				add_torque(Vector3(0,-rotspeed,0))
 		add_central_force(Vector3(go.x,getvert(speed,rotation.x),go.y))
 	if orders.has("break"):
 		var go=tospatial(-(actspeed/2),rotation.y)
 		if $getfront.get_overlapping_bodies().size()>0:
-			if isright():
+			if orders.has("right"):
 				add_torque(Vector3(0,rotspeed,0))
-			if isleft():
+			if orders.has("left"):
 				add_torque(Vector3(0,-rotspeed,0))
-		add_central_force(Vector3(go.x,-getvert(speed,rotation.x),go.y))
+		add_central_force(Vector3(go.x,0,go.y))
 	#bajar o subir partes del carro, o gravedad angular. esto ya esta
 	#en las fisicas normales, pero es necesario un empuje extra. ↓
 	if balancing:
@@ -89,10 +90,6 @@ func getvert(sp,dir):
 	if $getflor.get_overlapping_bodies().size()>0:
 		gety=sp*cos(dir-(PI/2))
 	return gety
-func isright():
-	return Input.is_action_pressed("changedirr")
-func isleft():
-	return Input.is_action_pressed("changedirl")
 var isripres=false
 func addlocaltorque(axisarg:String,num:float):
 	add_torque(get_indexed("transform:basis:"+axisarg)*num)

@@ -82,6 +82,9 @@ maxtries = 4
 mode = 1
 script = ExtResource( 2 )
 
+[node name="playerinteract" parent="player" index="10"]
+mounted = true
+
 [node name="sync" type="Node" parent="player"]
 script = ExtResource( 4 )
 
@@ -296,3 +299,5 @@ text = "spectate"
 [connection signal="setscripts" from="generator" to="generator/checkman" method="_on_generator_setscripts"]
 [connection signal="timeout" from="actionman/wintime" to="actionman" method="_on_wintime_timeout"]
 [connection signal="timeout" from="loadtime" to="." method="_on_loadtime_timeout"]
+
+[editable path="player"]

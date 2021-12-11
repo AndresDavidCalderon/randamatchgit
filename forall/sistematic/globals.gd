@@ -6,7 +6,7 @@ var camera:Camera
 var ostype:String
 var popuper:Panel
 var UIscale
-var playernd:player
+var playernd
 var paused=false
 export(Dictionary) var consoleshorts
 onready var defres=Vector2(ProjectSettings.get("display/window/size/width"),ProjectSettings.get("display/window/size/height"))

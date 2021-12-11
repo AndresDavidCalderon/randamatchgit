@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gui/sider.gd"
 }, {
+"base": "RigidBody",
+"class": "car",
+"language": "GDScript",
+"path": "res://forall/scripts/player.gd"
+}, {
 "base": "Button",
 "class": "input",
 "language": "GDScript",
@@ -24,11 +29,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gui/debug/output.gd"
 }, {
-"base": "RigidBody",
-"class": "player",
-"language": "GDScript",
-"path": "res://forall/scripts/player.gd"
-}, {
 "base": "Node",
 "class": "resman",
 "language": "GDScript",
@@ -36,9 +36,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "aligner": "res://gui/images/extendericon.png",
+"car": "res://classicons/player.png",
 "input": "res://gui/debug/input.png",
 "output": "res://gui/debug/output.png",
-"player": "res://classicons/player.png",
 "resman": "res://forall/sistematic/resman.png"
 }
 
@@ -125,6 +125,11 @@ sprint={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [input_devices]
 
@@ -138,6 +143,7 @@ pointing/emulate_touch_from_mouse=true
 3d_physics/layer_2="impulse"
 3d_physics/layer_3="stopcamera"
 3d_physics/layer_4="chunkdetect"
+3d_physics/layer_5="interact"
 
 [physics]
 

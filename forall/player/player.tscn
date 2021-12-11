@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://forall/scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://forall/interact/interact.gd" type="Script" id=2]
 [ext_resource path="res://models/ruedabody.tscn" type="PackedScene" id=3]
 [ext_resource path="res://forall/visual/carrep.tscn" type="PackedScene" id=4]
+[ext_resource path="res://forall/player/carinteract.gd" type="Script" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.76
@@ -27,6 +29,9 @@ height = 8.77372
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 7.17086, 7.65976, 12.9206 )
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 13.0157, 5.83079, 17.292 )
 
 [node name="car" type="RigidBody"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0103111, 15.0876, 22.8899 )
@@ -100,3 +105,18 @@ collision_mask = 8
 [node name="col" type="CollisionShape" parent="chunkdect"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.61572 )
 shape = SubResource( 7 )
+
+[node name="interact" type="Area" parent="."]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 2 )
+
+[node name="col" type="CollisionShape" parent="interact"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.62284e-07, 3.18998, -4.14359 )
+shape = SubResource( 8 )
+
+[node name="playerinteract" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[connection signal="needsorders" from="." to="playerinteract" method="_on_car_needsorders"]
+[connection signal="interacted" from="interact" to="playerinteract" method="_on_interact_interacted"]

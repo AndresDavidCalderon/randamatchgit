@@ -1,4 +1,4 @@
-extends player
+extends car
 func _on_generator_generated():
 	if server.type!="none" and server.players>1:
 		var totalspace=get_node("/root/main/generator").terrwide*30
