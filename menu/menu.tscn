@@ -128,27 +128,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ip" type="Label" parent="partyman/code"]
-visible = false
-margin_left = 6.32849
-margin_top = -25.3536
-margin_right = 66.3285
-margin_bottom = -11.3536
-text = "private ip"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="port" type="Label" parent="partyman/code"]
-margin_left = 134.549
-margin_top = -24.2406
-margin_right = 204.549
-margin_bottom = -10.2406
-text = "server port"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ipshow" type="Button" parent="partyman/code"]
 margin_left = 4.50269
 margin_top = -49.5298
@@ -165,6 +144,34 @@ margin_top = -215.318
 margin_right = 705.664
 margin_bottom = -129.318
 icon = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rawdata" type="HBoxContainer" parent="partyman/code"]
+margin_left = 7.54065
+margin_top = -24.7295
+margin_right = 125.541
+margin_bottom = -7.72949
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ip" type="Label" parent="partyman/code/rawdata"]
+visible = false
+margin_top = 1.0
+margin_right = 60.0
+margin_bottom = 15.0
+text = "private ip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="port" type="Label" parent="partyman/code/rawdata"]
+margin_top = 1.0
+margin_right = 70.0
+margin_bottom = 15.0
+text = "server port"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -368,6 +375,13 @@ margin_bottom = 281.159
 [node name="title" parent="story" index="0"]
 text = "story"
 
+[node name="frame" parent="story" index="1"]
+anchor_right = 1.0
+anchor_bottom = 1.013
+margin_left = -1.0
+margin_right = 0.0
+margin_bottom = -0.339996
+
 [node name="multiplayer" parent="." instance=ExtResource( 17 )]
 margin_left = 43.7948
 margin_top = 339.387
@@ -436,6 +450,7 @@ right = true
 scaleview = Vector2( 0.5, -0.5 )
 
 [node name="console" parent="cam/topright" instance=ExtResource( 11 )]
+visible = false
 position = Vector2( 3.46497, -1.09236 )
 bypress = true
 

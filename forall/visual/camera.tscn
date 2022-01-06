@@ -47,4 +47,5 @@ script = ExtResource( 9 )
 right = true
 
 [node name="console" parent="topright" instance=ExtResource( 3 )]
+visible = false
 bypress = true

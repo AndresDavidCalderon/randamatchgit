@@ -1,8 +1,9 @@
 extends Node2D
 signal pausing
+export(bool) var technical_demo
 var console:Node2D
 var res:resman
-var camera:Camera
+var camera
 var ostype:String
 var popuper:Panel
 var UIscale

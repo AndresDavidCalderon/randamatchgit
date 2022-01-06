@@ -4,7 +4,7 @@ var codetoip:Dictionary={}
 func _ready():
 	for i in iptocode.keys():
 		codetoip[iptocode[i]]=i
-func tocode(ip:String,port)->String:
+func tocode(ip:String,port):
 	port=str(port)
 	var done=0
 	var result=""
@@ -20,6 +20,10 @@ func tocode(ip:String,port)->String:
 				result+=iptocode[now]
 				added=now
 				break
+			else:
+				if now.length()==1:
+					printerr("invalid carachter "+now)
+					return 0
 			i-=1
 		done+=added.length()
 		if done==string.length():
@@ -43,6 +47,6 @@ func toip(code:String)->Array:
 		else:
 			answer[index]+=codetoip[code[done]]
 		done+=1
-	print(answer)
+	print(answer[1])
 	answer[1]=int(answer[1])
 	return answer

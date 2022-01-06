@@ -4,8 +4,12 @@ export(NodePath) var tocode
 func _on_create_pressed():
 	if $edit.start():
 		var port=server.startserv(41202)
-		get_node(tocode).get_node("port").text=str(port)
-		var ip=IP.get_local_addresses()[4]
+		get_node(tocode).get_node("rawdata/port").text=str(port)
+		var ipidx=0
+		var ip=IP.get_local_addresses()[0]
+		while server.get_node("encoder").tocode(ip,port) is int and ipidx<4:
+			ipidx+=1
+			ip=IP.get_local_addresses()[ipidx]
 		get_node(tocode).setcode(ip,port)
 		get_node("/root/menu/cam").page(2)
 var returns:Array
@@ -13,7 +17,6 @@ func _on_join_pressed():
 	if $edit.start():
 		returns=globals.popuper.popup("join","",[LineEdit,Button]) as Array
 		returns[0].placeholder_text="match code"
-		returns[0].connect("text_changed",self,"codechange")
 		returns[1].text="go"
 		returns[1].connect("pressed",self,"usematch")
 func codechange(text:String):

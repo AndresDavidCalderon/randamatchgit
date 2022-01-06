@@ -41,10 +41,10 @@ extents = Vector3( 36.0174, 1, 34.3437 )
 [sub_resource type="ProceduralSky" id=2]
 sky_top_color = Color( 0.247059, 0.321569, 0.364706, 1 )
 sky_horizon_color = Color( 0.203922, 0.356863, 0.478431, 1 )
-ground_bottom_color = Color( 0.141176, 0.25098, 0.12549, 1 )
+ground_bottom_color = Color( 0.129412, 0.411765, 0.478431, 1 )
+ground_horizon_color = Color( 0.419608, 0.494118, 0.65098, 1 )
 ground_energy = 0.47
-sun_latitude = 127.89
-sun_longitude = -118.42
+sun_latitude = 139.01
 
 [sub_resource type="Environment" id=3]
 background_mode = 2
@@ -71,7 +71,6 @@ size = 64
 font_data = ExtResource( 16 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 32
 font_data = ExtResource( 16 )
 
 [node name="main" type="Node"]
@@ -93,8 +92,8 @@ script = ExtResource( 5 )
 hillprov = 50
 betweencaves = 5
 genmode = "byvis"
-outsidechunks = 8
-leng = 100
+outsidechunks = 10
+leng = 40
 stepbystep = true
 cavechance = 70
 chunk = ExtResource( 23 )
@@ -250,6 +249,7 @@ right = true
 scaleview = Vector2( 0.5, 1 )
 
 [node name="spr" type="Sprite" parent="camhold/cam/top"]
+visible = false
 position = Vector2( 0, 27.618 )
 texture = ExtResource( 18 )
 script = ExtResource( 19 )
@@ -276,20 +276,14 @@ bottom = true
 right = true
 scaleview = Vector2( -0.3, 0.4 )
 
-[node name="options" type="VBoxContainer" parent="camhold/cam/top/celebration/aligner"]
-margin_left = -1.68182
-margin_top = 2.52269
-margin_right = 38.3182
-margin_bottom = 42.5227
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="spec" type="Button" parent="camhold/cam/top/celebration/aligner/options"]
-margin_right = 154.0
-margin_bottom = 39.0
+[node name="again" type="Button" parent="camhold/cam/top/celebration"]
+visible = false
+margin_left = -9.26419
+margin_top = 66.1996
+margin_right = 87.7358
+margin_bottom = 89.1996
 custom_fonts/font = SubResource( 7 )
-text = "spectate"
+text = "play again"
 
 [node name="movement" parent="camhold/cam" instance=ExtResource( 7 )]
 
@@ -299,5 +293,6 @@ text = "spectate"
 [connection signal="setscripts" from="generator" to="generator/checkman" method="_on_generator_setscripts"]
 [connection signal="timeout" from="actionman/wintime" to="actionman" method="_on_wintime_timeout"]
 [connection signal="timeout" from="loadtime" to="." method="_on_loadtime_timeout"]
+[connection signal="pressed" from="camhold/cam/top/celebration/again" to="actionman" method="_on_again_pressed"]
 
 [editable path="player"]

@@ -15,7 +15,11 @@ func _ready():
 	set_process(false)
 	get_tree().connect("network_peer_disconnected",self,"gonout")
 func gonout(id):
-	pinbyorder[server.orderbyid[str(id)]-1].queue_free()
+	var order=server.orderbyid[str(id)]-1
+	if pinbyorder.size()>order:
+		pinbyorder[order].queue_free()
+	else:
+		printerr("that player doesnt have a pin")
 func _process(_delta):
 	var base=position.x-(texture.get_width()/2.0)
 	var positioned=0
