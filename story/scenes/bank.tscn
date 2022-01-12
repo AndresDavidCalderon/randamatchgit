@@ -42,6 +42,7 @@ turnspeed = 0.0
 managemouse = false
 offset = Vector3( 3.708, 11.88, 0.01 )
 totarget = NodePath("../player")
+addpi = true
 
 [node name="cam" parent="camhold" instance=ExtResource( 2 )]
 transform = Transform( -1, 4.04016e-08, -7.7527e-08, 0, 0.886806, 0.46214, 8.74228e-08, 0.46214, -0.886806, 3.708, 18.96, -13.5759 )
@@ -83,7 +84,7 @@ render_target_v_flip = true
 script = ExtResource( 5 )
 
 [node name="remotecam" type="Camera" parent="targetworld"]
-transform = Transform( -1, 4.04016e-08, -7.75271e-08, 0, 0.886807, 0.462141, 8.74228e-08, 0.462141, -0.886807, 21.399, 20.063, -18.5009 )
+transform = Transform( -1, 4.04016e-08, -7.75271e-08, 0, 0.886807, 0.46214, 8.74228e-08, 0.46214, -0.886807, 21.399, 20.063, -18.5009 )
 cull_mask = 2
 fov = 74.0
 far = 1008.4

@@ -159,13 +159,16 @@ initresources = [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 35 ), ExtRe
 [node name="camhold" type="Spatial" parent="."]
 transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.0103111, 15.0876, 22.8899 )
 script = ExtResource( 6 )
-cameradistance = 22.547
-cameraangle = 0.677
+baserot = Vector3( 0, 180, 0 )
+active = true
+cameradistance = 31.079
+cameraangle = -3.857
 turnspeed = 1.097
 totarget = NodePath("../player")
+addpi = true
 
 [node name="cam" parent="camhold" instance=ExtResource( 3 )]
-transform = Transform( 1, -1.42189e-07, 6.81422e-08, 6.81422e-08, 0.779456, 0.626458, -1.42189e-07, -0.626458, 0.779456, 0, 14.1247, 17.5744 )
+transform = Transform( -1, 5.73428e-08, -6.5989e-08, 0, 0.754826, 0.655926, 8.74228e-08, 0.655926, -0.754826, 0, 20.3855, -23.4592 )
 
 [node name="centre" type="Node2D" parent="camhold/cam"]
 position = Vector2( 514.088, 290.718 )

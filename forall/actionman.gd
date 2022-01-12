@@ -35,6 +35,5 @@ func wincomfirm():
 func _on_wintime_timeout():
 	worldman.rpc("win")
 
-
 func _on_again_pressed():
 	get_tree().change_scene("res://menu/menu.tscn")
