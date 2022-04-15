@@ -43,7 +43,8 @@ func playerdead():
 	holder.target=$seer
 	$spawn.play("spawn")
 	wasremote=false
-	rpc("playremote")
+	if not globals.technical_demo:
+		rpc("playremote")
 export(float) var adforce
 func addfor():
 	if not wasremote:
