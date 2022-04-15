@@ -9,6 +9,7 @@ export var managemouse:bool=true
 export(Vector3) var offset setget setoff
 export(NodePath) var totarget
 var target:Spatial
+
 func _process(_delta):
 	if active:
 		if target!=null:
@@ -19,15 +20,18 @@ func _process(_delta):
 			rotation+=math.vectorad(baserot)
 		else:
 			target=get_node(totarget)
+
 func _ready():
 	globals.connect("pausing",self,"pause")
 	pause()
+
 func pause():
 	if managemouse:
 		if globals.paused:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 func _input(event):
 	if managemouse and not globals.paused:
 		if event is InputEventMouseMotion:
@@ -43,7 +47,9 @@ func setoff(value):
 func camangle(value):
 	cameraangle=value
 	updatethird()
+
 export var addpi:bool
+
 func updatethird():
 	if is_inside_tree() and get_node("cam")!=null:
 		var vec=Vector2(cameradistance,0).rotated(cameraangle)

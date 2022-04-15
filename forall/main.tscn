@@ -1,29 +1,18 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://forall/player/onmulti.gd" type="Script" id=2]
 [ext_resource path="res://forall/visual/camera.tscn" type="PackedScene" id=3]
-[ext_resource path="res://network/sync.gd" type="Script" id=4]
 [ext_resource path="res://forall/generator.gd" type="Script" id=5]
 [ext_resource path="res://forall/visual/camholder.gd" type="Script" id=6]
 [ext_resource path="res://gui/movement.tscn" type="PackedScene" id=7]
-[ext_resource path="res://gui/sider.tscn" type="PackedScene" id=9]
-[ext_resource path="res://network/playervisman.gd" type="Script" id=13]
-[ext_resource path="res://network/playerrep/player.tscn" type="PackedScene" id=14]
 [ext_resource path="res://forall/main.gd" type="Script" id=15]
 [ext_resource path="res://fonts/LuckiestGuy-Regular.ttf" type="DynamicFontData" id=16]
-[ext_resource path="res://forall/actionman.gd" type="Script" id=17]
-[ext_resource path="res://gui/images/progress.png" type="Texture" id=18]
-[ext_resource path="res://gui/progress.gd" type="Script" id=19]
-[ext_resource path="res://gui/carpin.tscn" type="PackedScene" id=20]
 [ext_resource path="res://forall/visual/baker.gd" type="Script" id=21]
-[ext_resource path="res://forall/checkman.gd" type="Script" id=22]
 [ext_resource path="res://forall/sistematic/chunk.tscn" type="PackedScene" id=23]
 [ext_resource path="res://forall/sistematic/chunk.gd" type="Script" id=24]
 [ext_resource path="res://forall/sistematic/chunktypes/hill.gd" type="Script" id=25]
 [ext_resource path="res://forall/sistematic/chunktypes/plain.gd" type="Script" id=26]
 [ext_resource path="res://forall/sistematic/chunktypes/out.gd" type="Script" id=27]
-[ext_resource path="res://forall/sistematic/chunktypes/checkpoint.gd" type="Script" id=28]
 [ext_resource path="res://forall/sistematic/chunktypes/caves/caveentrance.gd" type="Script" id=29]
 [ext_resource path="res://gui/sider.gd" type="Script" id=30]
 [ext_resource path="res://forall/sistematic/resoursman.gd" type="Script" id=32]
@@ -34,6 +23,21 @@
 [ext_resource path="res://forall/sistematic/chunktypes/caves/cavetunnel.gd" type="Script" id=37]
 [ext_resource path="res://forall/chunkconts/hills/caves/cavetunnel.tscn" type="PackedScene" id=38]
 [ext_resource path="res://gui/for shop.tres" type="DynamicFont" id=40]
+
+[sub_resource type="GDScript" id=8]
+script/source = "extends car
+func _on_generator_generated():
+	if server.type!=\"none\" and server.players>1:
+		var totalspace=get_node(\"/root/main/generator\").terrwide*30
+		var partwide=totalspace/server.players
+		var myspace=partwide*server.orderbyid[str(get_tree().get_network_unique_id())]
+		translation.x=myspace-(totalspace/2)
+	inittrans=translation
+	initrot=rotation
+	sleeping=false
+	mode=MODE_RIGID
+	$col.disabled=false
+"
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 36.0174, 1, 34.3437 )
@@ -66,35 +70,25 @@ font_data = ExtResource( 16 )
 size = 24
 font_data = ExtResource( 16 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 64
-font_data = ExtResource( 16 )
-
-[sub_resource type="DynamicFont" id=7]
-font_data = ExtResource( 16 )
-
 [node name="main" type="Node"]
 script = ExtResource( 15 )
 maxtries = 4
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-mode = 1
-script = ExtResource( 2 )
+script = SubResource( 8 )
+
+[node name="vis" parent="player" index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.37464, 0.288897, -0.128355 )
 
 [node name="playerinteract" parent="player" index="10"]
 mounted = true
-
-[node name="sync" type="Node" parent="player"]
-script = ExtResource( 4 )
 
 [node name="generator" type="Node" parent="."]
 script = ExtResource( 5 )
 hillprov = 50
 betweencaves = 5
-genmode = "byvis"
 outsidechunks = 10
 leng = 40
-stepbystep = true
 cavechance = 70
 chunk = ExtResource( 23 )
 chunkbase = ExtResource( 24 )
@@ -102,10 +96,6 @@ hillscript = ExtResource( 25 )
 plainscript = ExtResource( 26 )
 outscript = ExtResource( 27 )
 cavescript = ExtResource( 29 )
-
-[node name="checkman" type="Node" parent="generator"]
-script = ExtResource( 22 )
-checkscript = ExtResource( 28 )
 
 [node name="floor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36519, 0 )
@@ -128,22 +118,8 @@ directional_shadow_blend_splits = true
 directional_shadow_depth_range = 1
 directional_shadow_max_distance = 274.2
 
-[node name="playervisman" type="Node" parent="."]
-script = ExtResource( 13 )
-playersource = ExtResource( 14 )
-
 [node name="env" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
-
-[node name="actionman" type="Node" parent="."]
-script = ExtResource( 17 )
-wintexts = [ Color( 0.741176, 0.643137, 0.0980392, 1 ), Color( 0.533333, 0.615686, 0.698039, 1 ), Color( 0.443137, 0.34902, 0.176471, 1 ) ]
-
-[node name="wintime" type="Timer" parent="actionman"]
-
-[node name="loadtime" type="Timer" parent="."]
-wait_time = 2.217
-autostart = true
 
 [node name="baker" type="GIProbe" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93565, 2.58567, 21.4044 )
@@ -168,7 +144,7 @@ totarget = NodePath("../player")
 addpi = true
 
 [node name="cam" parent="camhold" instance=ExtResource( 3 )]
-transform = Transform( -1, 5.73428e-08, -6.5989e-08, 0, 0.754826, 0.655926, 8.74228e-08, 0.655926, -0.754826, 0, 20.3855, -23.4592 )
+transform = Transform( -1, -5.73428e-08, 6.5989e-08, 0, -0.754826, -0.655926, 8.74228e-08, -0.655926, 0.754826, 0, 20.3855, -23.4592 )
 
 [node name="centre" type="Node2D" parent="camhold/cam"]
 position = Vector2( 514.088, 290.718 )
@@ -246,56 +222,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="top" parent="camhold/cam" instance=ExtResource( 9 )]
-position = Vector2( 512.034, 3.75803 )
-right = true
-scaleview = Vector2( 0.5, 1 )
-
-[node name="spr" type="Sprite" parent="camhold/cam/top"]
-visible = false
-position = Vector2( 0, 27.618 )
-texture = ExtResource( 18 )
-script = ExtResource( 19 )
-enabled = true
-indicator = ExtResource( 20 )
-
-[node name="celebration" type="Label" parent="camhold/cam/top"]
-visible = false
-margin_left = -28.0
-margin_top = 46.0
-margin_right = 36.0
-margin_bottom = 110.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 6 )
-text = "#1"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="aligner" type="Node2D" parent="camhold/cam/top/celebration"]
-position = Vector2( -351.495, 121.93 )
-script = ExtResource( 30 )
-bottom = true
-right = true
-scaleview = Vector2( -0.3, 0.4 )
-
-[node name="again" type="Button" parent="camhold/cam/top/celebration"]
-visible = false
-margin_left = -9.26419
-margin_top = 66.1996
-margin_right = 87.7358
-margin_bottom = 89.1996
-custom_fonts/font = SubResource( 7 )
-text = "play again"
-
 [node name="movement" parent="camhold/cam" instance=ExtResource( 7 )]
 
 [connection signal="generated" from="generator" to="player" method="_on_generator_generated"]
 [connection signal="generated" from="generator" to="baker" method="_on_generator_generated"]
-[connection signal="lineend" from="generator" to="generator/checkman" method="_on_generator_lineend"]
-[connection signal="setscripts" from="generator" to="generator/checkman" method="_on_generator_setscripts"]
-[connection signal="timeout" from="actionman/wintime" to="actionman" method="_on_wintime_timeout"]
-[connection signal="timeout" from="loadtime" to="." method="_on_loadtime_timeout"]
-[connection signal="pressed" from="camhold/cam/top/celebration/again" to="actionman" method="_on_again_pressed"]
 
 [editable path="player"]
