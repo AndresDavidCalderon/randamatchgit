@@ -24,8 +24,6 @@ func popup(title:String,desc="",fields:Array=[],canout=true):
 	$quit.visible=canout
 	if visible:
 		unpopup()
-	if globals.ostype=="mobile":
-		rect_scale=globals.getguisize()
 	visible=true
 	var added=0
 	$title.text=title

@@ -25,5 +25,3 @@ func setgui():
 	if right:
 		position.x=base.size.x*scaleview.x
 	position+=offset
-	if (scalesondesktop and globals.ostype=="desktop") or (scalesonmobile and globals.ostype=="mobile"):
-		scale=initscale*globals.getguisize()

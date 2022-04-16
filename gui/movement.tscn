@@ -1,7 +1,5 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://gui/sider.tscn" type="PackedScene" id=1]
-[ext_resource path="res://gui/movement.gd" type="Script" id=2]
 [ext_resource path="res://gui/images/accelpress.png" type="Texture" id=3]
 [ext_resource path="res://gui/images/accel.png" type="Texture" id=4]
 [ext_resource path="res://gui/images/sidepres.png" type="Texture" id=5]
@@ -13,35 +11,24 @@ extents = Vector2( 40, 45 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 45 )
 
-[node name="movement" type="Node2D"]
-script = ExtResource( 2 )
+[node name="movement" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="siderbr" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1024.08, 600.135 )
-bottom = true
-right = true
+[node name="direction" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -225.0
+margin_right = 355.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="accel" type="TouchScreenButton" parent="siderbr"]
-position = Vector2( -101.332, -186.594 )
-normal = ExtResource( 4 )
-pressed = ExtResource( 3 )
-passby_press = true
-action = "forward"
-
-[node name="accel2" type="TouchScreenButton" parent="siderbr"]
-position = Vector2( -136.016, -101.572 )
-rotation = 1.5708
-normal = ExtResource( 6 )
-pressed = ExtResource( 5 )
-passby_press = true
-action = "brake"
-
-[node name="siderbl" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0.61145, 598.904 )
-bottom = true
-
-[node name="dirl" type="TouchScreenButton" parent="siderbl"]
-position = Vector2( 165.76, -58.4202 )
+[node name="dirl" type="TouchScreenButton" parent="direction"]
+position = Vector2( 150.657, 181.404 )
 rotation = -3.14159
 scale = Vector2( 1.2, 1.2 )
 normal = ExtResource( 6 )
@@ -50,11 +37,37 @@ shape = SubResource( 1 )
 passby_press = true
 action = "changedirl"
 
-[node name="dir" type="TouchScreenButton" parent="siderbl"]
-position = Vector2( 204.81, -155.05 )
+[node name="dir" type="TouchScreenButton" parent="direction"]
+position = Vector2( 189.707, 84.7747 )
 scale = Vector2( 1.2, 1.2 )
 normal = ExtResource( 6 )
 pressed = ExtResource( 5 )
 shape = SubResource( 2 )
 passby_press = true
 action = "changedirr"
+
+[node name="accel" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -270.0
+margin_top = -228.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="accel" type="TouchScreenButton" parent="accel"]
+position = Vector2( 159.214, 21.6833 )
+normal = ExtResource( 4 )
+pressed = ExtResource( 3 )
+passby_press = true
+action = "forward"
+
+[node name="break" type="TouchScreenButton" parent="accel"]
+position = Vector2( 124.53, 106.705 )
+rotation = 1.5708
+normal = ExtResource( 6 )
+pressed = ExtResource( 5 )
+passby_press = true
+action = "brake"

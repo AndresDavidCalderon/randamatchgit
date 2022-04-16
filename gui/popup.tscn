@@ -8,36 +8,43 @@
 [ext_resource path="res://gui/smallfont.tres" type="DynamicFont" id=6]
 
 [sub_resource type="DynamicFont" id=1]
-size = 36
+size = 40
 font_data = ExtResource( 1 )
 
 [node name="popup" type="Panel"]
-margin_right = 318.0
-margin_bottom = 85.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -223.0
+margin_top = -83.0
+margin_right = 223.0
+margin_bottom = 35.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="title" type="Label" parent="."]
-margin_left = 21.7235
-margin_top = 8.70667
-margin_right = 286.724
-margin_bottom = 38.7067
+anchor_right = 1.0
+margin_bottom = 33.0
 custom_fonts/font = SubResource( 1 )
 text = "popup!"
 align = 1
 autowrap = true
-clip_text = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="quit" type="TextureButton" parent="."]
-margin_left = 301.759
-margin_top = -15.7403
-margin_right = 333.759
-margin_bottom = 16.2597
+anchor_left = 1.0
+anchor_top = 0.002
+anchor_right = 1.0
+anchor_bottom = 0.002
+margin_left = -16.8416
+margin_top = -13.7314
+margin_right = 15.1584
+margin_bottom = 18.2686
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 5 )
@@ -46,17 +53,16 @@ __meta__ = {
 }
 
 [node name="vorder" type="VBoxContainer" parent="."]
-margin_left = 16.0
-margin_top = 39.0
-margin_right = 300.0
-margin_bottom = 84.0
+anchor_right = 1.0
+margin_top = 46.6691
+margin_bottom = 91.6691
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="description" type="Label" parent="vorder"]
-margin_right = 284.0
-margin_bottom = 45.0
+margin_right = 446.0
+margin_bottom = 57.0
 custom_fonts/font = ExtResource( 6 )
 text = "stuff goes here, explains what happened and what to do.
 now im putting some extra space here so yeah"
