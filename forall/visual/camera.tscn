@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://gui/popup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://forall/scripts/cam.gd" type="Script" id=10]
 
 [node name="cam" type="ClippedCamera"]
@@ -13,20 +12,3 @@ far = 850.1
 margin = 2.97
 collision_mask = 4
 script = ExtResource( 10 )
-
-[node name="ui" type="CanvasLayer" parent="."]
-
-[node name="fps" type="Label" parent="ui"]
-margin_right = 40.0
-margin_bottom = 14.0
-rect_scale = Vector2( 3.31955, 3.31955 )
-text = "fps: "
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
-[node name="popup" parent="ui" instance=ExtResource( 1 )]
-margin_left = -159.0
-margin_top = -63.0
-margin_right = 159.0
-margin_bottom = 63.0

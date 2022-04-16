@@ -2,7 +2,7 @@ extends Spatial
 
 var side:int
 var stage:int
-var row:int
+var column:int
 var typestr=""
 var pos:Vector3
 var uppos=Vector3(pos.x,pos.y+1,pos.z)
@@ -70,7 +70,6 @@ func getnewchunk(script:Script,gentype:String="onvis")->Spatial:
 	new.set_script(script)
 	new.gen=get_node("/root/main/generator")
 	new.player=get_node("/root/main/player")
-	new.onvisgen()
 
 	return new
 
@@ -79,6 +78,7 @@ func created():
 	gen=get_node("/root/main/generator")
 	player=get_node("/root/main/player")
 	add_to_group("chunks")
+	call("defined")
 
 
 func getresname(res:Resource)->String:
@@ -105,20 +105,6 @@ func register():
 	gen.chunkbypos[worldman.transtopos(translation)]=self
 
 
-func onvisgen():
-	if get_script()!=worldman.chunkscript:
-		if not $vis.is_on_screen():
-			$vis.connect("camera_entered",self,"oncam")
-		else:
-			call("defined")
-
-
-func oncam(_cam):
-	$vis.disconnect("camera_entered",self,"oncam")
-	call("defined")
-
-
 func _on_killdown_area_entered(area):
 	if area!=get_node("dect") and area.get_parent().get("typestr")!=null and area.name!="killdown":
 		$killdown.queue_free()
-		globals.iprint([area.get_parent(),"passed treshold"])

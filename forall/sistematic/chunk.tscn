@@ -24,9 +24,6 @@ transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, 0, 7.53116, 0 )
 billboard = 1
 alpha_cut = 2
 
-[node name="vis" type="VisibilityNotifier" parent="."]
-aabb = AABB( -33.2344, -30.1553, -32.5236, 66.4688, 60.3105, 65.0472 )
-
 [node name="dect" type="Area" parent="."]
 collision_layer = 8
 collision_mask = 8
