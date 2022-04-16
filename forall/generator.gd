@@ -10,8 +10,8 @@ onready var player=get_node("/root/main/player")
 var terrlong:float
 var pos=Vector3(0,-30,60)
 var terrhei:float
-var vislong:float
 var generated=false
+
 export(int,0,100) var cavechance
 var chunksbystage=[]
 export(PackedScene) var chunk
@@ -24,12 +24,15 @@ var checkwall:Area
 var chunkbypos={}
 var bycreated=[]
 
+signal make_row(row)
+
 func _ready():
 	box.width=(60*(terrwide+1))/2
 
 func _process(delta):
-	if globals.playernd.translation.z>((rows_done-10)*60):
+	if globals.playernd.translation.z>((rows_done-20)*60):
 		doline()
+		emit_signal("make_row",rows_done-10)
 
 var calling=false
 var called=0
@@ -51,7 +54,6 @@ func doline():
 	
 	#chunk by row
 	chunksbystage.append([])
-	emit_signal("newline")
 	for column in terrwide:
 		var nod=chunk.instance() as Spatial
 		add_child(nod)
@@ -90,10 +92,8 @@ func doline():
 		nod.stage=rows_done
 		bycreated.append(nod)
 		chunksbystage[rows_done].append(nod)
-	
 		nod.created()
 	
-	emit_signal("lineend")
 	
 	if can_be_hill:
 		is_hill=randman.randbool(hillprov)

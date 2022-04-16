@@ -21,5 +21,4 @@ func getres(path:String)->Resource:
 	else:
 		var res=load(path) as Resource
 		resources[path]=res
-		globals.iprint(["loaded new resource",path])
 		return res

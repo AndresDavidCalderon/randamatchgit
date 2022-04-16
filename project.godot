@@ -51,8 +51,6 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
-server="*res://network/server.tscn"
-nameman="*res://network/nameman.tscn"
 worldman="*res://forall/worldman.tscn"
 randman="*res://forall/sistematic/randman.gd"
 globals="*res://forall/sistematic/globals.tscn"

@@ -78,7 +78,12 @@ func created():
 	gen=get_node("/root/main/generator")
 	player=get_node("/root/main/player")
 	add_to_group("chunks")
-	call("defined")
+	gen.connect("make_row",self,"check_row")
+
+func check_row(newrow:int):
+	if newrow==stage:
+		gen.disconnect("make_row",self,"check_row")
+		call("defined")
 
 
 func getresname(res:Resource)->String:

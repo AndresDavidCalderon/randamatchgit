@@ -1,11 +1,10 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://forall/visual/camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://forall/generator.gd" type="Script" id=5]
 [ext_resource path="res://gui/movement.tscn" type="PackedScene" id=7]
-[ext_resource path="res://forall/main.gd" type="Script" id=15]
 [ext_resource path="res://forall/sistematic/chunk.tscn" type="PackedScene" id=23]
 [ext_resource path="res://forall/sistematic/chunk.gd" type="Script" id=24]
 [ext_resource path="res://forall/sistematic/chunktypes/hill.gd" type="Script" id=25]
@@ -70,8 +69,6 @@ glow_hdr_threshold = 0.83
 adjustment_enabled = true
 
 [node name="main" type="Node"]
-script = ExtResource( 15 )
-maxtries = 4
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, -0.01, 15.088, 22.89 )
