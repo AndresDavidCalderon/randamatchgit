@@ -4,7 +4,7 @@ signal needsorders
 export(float) var speed
 export(float) var rotspeed
 export(bool) var balancing
-export(float) var rotgrav
+export(float) var balancing_force
 export(float) var rotonair
 export(float) var goupspeed
 export(float) var vrotlimit
@@ -30,6 +30,7 @@ func callonint(funct:String,args:Array):
 	tocallonint[tocallonint.size()-1]=funct
 	tocallonintargs[tocallonintargs.size()-1]=args
 var orders=[]
+
 func _integrate_forces(state):
 	var done=0
 	orders=[]
@@ -51,6 +52,7 @@ func _integrate_forces(state):
 			addlocaltorque("x",-rotonair)
 		elif orders.has("break"):
 			addlocaltorque("x",rotonair)
+	
 	if hastokill:
 		state.transform.origin=inittrans
 		translation=inittrans
@@ -60,6 +62,7 @@ func _integrate_forces(state):
 		state.angular_velocity=Vector3()
 		sleeping=false
 		hastokill=false
+	
 	if orders.has("accel"):
 		var go=tospatial(actspeed,rotation.y)
 		if $getfront.get_overlapping_bodies().size()>0:
@@ -68,6 +71,7 @@ func _integrate_forces(state):
 			if orders.has("right"):
 				add_torque(Vector3(0,-rotspeed,0))
 		add_central_force(Vector3(go.x,getvert(speed,rotation.x),go.y))
+	
 	if orders.has("break"):
 		var go=tospatial(-(actspeed/2),rotation.y)
 		if $getfront.get_overlapping_bodies().size()>0:
@@ -76,20 +80,22 @@ func _integrate_forces(state):
 			if orders.has("left"):
 				add_torque(Vector3(0,-rotspeed,0))
 		add_central_force(Vector3(go.x,0,go.y))
-	#bajar o subir partes del carro, o gravedad angular. esto ya esta
-	#en las fisicas normales, pero es necesario un empuje extra. ↓
+	
 	if balancing:
 		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
-			addlocaltorque("x",-rotgrav)
+			addlocaltorque("x",-balancing_force)
 		if $getback.get_overlapping_bodies().size()<1 and rotation.x<0:
-			addlocaltorque("x",rotgrav)
+			addlocaltorque("x",balancing_force)
+
 func tospatial(sp,dir):
 	return Vector2(sp*-cos(dir+(PI*1.5)),sp*sin(dir+(PI*1.5)))
+
 func getvert(sp,dir):
 	var gety=0
 	if $getflor.get_overlapping_bodies().size()>0:
 		gety=sp*cos(dir-(PI/2))
 	return gety
 var isripres=false
+
 func addlocaltorque(axisarg:String,num:float):
 	add_torque(get_indexed("transform:basis:"+axisarg)*num)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=2]
@@ -17,10 +17,6 @@
 [ext_resource path="res://forall/sistematic/debug/tohill.png" type="Texture" id=36]
 [ext_resource path="res://forall/sistematic/chunktypes/caves/cavetunnel.gd" type="Script" id=37]
 [ext_resource path="res://forall/chunkconts/hills/caves/cavetunnel.tscn" type="PackedScene" id=38]
-
-[sub_resource type="GDScript" id=8]
-script/source = "extends car
-"
 
 [sub_resource type="GDScript" id=9]
 script/source = "extends \"res://forall/sistematic/chunk.gd\"
@@ -72,7 +68,16 @@ adjustment_enabled = true
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, -0.01, 15.088, 22.89 )
-script = SubResource( 8 )
+mass = 1.0
+gravity_scale = 1.5
+linear_velocity = Vector3( 0, -10, 0 )
+speed = 50.0
+rotspeed = 60.0
+balancing_force = 20.0
+rotonair = 20.0
+
+[node name="col" parent="player/getflor" index="0"]
+transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.65557, 1.58941 )
 
 [node name="getback" parent="player" index="4"]
 transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 1.18189, -4.57895, 1.18832 )
@@ -90,7 +95,7 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.13905
 mounted = true
 
 [node name="cam" parent="player" instance=ExtResource( 3 )]
-transform = Transform( 0.997127, 0.056259, -0.0507167, -0.0163141, 0.813374, 0.581513, 0.073967, -0.579015, 0.811955, -5.18281e-06, 20.3855, 18.6466 )
+transform = Transform( 0.998055, 0.0362501, -0.050714, 0, 0.813538, 0.581513, 0.0623376, -0.580382, 0.811955, -5.18281e-06, 20.3855, 18.6466 )
 
 [node name="generator" type="Node" parent="."]
 script = ExtResource( 5 )

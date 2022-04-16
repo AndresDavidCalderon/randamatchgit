@@ -35,7 +35,7 @@ normal = ExtResource( 6 )
 pressed = ExtResource( 5 )
 shape = SubResource( 1 )
 passby_press = true
-action = "changedirl"
+action = "left"
 
 [node name="dir" type="TouchScreenButton" parent="direction"]
 position = Vector2( 189.707, 84.7747 )
@@ -44,7 +44,7 @@ normal = ExtResource( 6 )
 pressed = ExtResource( 5 )
 shape = SubResource( 2 )
 passby_press = true
-action = "changedirr"
+action = "right"
 
 [node name="accel" type="Control" parent="."]
 anchor_left = 1.0
@@ -64,10 +64,10 @@ pressed = ExtResource( 3 )
 passby_press = true
 action = "forward"
 
-[node name="break" type="TouchScreenButton" parent="accel"]
+[node name="brake" type="TouchScreenButton" parent="accel"]
 position = Vector2( 124.53, 106.705 )
 rotation = 1.5708
 normal = ExtResource( 6 )
 pressed = ExtResource( 5 )
 passby_press = true
-action = "brake"
+action = "back"
