@@ -29,30 +29,21 @@ func dowall(random:bool,hill:bool):
 		1:
 			var wall=getnewwall(hill)
 			add_child(wall)
-			wall.translation.x=-30
+			wall.scale.x=-1
 		2:
 			if random:
 				if randman.randbool(30)==true:
-					var wall_right=getnewwall(hill)
-					add_child(wall_right)
-					wall_right.translation.x=-30
+					var wall_left=getnewwall(hill)
+					add_child(wall_left)
+					wall_left.scale.x=-1
 		3:
 			var wall=getnewwall(hill)
 			add_child(wall)
-			wall.translation.x=30
 			if random:
 				if randman.randbool(50)==true:
-					var wall_right=getnewwall(hill)
-					add_child(wall_right)
-					wall_right.translation.x=-30
-		4:
-			var wall=getnewwall(hill)
-			add_child(wall)
-			wall.translation.x=30
-			wall=getnewwall(hill)
-			add_child(wall)
-			wall.translation.x=-30
-
+					var wall_left=getnewwall(hill)
+					add_child(wall_left)
+					wall_left.scale.x=-1
 func setpos():
 	pos=Vector3(round(translation.x/60),round((translation.y)/30),round(translation.z/60))
 	forwup=Vector3(pos.x,pos.y+1,pos.z+1)
