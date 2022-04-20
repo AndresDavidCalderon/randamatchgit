@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:df013e6169e5d22e1f15fb1dff26d1fe8c1c7dee675ad67fedd931b821b53cf8
-size 432
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://forall/sistematic/resoursman.gd" type="Script" id=1]
+[ext_resource path="res://ChunkTypes/caves/cavetunnel.gd" type="Script" id=2]
+[ext_resource path="res://forall/chunkconts/hills/caves/reformats/cavetunnel.tscn" type="PackedScene" id=3]
+
+[node name="resman" type="Node"]
+script = ExtResource( 1 )
+initresources = [ ExtResource( 2 ), ExtResource( 3 ) ]

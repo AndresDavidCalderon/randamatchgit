@@ -1,9 +1,0 @@
-[gd_resource type="SpatialMaterial" load_steps=2 format=2]
-
-[ext_resource path="res://models/uv maps/dirts/greenmap.png" type="Texture" id=1]
-
-[resource]
-flags_ensure_correct_normals = true
-params_specular_mode = 4
-albedo_texture = ExtResource( 1 )
-metallic_specular = 0.0
