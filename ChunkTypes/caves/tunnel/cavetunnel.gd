@@ -42,7 +42,7 @@ func defined():
 			tunnel.typestr="cavecont"
 			tunnel.created()
 		else : #go out on plain
-			$debug.texture=globals.res.getres("res://forall/sistematic/debug/uprandom.png")
+			$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/uprandom.png")
 			gen.chunkbypos[forwup].queue_free()
 			var continuing=createcont(Vector3(0,30,0),gen.chunkbase,true,"none")
 			continuing.call("dowall",true,false)
@@ -50,19 +50,19 @@ func defined():
 			gen.chunkbypos[pos+Vector3(0,0,1)]=continuing
 			var ramp=globals.res.getres("res://ChunkTypes/caves/entrance/CaveEntrance.tscn").instance() as StaticBody
 			continuing.add_child(ramp)
-			ramp.rotation_degrees.y=0
+			ramp.rotation_degrees.y=180
 	else:
 		#if it isnt, react properly depending on whats there
 		match gen.chunkbypos[forward+offset].typestr:
 			"hill":
-				$debug.texture=globals.res.getres("res://forall/sistematic/debug/tohill.png")
+				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/tohill.png")
 				gen.chunkbypos[forward+offset].queue_free()
-				var continuing=createcont(Vector3(0,1,0),gen.chunkbase,true)
+				var continuing=createcont(Vector3(),gen.chunkbase,true)
 				continuing.typestr="hillout"
 				continuing.add_child(globals.res.getres("res://ChunkTypes/caves/OutOnHill/OutOnHill.tscn").instance())
 				continuing.call("dowall",true,true)
 			"cavein","caveout":
-				$debug.texture=globals.res.getres("res://forall/sistematic/debug/replace.png")
+				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/replace.png")
 				globals.console.printsline(["merging caves"])
 				gen.chunkbypos[forward+offset].queue_free()
 				var replace=createcont(Vector3(0,30,0),globals.res.getres("res://forall/sistematic/chunktypes/plain.gd"),true)
@@ -70,5 +70,5 @@ func defined():
 				var tunnel=createcont(Vector3(),get_script(),true)
 				tunnel.typestr="cavecont"
 			_:
-				$debug.texture=globals.res.getres("res://forall/sistematic/debug/unknown.png")
+				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/unknown.png")
 				
