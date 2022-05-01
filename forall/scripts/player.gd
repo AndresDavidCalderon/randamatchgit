@@ -41,9 +41,12 @@ func _integrate_forces(state):
 	tocallonint=[]
 	tocallonintargs=[]
 	emit_signal("onfis",state)
-	var actspeed=speed
-	if $getflor.get_overlapping_bodies().size()<1:
-		actspeed=speed/4
+	
+	#the speed affected by changing data
+	var current_speed=speed
+	var on_floor=$getflor.get_overlapping_bodies().size()>0
+	if not on_floor:
+		current_speed/=2
 		if orders.has("l"):
 			addlocaltorque("z",rotonair)
 		elif orders.has("r"):
@@ -64,22 +67,22 @@ func _integrate_forces(state):
 		hastokill=false
 	
 	if orders.has("accel"):
-		var go=tospatial(actspeed,rotation.y)
+		var direction=get_rotated_vector(Vector3(0,0,-current_speed))
 		if $getfront.get_overlapping_bodies().size()>0:
 			if orders.has("left"):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("right"):
 				add_torque(Vector3(0,-rotspeed,0))
-		add_central_force(Vector3(go.x,getvert(speed,rotation.x),go.y))
+		add_central_force(direction)
 	
 	if orders.has("break"):
-		var go=tospatial(-(actspeed/2),rotation.y)
+		var direction=get_rotated_vector(Vector3(0,0,current_speed/2))
 		if $getfront.get_overlapping_bodies().size()>0:
 			if orders.has("right"):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("left"):
 				add_torque(Vector3(0,-rotspeed,0))
-		add_central_force(Vector3(go.x,0,go.y))
+		add_central_force(direction)
 	
 	if balancing:
 		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
@@ -87,15 +90,12 @@ func _integrate_forces(state):
 		if $getback.get_overlapping_bodies().size()<1 and rotation.x<0:
 			addlocaltorque("x",balancing_force)
 
-func tospatial(sp,dir):
-	return Vector2(sp*-cos(dir+(PI*1.5)),sp*sin(dir+(PI*1.5)))
-
-func getvert(sp,dir):
-	var gety=0
-	if $getflor.get_overlapping_bodies().size()>0:
-		gety=sp*cos(dir-(PI/2))
-	return gety
-var isripres=false
-
 func addlocaltorque(axisarg:String,num:float):
 	add_torque(get_indexed("transform:basis:"+axisarg)*num)
+
+func get_rotated_vector(vec:Vector3):
+	var newvec:Vector3=vec
+	newvec=newvec.rotated(Vector3(0,0,1),transform.basis.get_euler().z)
+	newvec=newvec.rotated(Vector3(1,0,0),transform.basis.get_euler().x)
+	newvec=newvec.rotated(Vector3(0,1,0),transform.basis.get_euler().y)
+	return newvec

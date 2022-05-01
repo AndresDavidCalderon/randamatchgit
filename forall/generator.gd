@@ -34,7 +34,6 @@ func _process(delta):
 		doline()
 		emit_signal("make_row",rows_done-10)
 
-var calling=false
 var called=0
 var rows_done=0
 
