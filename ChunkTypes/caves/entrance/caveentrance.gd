@@ -8,7 +8,7 @@ func defined():
 		cavelong=1
 		dowall(true,false)
 		add_child(preload("res://ChunkTypes/caves/entrance/CaveEntrance.tscn").instance() as StaticBody)
-		var child=createcont(Vector3(0,-30,0),globals.res.getres("res://ChunkTypes/caves/tunnel/cavetunnel.gd"),true)
+		var child=createcont(Vector3(0,-1,0),globals.res.getres("res://ChunkTypes/caves/tunnel/cavetunnel.gd"),true)
 		child.typestr="tunnel"
 		child.created()
 		gen.chunkbypos[Vector3(pos.x,pos.y-1,pos.z)]=self

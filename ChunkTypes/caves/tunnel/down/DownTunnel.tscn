@@ -6,24 +6,26 @@
 extents = Vector3( 1, 10, 31.335 )
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 30, 1, 33 )
+extents = Vector3( 30, 1, 34.3343 )
 
 [node name="DownTunnel" type="StaticBody"]
+collision_layer = 7
+collision_mask = 7
 
 [node name="DownTunnel" parent="." instance=ExtResource( 1 )]
 
 [node name="right" type="CollisionShape" parent="."]
-transform = Transform( 1, 8.87987e-05, -0.000250958, 3.29951e-05, 0.89411, 0.447848, 0.000264152, -0.447848, 0.89411, 31.0001, 0.90181, -0.451705 )
+transform = Transform( 1, -0.000144231, -0.000248816, 1.6403e-05, 0.89235, -0.451345, 0.000287129, 0.451345, 0.89235, 31.0001, 30.902, -0.451705 )
 shape = SubResource( 1 )
 
 [node name="floor" type="CollisionShape" parent="."]
-transform = Transform( 1, 8.87987e-05, -0.000250958, 3.29951e-05, 0.89411, 0.447848, 0.000264152, -0.447848, 0.89411, 0, -10.858, 0.386 )
+transform = Transform( 1, -0.000160946, -0.000249191, 3.09944e-05, 0.892114, -0.451812, 0.000295024, 0.451812, 0.892114, 0, 18.5921, 0.386 )
 shape = SubResource( 2 )
 
 [node name="ceiling" type="CollisionShape" parent="."]
-transform = Transform( 1, 8.87987e-05, -0.000250958, 3.29951e-05, 0.89411, 0.447848, 0.000264152, -0.447848, 0.89411, 0, 13.142, 0.386 )
+transform = Transform( 1, -0.000160946, -0.000249191, 3.11489e-05, 0.89235, -0.451345, 0.000295008, 0.451345, 0.89235, 0, 43.142, 0.386 )
 shape = SubResource( 2 )
 
 [node name="left" type="CollisionShape" parent="."]
-transform = Transform( 1, 8.87987e-05, -0.000250958, 3.29951e-05, 0.89411, 0.447848, 0.000264152, -0.447848, 0.89411, -31, 0.902, -0.452 )
+transform = Transform( 1, -0.000152093, -0.000253475, 2.67866e-05, 0.900577, -0.434697, 0.000294388, 0.434697, 0.900577, -31, 30.902, -0.452 )
 shape = SubResource( 1 )

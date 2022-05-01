@@ -50,7 +50,7 @@ func setpos():
 	forward=Vector3(pos.x,pos.y,pos.z+1)
 	uppos=Vector3(pos.x,pos.y+1,pos.z)
 
-func getnewchunk(script:Script,gentype:String="onvis")->Spatial:
+func getnewchunk(script:Script)->Spatial:
 	var new=load("res://ChunkTypes/chunk.tscn").instance() as Spatial
 	new.set_script(script)
 	new.gen=get_node("/root/main/generator")

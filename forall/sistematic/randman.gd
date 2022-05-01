@@ -2,6 +2,7 @@ extends Node
 
 func _ready():
 	get_tree().connect("network_peer_connected",self,"setseed")
+	random.randomize()
 
 var random:RandomNumberGenerator=RandomNumberGenerator.new()
 func randbool(posibility):

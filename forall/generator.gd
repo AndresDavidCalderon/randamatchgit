@@ -20,19 +20,20 @@ export(Script) var hillscript
 export(Script) var plainscript
 export(Script) var outscript
 export(Script) var cavescript
-var checkwall:Area
+
 var chunkbypos={}
 var bycreated=[]
 
 signal make_row(row)
 
 func _ready():
+	randomize()
 	box.width=(60*(terrwide+1))/2
 
 func _process(delta):
-	if globals.playernd.translation.z>((rows_done-20)*60):
+	if globals.playernd.translation.z>((rows_done-30)*60):
 		doline()
-		emit_signal("make_row",rows_done-10)
+		emit_signal("make_row",rows_done-20)
 
 var called=0
 var rows_done=0

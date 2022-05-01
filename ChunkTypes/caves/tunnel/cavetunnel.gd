@@ -23,14 +23,14 @@ func defined():
 	#check if spot is free
 	if not gen.chunkbypos.has(forward+offset):
 		if randman.randbool(30) or cavelong<2 or hilltype!="forward" or not gen.chunkbypos.has(forwup):
-			var tunnel=createcont(Vector3()+worldman.postotrans(offset),get_script(),true)
+			var tunnel=createcont(offset,get_script(),true)
 			var hillposibs:Array
 			match hilltype:
 				"forward":
 					if not gen.chunkbypos.has(forwup):
-						hillposibs=["up","down","forward","forward","up"]
+						hillposibs=["up","down","forward","forward","up","down"]
 					else:
-						hillposibs=["down","forward"]
+						hillposibs=["down","forward","down"]
 				"up":
 					if not gen.chunkbypos.has(forwup):
 						hillposibs=["up","up","forward"]
@@ -38,13 +38,15 @@ func defined():
 						hillposibs=["forward"]
 				"down":
 					hillposibs=["down","forward"]
+			if cavelong>8:
+				hillposibs.erase("down")
 			tunnel.hilltype=randman.choose(hillposibs)
 			tunnel.typestr="cavecont"
 			tunnel.created()
 		else : #go out on plain
 			$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/uprandom.png")
 			gen.chunkbypos[forwup].queue_free()
-			var continuing=createcont(Vector3(0,30,0),gen.chunkbase,true,"none")
+			var continuing=createcont(Vector3(0,1,0),gen.chunkbase,true)
 			continuing.call("dowall",true,false)
 			continuing.typestr="caveout"
 			gen.chunkbypos[pos+Vector3(0,0,1)]=continuing
@@ -57,7 +59,7 @@ func defined():
 			"hill":
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/tohill.png")
 				gen.chunkbypos[forward+offset].queue_free()
-				var continuing=createcont(Vector3(),gen.chunkbase,true)
+				var continuing=createcont(offset,gen.chunkbase,true)
 				continuing.typestr="hillout"
 				continuing.add_child(globals.res.getres("res://ChunkTypes/caves/OutOnHill/OutOnHill.tscn").instance())
 				continuing.call("dowall",true,true)
@@ -65,7 +67,7 @@ func defined():
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/replace.png")
 				globals.console.printsline(["merging caves"])
 				gen.chunkbypos[forward+offset].queue_free()
-				var replace=createcont(Vector3(0,30,0),globals.res.getres("res://forall/sistematic/chunktypes/plain.gd"),true)
+				var replace=createcont(Vector3(0,1,0),globals.res.getres("res://forall/sistematic/chunktypes/plain.gd"),true)
 				replace.typestr="plain"
 				var tunnel=createcont(Vector3(),get_script(),true)
 				tunnel.typestr="cavecont"

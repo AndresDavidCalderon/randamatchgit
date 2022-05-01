@@ -14,15 +14,19 @@ onready var inittrans=translation
 var hastokill=false
 signal kill
 signal onfis(state)
+
 func _init():
 	globals.playernd=self
+
 func kill():
 	hastokill=true
 	sleeping=true
 	emit_signal("kill")
+
 var ruedarot=0
 var tocallonint=[]
 var tocallonintargs=[]
+
 #function to call on integrate forces
 func callonint(funct:String,args:Array):
 	tocallonint.resize(tocallonint.size()+1)
