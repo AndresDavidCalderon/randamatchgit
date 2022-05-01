@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://forall/sistematic/resoursman.gd" type="Script" id=1]
-[ext_resource path="res://ChunkTypes/caves/cavetunnel.gd" type="Script" id=2]
+[ext_resource path="res://ChunkTypes/caves/tunnel/cavetunnel.gd" type="Script" id=2]
 [ext_resource path="res://forall/chunkconts/hills/caves/reformats/cavetunnel.tscn" type="PackedScene" id=3]
 
 [node name="resman" type="Node"]

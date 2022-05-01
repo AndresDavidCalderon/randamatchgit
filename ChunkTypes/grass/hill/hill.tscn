@@ -6,6 +6,8 @@
 extents = Vector3( 30.0614, 1, 33.579 )
 
 [node name="hill" type="StaticBody"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="hill" parent="." instance=ExtResource( 1 )]
 

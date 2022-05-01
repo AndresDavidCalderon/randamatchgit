@@ -56,7 +56,6 @@ randman="*res://forall/sistematic/randman.gd"
 globals="*res://forall/sistematic/globals.tscn"
 saver="*res://story/saves/saveman.gd"
 math="*res://forall/sistematic/math.gd"
-story="*res://story/storyman.tscn"
 
 [debug]
 

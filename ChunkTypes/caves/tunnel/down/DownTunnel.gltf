@@ -54,15 +54,15 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 24,
+            "count" : 16,
             "max" : [
-                32,
                 30,
+                27,
                 30
             ],
             "min" : [
-                30,
-                0,
+                -30,
+                -25,
                 -30
             ],
             "type" : "VEC3"
@@ -70,48 +70,48 @@
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 24,
+            "count" : 16,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 24,
+            "count" : 16,
             "type" : "VEC2"
         },
         {
             "bufferView" : 3,
             "componentType" : 5123,
-            "count" : 36,
+            "count" : 24,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 288,
+            "byteLength" : 192,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 288,
-            "byteOffset" : 288
-        },
-        {
-            "buffer" : 0,
             "byteLength" : 192,
-            "byteOffset" : 576
+            "byteOffset" : 192
         },
         {
             "buffer" : 0,
-            "byteLength" : 72,
-            "byteOffset" : 768
+            "byteLength" : 128,
+            "byteOffset" : 384
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 48,
+            "byteOffset" : 512
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 840,
-            "uri" : "data:application/octet-stream;base64,AAAAQgAA8EEAAPDBAAAAQgAA8EEAAPDBAAAAQgAA8EEAAPDBAAAAQgAAAAAAAPDBAAAAQgAAAAAAAPDBAAAAQgAAAAAAAPDBAADwQQAA8EEAAPDBAADwQQAA8EEAAPDBAADwQQAA8EEAAPDBAADwQQAAAAAAAPDBAADwQQAAAAAAAPDBAADwQQAAAAAAAPDBAAAAQgAA8EEAAPBBAAAAQgAA8EEAAPBBAAAAQgAA8EEAAPBBAAAAQgAAAAAAAPBBAAAAQgAAAAAAAPBBAAAAQgAAAAAAAPBBAADwQQAA8EEAAPBBAADwQQAA8EEAAPBBAADwQQAA8EEAAPBBAADwQQAAAAAAAPBBAADwQQAAAAAAAPBBAADwQQAAAAAAAPBBAACAvwAAAAAAAACAAAAAAAAAgL8AAACAAAAAAAAAAAAAAIA/AACAvwAAAAAAAACAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAACAAAAAAAAAgL8AAACAAAAAAAAAAAAAAIA/AACAPwAAAAAAAACAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAACAAACAPwAAAAAAAACAAACAvwAAAAAAAACAAAAAAAAAgL8AAACAAAAAAAAAAAAAAIC/AACAvwAAAAAAAACAAAAAAAAAAAAAAIC/AAAAAAAAgD8AAACAAAAAAAAAgL8AAACAAAAAAAAAAAAAAIC/AACAPwAAAAAAAACAAAAAAAAAAAAAAIC/AAAAAAAAgD8AAACAAACAPwAAAAAAAACAAAAgPwAAAD8AACA/AAAAPwAAID8AAAA/AADAPgAAAD8AAMA+AAAAPwAAwD4AAAA/AAAgPwAAgD4AACA/AACAPgAAID8AAIA+AADAPgAAgD4AAMA+AACAPgAAwD4AAIA+AAAgPwAAQD8AAGA/AAAAPwAAID8AAEA/AADAPgAAQD8AAMA+AABAPwAAAD4AAAA/AABgPwAAgD4AACA/AACAPwAAID8AAAAAAADAPgAAgD8AAAA+AACAPgAAwD4AAAAAAQANABIAAQASAAYACwAIABQACwAUABcAFQATAA4AFQAOABAAEQAFAAoAEQAKABYABAACAAcABAAHAAkADwAMAAAADwAAAAMA"
+            "byteLength" : 560,
+            "uri" : "data:application/octet-stream;base64,AADwQQAAQMAAAPDBAADwQQAAQMAAAPDBAADwQQAAyMEAAPDBAADwQQAAyMEAAPDBAADwQQAA2EEAAPBBAADwQQAA2EEAAPBBAADwQQAAoEAAAPBBAADwQQAAoEAAAPBBAADwwQAAQMAAAPDBAADwwQAAQMAAAPDBAADwwQAAyMEAAPDBAADwwQAAyMEAAPDBAADwwQAA2EEAAPBBAADwwQAA2EEAAPBBAADwwQAAoEAAAPBBAADwwQAAoEAAAPBBAAAAAC/5ZD8v+eS+//9/PwAAAAAAAACAAAAAAC/5ZL8v+eQ+//9/PwAAAAAAAACAAAAAAC/5ZD8v+eS+//9/PwAAAAAAAACAAAAAAC/5ZL8v+eQ+//9/PwAAAAAAAACA//9/vwAAAAAAAACAAAAAAC/5ZD8v+eS+//9/vwAAAAAAAACAAAAAAC/5ZL8v+eQ+//9/vwAAAAAAAACAAAAAAC/5ZD8v+eS+//9/vwAAAAAAAACAAAAAAC/5ZL8v+eQ+AAAgPwAAAD8AACA/AAAAPwAAwD4AAAA/AADAPgAAAD8AACA/AACAPgAAID8AAIA+AADAPgAAgD4AAMA+AACAPgAAID8AAEA/AABgPwAAAD8AAMA+AABAPwAAAD4AAAA/AAAgPwAAgD8AAGA/AACAPgAAwD4AAIA/AAAAPgAAgD4AAAkADQAAAA0ABAAOAAwACAAOAAgACgALAAIABgALAAYADwADAAEABQADAAUABwA="
         }
     ]
 }

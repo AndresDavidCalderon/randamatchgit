@@ -11,11 +11,11 @@ var forward:Vector3
 var stack:int
 var gen:Node
 
-func getnewwall(hilltype):
-	if not hilltype:
-		return preload("res://forall/chunkconts/walls/jungle/junglewall.tscn").instance()
+func getnewwall(is_hill):
+	if not is_hill:
+		return preload("res://ChunkTypes/walls/plain/PlainWall.tscn").instance()
 	else:
-		return preload("res://forall/chunkconts/walls/jungle/todownbody.tscn").instance()
+		return preload("res://ChunkTypes/walls/hill/HillWall.tscn").instance()
 
 var player:RigidBody
 
@@ -51,7 +51,7 @@ func setpos():
 	uppos=Vector3(pos.x,pos.y+1,pos.z)
 
 func getnewchunk(script:Script,gentype:String="onvis")->Spatial:
-	var new=load("res://forall/sistematic/chunk.tscn").instance() as Spatial
+	var new=load("res://ChunkTypes/chunk.tscn").instance() as Spatial
 	new.set_script(script)
 	new.gen=get_node("/root/main/generator")
 	new.player=get_node("/root/main/player")

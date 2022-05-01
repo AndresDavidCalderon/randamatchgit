@@ -8,14 +8,14 @@ func defined():
 	var child
 	match hilltype:
 		"forward":
-			child=globals.res.getres("res://forall/chunkconts/hills/caves/cavetunnel.tscn").instance()
+			child=globals.res.getres("res://ChunkTypes/caves/tunnel/straight/StraightTunnel.tscn").instance()
 		"down":
-			child=globals.res.getres("res://forall/chunkconts/hills/caves/todownbody.tscn").instance()
+			child=globals.res.getres("res://ChunkTypes/caves/tunnel/down/DownTunnel.tscn").instance()
 			child.translation.y=-30
 			offset.y=-1
 		"up":
-			child=globals.res.getres("res://forall/chunkconts/hills/caves/todownbody.tscn").instance()
-			child.rotation_degrees.y=0
+			child=globals.res.getres("res://ChunkTypes/caves/tunnel/down/DownTunnel.tscn").instance()
+			child.rotation_degrees.y=180
 			offset.y=1
 	add_child(child)
 	
@@ -44,11 +44,11 @@ func defined():
 		else : #go out on plain
 			$debug.texture=globals.res.getres("res://forall/sistematic/debug/uprandom.png")
 			gen.chunkbypos[forwup].queue_free()
-			var continuing=createcont(Vector3(0,30,0),worldman.chunkscript,true,"none")
+			var continuing=createcont(Vector3(0,30,0),gen.chunkbase,true,"none")
 			continuing.call("dowall",true,false)
 			continuing.typestr="caveout"
 			gen.chunkbypos[pos+Vector3(0,0,1)]=continuing
-			var ramp=globals.res.getres("res://forall/chunkconts/hills/caves/ramptocavebody.tscn").instance() as StaticBody
+			var ramp=globals.res.getres("res://ChunkTypes/caves/entrance/CaveEntrance.tscn").instance() as StaticBody
 			continuing.add_child(ramp)
 			ramp.rotation_degrees.y=0
 	else:
@@ -57,9 +57,9 @@ func defined():
 			"hill":
 				$debug.texture=globals.res.getres("res://forall/sistematic/debug/tohill.png")
 				gen.chunkbypos[forward+offset].queue_free()
-				var continuing=createcont(Vector3(0,1,0),worldman.chunkscript,true)
+				var continuing=createcont(Vector3(0,1,0),gen.chunkbase,true)
 				continuing.typestr="hillout"
-				continuing.add_child(globals.res.getres("res://forall/chunkconts/hills/caves/torampbody.tscn").instance())
+				continuing.add_child(globals.res.getres("res://ChunkTypes/caves/OutOnHill/OutOnHill.tscn").instance())
 				continuing.call("dowall",true,true)
 			"cavein","caveout":
 				$debug.texture=globals.res.getres("res://forall/sistematic/debug/replace.png")
