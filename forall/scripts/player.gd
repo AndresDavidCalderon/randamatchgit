@@ -8,10 +8,14 @@ export(float) var balancing_force
 export(float) var rotonair
 export(float) var goupspeed
 export(float) var vrotlimit
+export var impulse_offset:Vector3
+
 var byinput=false
 onready var initrot=rotation
 onready var inittrans=translation
 var hastokill=false
+
+
 signal kill
 signal onfis(state)
 
@@ -71,22 +75,23 @@ func _integrate_forces(state):
 		hastokill=false
 	
 	if orders.has("accel"):
-		var direction=get_rotated_vector(Vector3(0,0,-current_speed))
 		if $getfront.get_overlapping_bodies().size()>0:
 			if orders.has("left"):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("right"):
 				add_torque(Vector3(0,-rotspeed,0))
-		add_central_force(direction)
+		
+		var direction=get_rotated_vector(Vector3(0,0,-current_speed))
+		add_force(direction,get_rotated_vector(impulse_offset))
 	
 	if orders.has("break"):
-		var direction=get_rotated_vector(Vector3(0,0,current_speed/2))
 		if $getfront.get_overlapping_bodies().size()>0:
 			if orders.has("right"):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("left"):
 				add_torque(Vector3(0,-rotspeed,0))
-		add_central_force(direction)
+		var direction=get_rotated_vector(Vector3(0,0,current_speed/2))
+		add_force(direction,get_rotated_vector(-impulse_offset))
 	
 	if balancing:
 		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
@@ -97,9 +102,13 @@ func _integrate_forces(state):
 func addlocaltorque(axisarg:String,num:float):
 	add_torque(get_indexed("transform:basis:"+axisarg)*num)
 
-func get_rotated_vector(vec:Vector3):
+
+func apply_local_torque_impulse(axisarg:String,num:float):
+	apply_torque_impulse(get_indexed("transform:basis:"+axisarg)*num)
+
+func get_rotated_vector(vec:Vector3,offset:Vector3=Vector3(0,0,0)):
 	var newvec:Vector3=vec
-	newvec=newvec.rotated(Vector3(0,0,1),transform.basis.get_euler().z)
-	newvec=newvec.rotated(Vector3(1,0,0),transform.basis.get_euler().x)
-	newvec=newvec.rotated(Vector3(0,1,0),transform.basis.get_euler().y)
+	newvec=newvec.rotated(Vector3(0,0,1),transform.basis.get_euler().z+offset.z)
+	newvec=newvec.rotated(Vector3(1,0,0),transform.basis.get_euler().x+offset.z)
+	newvec=newvec.rotated(Vector3(0,1,0),transform.basis.get_euler().y+offset.z)
 	return newvec

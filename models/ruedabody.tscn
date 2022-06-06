@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://models/rueda.gltf" type="PackedScene" id=1]
-[ext_resource path="res://forall/visual/visrueda.gd" type="Script" id=2]
 [ext_resource path="res://models/ruedamaterial.material" type="Material" id=3]
 
 [sub_resource type="CylinderShape" id=1]
@@ -14,10 +13,6 @@ shape = SubResource( 1 )
 
 [node name="vis" type="Spatial" parent="."]
 transform = Transform( 1.1, 0, 0, 0, 1, 0, 0, 0, 1.1, 0, 0, 0.0732205 )
-script = ExtResource( 2 )
-
-[node name="getback" type="Timer" parent="vis"]
-wait_time = 0.337
 
 [node name="rueda3" parent="vis" instance=ExtResource( 1 )]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.821437, -4.21905, -0.0665641 )
@@ -33,11 +28,7 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.8152
 generate_lightmap = false
 material/0 = ExtResource( 3 )
 
-[node name="getbackimp" type="Timer" parent="vis"]
-wait_time = 0.303
-
-[connection signal="timeout" from="vis/getback" to="vis" method="_on_getback_timeout"]
-[connection signal="timeout" from="vis/getbackimp" to="vis" method="_on_getbackimp_timeout"]
+[node name="Tween" type="Tween" parent="."]
 
 [editable path="vis/rueda3"]
 [editable path="vis/rueda4"]

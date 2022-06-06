@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://forall/scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://forall/interact/interact.gd" type="Script" id=2]
 [ext_resource path="res://models/ruedabody.tscn" type="PackedScene" id=3]
 [ext_resource path="res://forall/visual/carrep.tscn" type="PackedScene" id=4]
 [ext_resource path="res://forall/player/carinteract.gd" type="Script" id=5]
+[ext_resource path="res://forall/physic/suspension.gd" type="Script" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.76
@@ -23,9 +24,8 @@ extents = Vector3( 4.37119, 1.93052, 2.04197 )
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 3.96996, 0.843558, 1.26515 )
 
-[sub_resource type="CylinderShape" id=6]
-radius = 1.96
-height = 8.77372
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.218015, 4.5919, 0.542621 )
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 7.17086, 7.65976, 12.9206 )
@@ -44,7 +44,6 @@ script = ExtResource( 1 )
 speed = 16000.0
 rotspeed = 12000.0
 balancing = true
-rotgrav = 6000.0
 rotonair = 10000.0
 
 [node name="col" type="CollisionShape" parent="."]
@@ -92,11 +91,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98536, 0, 0 )
 
 [node name="ruedaback" parent="." instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0771024, -1.00491, 1.71085 )
-shape = SubResource( 6 )
 
 [node name="ruedafront" parent="." instance=ExtResource( 3 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.0771014, -1.00491, -10.4764 )
-shape = SubResource( 6 )
+script = ExtResource( 6 )
+
+[node name="bottom" type="Area" parent="ruedafront"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34607, 1.19209e-07, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ruedafront/bottom"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219571, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="front" type="Area" parent="ruedafront"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65936, 1.19209e-07, -1.34426 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ruedafront/front"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219571, 0, 0 )
+shape = SubResource( 9 )
 
 [node name="chunkdect" type="Area" parent="."]
 collision_layer = 8
@@ -119,4 +131,6 @@ shape = SubResource( 8 )
 script = ExtResource( 5 )
 
 [connection signal="needsorders" from="." to="playerinteract" method="_on_car_needsorders"]
+[connection signal="body_entered" from="ruedafront/front" to="ruedafront" method="_on_front_body_entered"]
+[connection signal="body_exited" from="ruedafront/front" to="ruedafront" method="_on_front_body_exited"]
 [connection signal="interacted" from="interact" to="playerinteract" method="_on_interact_interacted"]
