@@ -55,14 +55,16 @@ func _integrate_forces(state):
 	var on_floor=$getflor.get_overlapping_bodies().size()>0
 	if not on_floor:
 		current_speed/=2
-		if orders.has("l"):
-			addlocaltorque("z",rotonair)
-		elif orders.has("r"):
-			addlocaltorque("z",-rotonair)
 		if orders.has("accel"):
 			addlocaltorque("x",-rotonair)
 		elif orders.has("break"):
 			addlocaltorque("x",rotonair)
+	
+	if $GetRight.get_overlapping_bodies().size()==0 or $GetLeft.get_overlapping_bodies().size()==0:
+		if orders.has("l"):
+			addlocaltorque("z",rotonair*1.5)
+		elif orders.has("r"):
+			addlocaltorque("z",-rotonair*1.5)
 	
 	if hastokill:
 		state.transform.origin=inittrans
