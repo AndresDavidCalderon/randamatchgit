@@ -36,7 +36,6 @@ func defined():
 			continuing.add_child(ramp)
 			ramp.rotation_degrees.y=180
 		else:
-			$de
 			var tunnel=createcont(offset,get_script(),true)
 			var hillposibs:Array
 			match hilltype:
