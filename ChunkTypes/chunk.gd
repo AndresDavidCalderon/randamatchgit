@@ -53,14 +53,14 @@ func setpos():
 func getnewchunk(script:Script)->Spatial:
 	var new=load("res://ChunkTypes/chunk.tscn").instance() as Spatial
 	new.set_script(script)
-	new.gen=get_node("/root/main/generator")
+	new.gen=get_node("/root/main/Generator")
 	new.player=get_node("/root/main/player")
 
 	return new
 
 
 func created():
-	gen=get_node("/root/main/generator")
+	gen=get_node("/root/main/Generator")
 	player=get_node("/root/main/player")
 	add_to_group("chunks")
 	gen.connect("make_row",self,"check_row")

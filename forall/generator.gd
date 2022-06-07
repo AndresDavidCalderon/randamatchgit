@@ -18,7 +18,6 @@ export(PackedScene) var chunk
 export(Script) var chunkbase
 export(Script) var hillscript
 export(Script) var plainscript
-export(Script) var outscript
 export(Script) var cavescript
 
 var chunkbypos={}

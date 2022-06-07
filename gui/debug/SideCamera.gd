@@ -1,6 +1,4 @@
 extends Camera
 
-func _process(delta):
-	translation=globals.playernd.translation
-	translation.x-=23
-	rotation.y=-PI/2
+onready var main_camera=get_node("/root/main/player/cam")
+onready var alt_camera=get_node("/root/main/player/BackCamera")

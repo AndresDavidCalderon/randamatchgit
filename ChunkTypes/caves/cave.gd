@@ -1,5 +1,8 @@
 extends "res://ChunkTypes/chunk.gd"
+
 var cavelong:int
+
+
 func createcont(offset:Vector3,script:Script=worldman.chunkscript,register:bool=false)->Spatial:
 	var continuing=getnewchunk(script) as Spatial
 	gen.add_child(continuing)

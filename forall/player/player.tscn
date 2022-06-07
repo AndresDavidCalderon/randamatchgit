@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://forall/scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://forall/interact/interact.gd" type="Script" id=2]
@@ -13,7 +13,10 @@ rough = true
 absorbent = true
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 3.84104, 3.18178, 8.40115 )
+extents = Vector3( 3.84104, 3.18178, 4.95683 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 3.84104, 1.78415, 5.11606 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 5.21962, 1.1307, 8.01676 )
@@ -46,9 +49,17 @@ rotspeed = 12000.0
 balancing = true
 rotonair = 10000.0
 
-[node name="col" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, -5.68434e-14, 0, 0.999999, 0, 0, 0, 0.999999, -0.194292, 2.19102, -4.53217 )
+[node name="MainCol" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, -5.68434e-14, 0, 0.999999, 0, 0, 0, 0.999999, -0.194292, 2.19102, -0.640524 )
 shape = SubResource( 2 )
+
+[node name="FrontCol" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, -5.68434e-14, 0, 0.999999, 0, 0, 0, 0.999999, -0.194292, 0.678189, -8.12509 )
+shape = SubResource( 10 )
+
+[node name="FrontCol2" type="CollisionShape" parent="."]
+transform = Transform( 1, 6.11196e-08, 2.49156e-08, -6.11196e-08, 0.714997, 0.699126, 2.49157e-08, -0.699126, 0.714997, -0.204032, 1.11777, -7.34081 )
+shape = SubResource( 10 )
 
 [node name="getflor" type="Area" parent="."]
 transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 0.532305, -4.97684, -6.03905 )
@@ -68,12 +79,21 @@ collision_mask = 2
 transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420212 )
 shape = SubResource( 4 )
 
-[node name="getright" type="Area" parent="."]
+[node name="GetRight" type="Area" parent="."]
 transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -3.71438, -4.79198, -4.37423 )
 collision_layer = 2
 collision_mask = 2
 
-[node name="col" type="CollisionShape" parent="getright"]
+[node name="col" type="CollisionShape" parent="GetRight"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420213 )
+shape = SubResource( 5 )
+
+[node name="Getleft" type="Area" parent="."]
+transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 4.95577, -4.79198, -4.37423 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="Getleft"]
 transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420213 )
 shape = SubResource( 5 )
 

@@ -1,4 +1,6 @@
 extends "res://ChunkTypes/caves/cave.gd"
+
+var supported_out_types=["plain"]
 var hilltype="forward"
 func defined():
 	setpos()
@@ -22,7 +24,7 @@ func defined():
 	#continue the cave
 	#check if spot is free
 	if not gen.chunkbypos.has(forward+offset):
-		if randman.randbool(30) or cavelong<2 or hilltype!="forward" or not gen.chunkbypos.has(forwup):
+		if can_come_out():
 			var tunnel=createcont(offset,get_script(),true)
 			var hillposibs:Array
 			match hilltype:
@@ -55,7 +57,8 @@ func defined():
 			ramp.rotation_degrees.y=180
 	else:
 		#if it isnt, react properly depending on whats there
-		match gen.chunkbypos[forward+offset].typestr:
+		var obstructing_chunk:Spatial=gen.chunkbypos[forward+offset]
+		match obstructing_chunk.typestr:
 			"hill":
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/tohill.png")
 				gen.chunkbypos[forward+offset].queue_free()
@@ -67,6 +70,10 @@ func defined():
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/replace.png")
 				globals.console.printsline(["merging caves"])
 				gen.chunkbypos[forward+offset].queue_free()
+				var warning=Sprite3D.new()
+				warning.texture=preload("res://gui/debug/CaveOutReplace.png")
+				warning.translation=obstructing_chunk.translation
+				warning.translation.y+=30
 				var replace=createcont(Vector3(0,1,0),globals.res.getres("res://forall/sistematic/chunktypes/plain.gd"),true)
 				replace.typestr="plain"
 				var tunnel=createcont(Vector3(),get_script(),true)
@@ -74,3 +81,23 @@ func defined():
 			_:
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/unknown.png")
 				
+
+func can_come_out():
+	if randman.randbool(30):
+		return false
+		#we just dont want to come out
+	if cavelong<2:
+		return false
+		#cave is not long enough "cve"
+	if hilltype!="forward":
+		return false
+		#we cant come out on a bad angle.
+	if not gen.chunkbypos.has(forwup):
+		return false
+		#we cant go out on the void
+	else:
+		if not supported_out_types.has(gen.chunkbypos[forwup].typestr):
+			return false
+			#we cant replace a hill
+	
+	return true
