@@ -87,6 +87,7 @@ func defined():
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/unknown.png")
 				
 
+#this is an if statement, just very long.
 func can_come_out():
 	if randman.randbool(30):
 		return false
