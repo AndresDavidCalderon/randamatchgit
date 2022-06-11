@@ -29,6 +29,10 @@ shape = SubResource( 2 )
 transform = Transform( 1, 8.87987e-05, -0.000250958, 3.29951e-05, 0.89411, 0.447848, 0.000264152, -0.447848, 0.89411, 0, 13.142, 0.386 )
 shape = SubResource( 2 )
 
+[node name="ceiling2" type="CollisionShape" parent="."]
+transform = Transform( 1, 8.87987e-05, -0.000250958, 3.29951e-05, 0.89411, 0.447848, 0.000264152, -0.447848, 0.89411, 0, 13.142, 0.386 )
+shape = SubResource( 2 )
+
 [node name="left" type="CollisionShape" parent="."]
 transform = Transform( 1, 8.87987e-05, -0.000250958, 3.29951e-05, 0.89411, 0.447848, 0.000264152, -0.447848, 0.89411, -28, 0.902, -0.452 )
 shape = SubResource( 1 )

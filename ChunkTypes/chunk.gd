@@ -11,6 +11,9 @@ var forward:Vector3
 var stack:int
 var gen:Node
 
+func _ready():
+	globals.connect("debug_priority_changed",self,"debug_priority")
+
 func getnewwall(is_hill):
 	if not is_hill:
 		return preload("res://ChunkTypes/walls/plain/PlainWall.tscn").instance()
@@ -60,6 +63,7 @@ func getnewchunk(script:Script)->Spatial:
 
 
 func created():
+	$Type.text=typestr
 	gen=get_node("/root/main/Generator")
 	player=get_node("/root/main/player")
 	add_to_group("chunks")
@@ -68,7 +72,7 @@ func created():
 func check_row(newrow:int):
 	if newrow==stage:
 		gen.disconnect("make_row",self,"check_row")
-		call("defined")
+		call("generate")
 
 
 func getresname(res:Resource)->String:
@@ -92,9 +96,14 @@ func invertstring(phrase:String):
 	return result
 
 func register():
-	gen.chunkbypos[worldman.transtopos(translation)]=self
+	get_node("/root/main/Generator").chunkbypos[worldman.transtopos(translation)]=self
 
 
 func _on_killdown_area_entered(area):
 	if area!=get_node("dect") and area.get_parent().get("typestr")!=null and area.name!="killdown":
 		$killdown.queue_free()
+
+func debug_priority(enabled:bool):
+	$DebugLabel.no_depth_test=enabled
+	$debug.no_depth_test=enabled
+	$Type.visible=enabled

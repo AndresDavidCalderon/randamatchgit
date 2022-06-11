@@ -52,8 +52,8 @@ func _integrate_forces(state):
 	
 	#the speed affected by changing data
 	var current_speed=speed
-	var on_floor=$getflor.get_overlapping_bodies().size()>0
-	if not on_floor:
+	
+	if $getfront.get_overlapping_bodies().size()==0 or $getback.get_overlapping_bodies().size()==0:
 		current_speed/=2
 		if orders.has("accel"):
 			addlocaltorque("x",-rotonair)

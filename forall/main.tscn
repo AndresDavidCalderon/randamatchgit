@@ -96,23 +96,29 @@ mounted = true
 
 [node name="Suspension" type="Node" parent="player"]
 script = ExtResource( 9 )
+automatic_suspension = 14.0
 
 [node name="CamHolder" type="Spatial" parent="player"]
 
 [node name="cam" parent="player" instance=ExtResource( 3 )]
-transform = Transform( 0.998055, 0.0362501, -0.050714, 0, 0.813537, 0.581513, 0.0623376, -0.580382, 0.811955, -5.18281e-06, 32.7859, 40.3301 )
+transform = Transform( 0.998055, 0.0362501, -0.050714, 0, 0.813537, 0.581513, 0.0623376, -0.580382, 0.811955, -2.81133, 33.1639, 41.9103 )
 fov = 91.3
 far = 600.0
+margin = 3.82
+process_mode = 1
 
 [node name="BackCamera" type="ClippedCamera" parent="player"]
 transform = Transform( -0.99721, 0.0564289, -0.0488682, 0.00373632, 0.691559, 0.722311, 0.0745545, 0.720113, -0.68984, 2.29105e-07, 32.0218, -35.7128 )
 fov = 101.5
 far = 900.0
 margin = 2.97
+process_mode = 1
 collision_mask = 4
 
 [node name="LookSwitch" type="Node" parent="player"]
 script = ExtResource( 6 )
+
+[node name="Sprite3D" type="Sprite3D" parent="player"]
 
 [node name="floor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36519, 0 )

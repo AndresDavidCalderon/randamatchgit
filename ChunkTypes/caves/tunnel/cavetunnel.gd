@@ -2,7 +2,7 @@ extends "res://ChunkTypes/caves/cave.gd"
 
 var supported_out_types=["plain"]
 var hilltype="forward"
-func defined():
+func generate():
 	setpos()
 	var offset=Vector3()
 	
@@ -28,7 +28,7 @@ func defined():
 			#go out on plain
 			$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/uprandom.png")
 			gen.chunkbypos[forwup].queue_free()
-			var continuing=createcont(Vector3(0,1,0),gen.chunkbase,true)
+			var continuing=createcont(Vector3(0,1,0),gen.chunkbase)
 			continuing.call("dowall",true,false)
 			continuing.typestr="caveout"
 			gen.chunkbypos[pos+Vector3(0,0,1)]=continuing
@@ -36,34 +36,15 @@ func defined():
 			continuing.add_child(ramp)
 			ramp.rotation_degrees.y=180
 		else:
-			var tunnel=createcont(offset,get_script(),true)
-			var hillposibs:Array
-			match hilltype:
-				"forward":
-					if not gen.chunkbypos.has(forwup):
-						hillposibs=["up","down","forward","forward","up","down"]
-					else:
-						hillposibs=["down","forward","down"]
-				"up":
-					if not gen.chunkbypos.has(forwup):
-						hillposibs=["up","up","forward"]
-					else:
-						hillposibs=["forward"]
-				"down":
-					hillposibs=["down","forward"]
-			if cavelong>8:
-				hillposibs.erase("down")
-			tunnel.hilltype=randman.choose(hillposibs)
-			tunnel.typestr="cavecont"
-			tunnel.created()
+			continue_cave(offset)
 	else:
 		#if it isnt, react properly depending on whats there
 		var obstructing_chunk:Spatial=gen.chunkbypos[forward+offset]
 		match obstructing_chunk.typestr:
 			"hill":
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/tohill.png")
-				gen.chunkbypos[forward+offset].queue_free()
-				var continuing=createcont(offset,gen.chunkbase,true)
+				obstructing_chunk.queue_free()
+				var continuing=createcont(offset,gen.chunkbase)
 				continuing.typestr="hillout"
 				continuing.add_child(globals.res.getres("res://ChunkTypes/caves/OutOnHill/OutOnHill.tscn").instance())
 				continuing.call("dowall",true,true)
@@ -71,7 +52,7 @@ func defined():
 			"cavein","caveout":
 				
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/replace.png")
-				gen.chunkbypos[forward+offset].queue_free()
+				obstructing_chunk.queue_free()
 				
 				var warning=Sprite3D.new()
 				warning.texture=preload("res://gui/debug/CaveOutReplace.png")
@@ -79,13 +60,30 @@ func defined():
 				warning.translation=obstructing_chunk.translation
 				warning.translation.y+=30
 				
-				var replace=createcont(Vector3(0,1,0),globals.res.getres("res://ChunkTypes/grass/plain/plain.gd"),true)
+				var replace=createcont(Vector3(0,1,0),globals.res.getres("res://ChunkTypes/grass/plain/plain.gd"))
 				replace.typestr="plain"
-				var tunnel=createcont(Vector3(),get_script(),true)
-				tunnel.typestr="cavecont"
-			_:
-				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/unknown.png")
+				replace.generate()
 				
+				continue_cave(offset)
+			"tunnel":
+				if obstructing_chunk.hilltype=="down" and hilltype=="forward":
+					$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/CaveDownReplace.png")
+					obstructing_chunk.queue_free()
+					
+					var replacement=gen.chunk.instance()
+					gen.add_child(replacement)
+					replacement.set_script(get_script())
+					replacement.typestr=typestr
+					replacement.add_child(globals.res.getres("res://ChunkTypes/caves/tunnel/Connections/StraightDown/StraightDown.tscn").instance())
+					share_info_to_chunk(replacement)
+					replacement.translation=translation+Vector3(0,0,30)+worldman.transtopos(offset)
+					replacement.register()
+				else:
+					$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/NoConnection.png")
+					$DebugLabel.text=str(obstructing_chunk.hilltype)
+			var type:
+				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/unknown.png")
+				$DebugLabel.text="type "+ type
 
 #this is an if statement, just very long.
 func can_come_out():
@@ -107,3 +105,25 @@ func can_come_out():
 			#we cant replace a hill
 	
 	return true
+
+func continue_cave(offset:Vector3):
+	var tunnel=createcont(offset,get_script())
+	var hillposibs:Array
+	match hilltype:
+		"forward":
+			if not gen.chunkbypos.has(forwup):
+				hillposibs=["up","down","forward","forward","up","down"]
+			else:
+				hillposibs=["down","forward","down"]
+		"up":
+			if not gen.chunkbypos.has(forwup):
+				hillposibs=["up","up","forward"]
+			else:
+				hillposibs=["forward"]
+		"down":
+			hillposibs=["down","forward"]
+	if cavelong>8:
+		hillposibs.erase("down")
+	tunnel.hilltype=randman.choose(hillposibs)
+	tunnel.typestr="tunnel"
+	tunnel.created()

@@ -1,7 +1,9 @@
 extends Node
 
 signal pausing
+signal debug_priority_changed(priority)
 
+var debug_prority:bool=false
 var console:Node2D
 var res:resman
 var camera
@@ -26,3 +28,9 @@ func _input(event):
 	if event.is_action_pressed("pause"):
 		paused=not paused
 		emit_signal("pausing")
+		return
+	if event.is_action_pressed("console"):
+		debug_prority=not debug_prority
+		emit_signal("debug_priority_changed",debug_prority)
+	
+

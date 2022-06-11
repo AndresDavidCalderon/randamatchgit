@@ -64,13 +64,17 @@ func doline():
 			nod.set_script(plainscript)
 			nod.typestr="plain"
 		
-		chunkbypos[Vector3(round(pos.x/60),round(pos.y/30),round(pos.z/60))]=nod
+		chunkbypos[worldman.transtopos(nod.translation)]=nod
 		
 		pos.x+=60
 		
 		if randman.randbool(cavechance) and is_hill==false and lastcave>betweencaves:
+			chunkbypos[worldman.transtopos(nod.translation)+Vector3(0,-1,0)]=nod
+			
 			nod.set_script(cavescript)
+			nod.typestr="cavein"
 			lastcave=0
+			
 			if terrhei<abs(pos.y)+30:
 				terrhei+=30
 			can_be_hill=false
@@ -91,6 +95,7 @@ func doline():
 		nod.stage=rows_done
 		bycreated.append(nod)
 		chunksbystage[rows_done].append(nod)
+		
 		nod.created()
 	
 	

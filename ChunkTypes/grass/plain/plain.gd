@@ -1,5 +1,5 @@
 extends "res://ChunkTypes/chunk.gd"
-func defined():
+func generate():
 	dowall(true,false)
 	add_child(load("res://ChunkTypes/grass/plain/plain.tscn").instance())
 
