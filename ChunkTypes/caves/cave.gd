@@ -5,7 +5,7 @@ var cavelong:int
 
 func createcont(offset:Vector3,script:Script=worldman.chunkscript)->Spatial:
 	var continuing=getnewchunk(script) as Spatial
-	gen.add_child(continuing)
+	get_node("/root/main/Generator").add_child(continuing)
 	share_info_to_chunk(continuing)
 	if continuing.get("cavelong")!=null:
 		continuing.cavelong=cavelong+1

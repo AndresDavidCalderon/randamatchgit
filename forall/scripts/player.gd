@@ -7,6 +7,7 @@ export(bool) var balancing
 export(float) var balancing_force
 export(float) var rotonair
 export(float) var goupspeed
+export(float) var jump_force
 export(float) var vrotlimit
 export var impulse_offset:Vector3
 
@@ -54,7 +55,8 @@ func _integrate_forces(state):
 	
 	#the speed affected by changing data
 	var current_speed=speed
-	
+	if Input.is_action_just_pressed("jump"):
+		apply_central_impulse(get_rotated_vector(Vector3(0,jump_force,0)))
 	if $getfront.get_overlapping_bodies().size()==0 or $getback.get_overlapping_bodies().size()==0:
 		current_speed/=2
 		if orders.has("accel"):

@@ -1,7 +1,7 @@
 extends "res://ChunkTypes/caves/cave.gd"
 
-var supported_out_types=["plain"]
-var hilltype="forward"
+var supported_out_types:=["plain"]
+var hilltype:="forward"
 func generate():
 	setpos()
 	var offset=Vector3()
@@ -76,11 +76,28 @@ func generate():
 					replacement.typestr=typestr
 					replacement.add_child(globals.res.getres("res://ChunkTypes/caves/tunnel/Connections/StraightDown/StraightDown.tscn").instance())
 					share_info_to_chunk(replacement)
-					replacement.translation=translation+Vector3(0,0,30)+worldman.transtopos(offset)
+					replacement.translation=translation+Vector3(0,0,60)+worldman.transtopos(offset)
 					replacement.register()
-				else:
-					$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/NoConnection.png")
-					$DebugLabel.text=str(obstructing_chunk.hilltype)
+					replacement.continue_cave(Vector3())
+					return
+				if obstructing_chunk.hilltype=="straight" and hilltype=="up":
+					$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/CaveDownReplace.png")
+					obstructing_chunk.queue_free()
+					var replacement=gen.chunk.instance()
+					gen.add_child(replacement)
+					replacement.set_script(get_script())
+					replacement.typestr=typestr
+					replacement.add_child(globals.res.getres("res://ChunkTypes/caves/tunnel/Connections/UpStraight/UpStraight.tscn").instance())
+					share_info_to_chunk(replacement)
+					replacement.translation=translation+Vector3(0,0,60)+worldman.transtopos(offset)
+					replacement.register()
+					replacement.continue_cave(Vector3())
+					return
+				if obstructing_chunk.hilltype==hilltype:
+					continue_cave(offset)
+					return
+				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/NoConnection.png")
+				$DebugLabel.text=str(obstructing_chunk.hilltype)+"/"+hilltype
 			var type:
 				$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/unknown.png")
 				$DebugLabel.text="type "+ type
@@ -106,7 +123,8 @@ func can_come_out():
 	
 	return true
 
-func continue_cave(offset:Vector3):
+func continue_cave(offset:Vector3,banned_directions:Array=[]):
+	gen=get_node("/root/main/Generator")
 	var tunnel=createcont(offset,get_script())
 	tunnel.register([offset])
 	var hillposibs:Array
@@ -125,6 +143,8 @@ func continue_cave(offset:Vector3):
 			hillposibs=["down","forward"]
 	if cavelong>8:
 		hillposibs.erase("down")
+	for i in banned_directions:
+		hillposibs.erase(banned_directions)
 	tunnel.hilltype=randman.choose(hillposibs)
 	tunnel.typestr="tunnel"
 	tunnel.created()
