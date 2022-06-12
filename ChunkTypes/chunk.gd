@@ -66,7 +66,7 @@ func created():
 	$Type.text=typestr
 	gen=get_node("/root/main/Generator")
 	player=get_node("/root/main/player")
-	add_to_group("chunks")
+	
 	gen.connect("make_row",self,"check_row")
 
 func check_row(newrow:int):
@@ -99,7 +99,8 @@ func register(extras:Array=[]):
 	get_node("/root/main/Generator").chunkbypos[worldman.transtopos(translation)]=self
 	for i in extras:
 		get_node("/root/main/Generator").chunkbypos[worldman.transtopos(translation)+i]=self
-
+	add_to_group("chunks")
+	
 func _on_killdown_area_entered(area):
 	if area!=get_node("dect") and area.get_parent().get("typestr")!=null and area.name!="killdown":
 		$killdown.queue_free()

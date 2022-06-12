@@ -2,6 +2,8 @@ extends Node
 
 signal pausing
 signal debug_priority_changed(priority)
+signal start
+signal end
 
 var debug_prority:bool=false
 var console:Node2D

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=2]
@@ -18,6 +18,9 @@
 [ext_resource path="res://gui/Jump/JumpLoadFull.png" type="Texture" id=16]
 [ext_resource path="res://gui/Jump/JumpLoad.png" type="Texture" id=17]
 [ext_resource path="res://gui/Jump/Jump.gd" type="Script" id=18]
+[ext_resource path="res://gui/titlefont.tres" type="DynamicFont" id=19]
+[ext_resource path="res://gui/smallfont.tres" type="DynamicFont" id=20]
+[ext_resource path="res://gui/MainMenu/Main.gd" type="Script" id=21]
 [ext_resource path="res://ChunkTypes/chunk.tscn" type="PackedScene" id=23]
 [ext_resource path="res://ChunkTypes/chunk.gd" type="Script" id=24]
 [ext_resource path="res://ChunkTypes/grass/hill/hill.gd" type="Script" id=25]
@@ -54,6 +57,9 @@ glow_strength = 1.4
 glow_hdr_threshold = 0.83
 adjustment_enabled = true
 
+[sub_resource type="Theme" id=8]
+default_font = ExtResource( 20 )
+
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 120, 120, 1 )
 
@@ -67,19 +73,17 @@ width = 1200
 [node name="main" type="Node"]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, -0.01, 15.088, 48.617 )
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, -0.01, 15.088, -5.78484 )
 mass = 1.0
 gravity_scale = 1.5
 linear_velocity = Vector3( 0, -10, 0 )
+linear_damp = 0.025
 angular_damp = 4.159
-speed = 50.0
-rotspeed = 80.0
-balancing = false
-balancing_force = 20.0
-rotonair = 20.0
-jump_force = 40.0
-vrotlimit = 90.0
-impulse_offset = Vector3( 0, 3, 0 )
+speed = 120.0
+balancing_force = 80.0
+rotonair = 80.0
+jump_force = 80.0
+impulse_offset = Vector3( 0, -3, 0 )
 
 [node name="col" parent="player/getflor" index="0"]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.65557, 1.58941 )
@@ -190,7 +194,19 @@ initresources = [ ExtResource( 33 ), ExtResource( 36 ), ExtResource( 37 ) ]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="fps" type="Label" parent="UI"]
+[node name="popup" parent="UI" instance=ExtResource( 2 )]
+visible = false
+margin_left = -159.0
+margin_top = -63.0
+margin_right = 159.0
+margin_bottom = 63.0
+
+[node name="OnMatch" type="Control" parent="UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="fps" type="Label" parent="UI/OnMatch"]
 margin_right = 40.0
 margin_bottom = 14.0
 rect_scale = Vector2( 3.31955, 3.31955 )
@@ -199,40 +215,68 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="popup" parent="UI" instance=ExtResource( 2 )]
-margin_left = -159.0
-margin_top = -63.0
-margin_right = 159.0
-margin_bottom = 63.0
+[node name="movement" parent="UI/OnMatch" instance=ExtResource( 7 )]
 
-[node name="movement" parent="UI" instance=ExtResource( 7 )]
-
-[node name="Jump" type="TouchScreenButton" parent="UI"]
+[node name="Jump" type="TouchScreenButton" parent="UI/OnMatch"]
 position = Vector2( 899, 285 )
 normal = ExtResource( 15 )
 pressed = ExtResource( 14 )
 action = "jump"
 script = ExtResource( 18 )
 
-[node name="CoolDown" type="Timer" parent="UI/Jump"]
+[node name="CoolDown" type="Timer" parent="UI/OnMatch/Jump"]
 wait_time = 3.0
 one_shot = true
 
-[node name="BottomRight" type="Control" parent="UI"]
+[node name="BottomRight" type="Control" parent="UI/OnMatch"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -40.0
-margin_top = -40.0
+margin_left = 944.0
+margin_top = 520.0
+margin_right = 984.0
+margin_bottom = 560.0
 
-[node name="JumpProgress" type="TextureProgress" parent="UI/BottomRight"]
+[node name="JumpProgress" type="TextureProgress" parent="UI/OnMatch/BottomRight"]
 margin_left = -186.0
 margin_top = -242.0
 margin_right = -100.0
 margin_bottom = -226.0
 texture_over = ExtResource( 17 )
 texture_progress = ExtResource( 16 )
+
+[node name="Main" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = SubResource( 8 )
+script = ExtResource( 21 )
+
+[node name="Title" type="Label" parent="UI/Main"]
+anchor_right = 1.0
+margin_bottom = 81.0
+custom_fonts/font = ExtResource( 19 )
+text = "Randamatch"
+align = 1
+valign = 1
+
+[node name="PlayTitle" type="Label" parent="UI/Main"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -68.0
+text = "tap to play"
+align = 1
+valign = 1
+
+[node name="Play" type="Button" parent="UI/Main"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 96.0
+margin_top = 76.0
+margin_right = -88.0
+margin_bottom = -96.0
 
 [node name="HillWall" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5441, 8.51478, 0.395824 )
@@ -275,7 +319,9 @@ rotation_speed = 0.1
 move_speed = 10.0
 
 [connection signal="body_entered" from="player/ruedafront/front" to="player/Suspension" method="_on_front_body_entered"]
-[connection signal="pressed" from="UI/Jump" to="UI/Jump" method="_on_Jump_pressed"]
+[connection signal="pressed" from="UI/OnMatch/Jump" to="UI/OnMatch/Jump" method="_on_Jump_pressed"]
+[connection signal="pressed" from="UI/Main/Play" to="UI/Main" method="_on_Play_pressed"]
+[connection signal="body_entered" from="Killer" to="Killer" method="_on_Killer_body_entered"]
 [connection signal="timeout" from="Killer/Timer" to="Killer" method="_on_Timer_timeout"]
 
 [editable path="player"]

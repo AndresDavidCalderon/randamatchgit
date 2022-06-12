@@ -44,10 +44,6 @@ sleeping = true
 can_sleep = false
 angular_damp = 2.306
 script = ExtResource( 1 )
-speed = 16000.0
-rotspeed = 12000.0
-balancing = true
-rotonair = 10000.0
 
 [node name="MainCol" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, -5.68434e-14, 0, 0.999999, 0, 0, 0, 0.999999, -0.194292, 2.19102, -0.640524 )

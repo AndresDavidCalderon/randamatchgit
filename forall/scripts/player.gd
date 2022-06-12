@@ -6,9 +6,7 @@ export(float) var rotspeed
 export(bool) var balancing
 export(float) var balancing_force
 export(float) var rotonair
-export(float) var goupspeed
 export(float) var jump_force
-export(float) var vrotlimit
 export var impulse_offset:Vector3
 
 var byinput=false
@@ -86,6 +84,7 @@ func _integrate_forces(state):
 		state.angular_velocity=Vector3()
 		sleeping=false
 		hastokill=false
+		globals.emit_signal("end")
 	
 	if orders.has("accel"):
 		if $getfront.get_overlapping_bodies().size()>0:

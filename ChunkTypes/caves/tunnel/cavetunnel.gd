@@ -60,7 +60,7 @@ func generate():
 				warning.translation=obstructing_chunk.translation
 				warning.translation.y+=30
 				
-				var replace=createcont(Vector3(0,1,0),globals.res.getres("res://ChunkTypes/grass/plain/plain.gd"))
+				var replace=createcont(Vector3(0,1,0)+offset,globals.res.getres("res://ChunkTypes/grass/plain/plain.gd"))
 				replace.typestr="plain"
 				replace.generate()
 				

@@ -7,10 +7,7 @@ export(int) var betweencaves
 var terrwide=3
 
 onready var player=get_node("/root/main/player")
-var terrlong:float
 var pos=Vector3(0,-30,60)
-var terrhei:float
-var generated=false
 
 export(int,0,100) var cavechance
 var chunksbystage=[]
@@ -28,9 +25,13 @@ signal make_row(row)
 func _ready():
 	randomize()
 	box.width=(60*(terrwide+1))/2
+	set_process(false)
+	globals.connect("start",self,"set_process",[true])
+	globals.connect("end",self,"reset")
 
 func _process(delta):
 	if globals.playernd.translation.z>((rows_done-30)*60):
+		
 		doline()
 		emit_signal("make_row",rows_done-20)
 
@@ -75,8 +76,6 @@ func doline():
 			nod.typestr="cavein"
 			lastcave=0
 			
-			if terrhei<abs(pos.y)+30:
-				terrhei+=30
 			can_be_hill=false
 		else:
 			lastcave+=1
@@ -97,7 +96,7 @@ func doline():
 		chunksbystage[rows_done].append(nod)
 		
 		nod.created()
-	
+		nod.add_to_group("chunks")
 	
 	if can_be_hill:
 		is_hill=randman.randbool(hillprov)
@@ -109,3 +108,7 @@ func doline():
 	pos.z+=60
 	pos.x=0
 	rows_done+=1
+
+func reset():
+	for i in get_tree().get_nodes_in_group("chunks"):
+		i.queue_free()
