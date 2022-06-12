@@ -31,6 +31,7 @@ var ruedarot=0
 var tocallonint=[]
 var tocallonintargs=[]
 
+
 #function to call on integrate forces
 func callonint(funct:String,args:Array):
 	tocallonint.resize(tocallonint.size()+1)
@@ -38,6 +39,7 @@ func callonint(funct:String,args:Array):
 	tocallonint[tocallonint.size()-1]=funct
 	tocallonintargs[tocallonintargs.size()-1]=args
 var orders=[]
+
 
 func _integrate_forces(state):
 	var done=0
@@ -57,15 +59,22 @@ func _integrate_forces(state):
 		current_speed/=2
 		if orders.has("accel"):
 			addlocaltorque("x",-rotonair)
-		elif orders.has("break"):
-			addlocaltorque("x",rotonair)
+		elif orders.has("brake"):
+			addlocaltorque("x",rotonair*5)
 	
 	if $GetRight.get_overlapping_bodies().size()==0 or $GetLeft.get_overlapping_bodies().size()==0:
-		if orders.has("l"):
-			addlocaltorque("z",rotonair*1.5)
-		elif orders.has("r"):
-			addlocaltorque("z",-rotonair*1.5)
-	
+		
+		if ($GetRight.get_overlapping_bodies().size()==0)!=($GetLeft.get_overlapping_bodies().size()==0):
+			if orders.has("r"):
+				addlocaltorque("z",-rotonair*2.5)
+			elif orders.has("l"):
+				addlocaltorque("z",rotonair*2.5)
+		else:
+			if orders.has("l"):
+				addlocaltorque("z",rotonair*1.5)
+			elif orders.has("r"):
+				addlocaltorque("z",-rotonair*1.5)
+		
 	if hastokill:
 		state.transform.origin=inittrans
 		translation=inittrans
@@ -85,15 +94,17 @@ func _integrate_forces(state):
 		
 		var direction=get_rotated_vector(Vector3(0,0,-current_speed))
 		add_force(direction,get_rotated_vector(impulse_offset))
+		$Debug/ThrottlePoint.translation=direction
 	
-	if orders.has("break"):
+	if orders.has("brake"):
 		if $getfront.get_overlapping_bodies().size()>0:
 			if orders.has("right"):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("left"):
 				add_torque(Vector3(0,-rotspeed,0))
-		var direction=get_rotated_vector(Vector3(0,0,current_speed/2))
+		var direction=get_rotated_vector(Vector3(0,0,current_speed),Vector3(PI,0,0))
 		add_force(direction,get_rotated_vector(-impulse_offset))
+		$Debug/BrakePoint.translation=direction
 	
 	if balancing:
 		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
@@ -101,10 +112,11 @@ func _integrate_forces(state):
 		if $getback.get_overlapping_bodies().size()<1 and rotation.x<0:
 			addlocaltorque("x",balancing_force)
 
+
 func addlocaltorque(axisarg:String,num:float):
-	add_torque(get_indexed("transform:basis:"+axisarg)*num)
-
-
+	var rot=get_indexed("transform:basis:"+axisarg)*num
+	
+	add_torque(rot)
 func apply_local_torque_impulse(axisarg:String,num:float):
 	apply_torque_impulse(get_indexed("transform:basis:"+axisarg)*num)
 

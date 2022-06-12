@@ -95,9 +95,10 @@ func invertstring(phrase:String):
 		by-=1
 	return result
 
-func register():
+func register(extras:Array=[]):
 	get_node("/root/main/Generator").chunkbypos[worldman.transtopos(translation)]=self
-
+	for i in extras:
+		get_node("/root/main/Generator").chunkbypos[worldman.transtopos(translation)+i]=self
 
 func _on_killdown_area_entered(area):
 	if area!=get_node("dect") and area.get_parent().get("typestr")!=null and area.name!="killdown":

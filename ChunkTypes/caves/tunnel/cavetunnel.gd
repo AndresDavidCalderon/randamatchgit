@@ -108,6 +108,7 @@ func can_come_out():
 
 func continue_cave(offset:Vector3):
 	var tunnel=createcont(offset,get_script())
+	tunnel.register([offset])
 	var hillposibs:Array
 	match hilltype:
 		"forward":

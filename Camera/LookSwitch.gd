@@ -1,15 +1,12 @@
 extends Node
 
-onready var main_cam:Camera=get_parent().get_node("cam")
-onready var alt_cam:Camera=get_parent().get_node("BackCamera")
+export var cameras:Dictionary
 
-func _input(event):
-	if event.is_action_pressed("LookBack"):
-		main_cam.current=false
-		alt_cam.current=true
-	
-	if event.is_action_released("LookBack"):
-		main_cam.current=true
-		alt_cam.current=false
-		return
-	
+func _input(event:InputEvent):
+	for i in cameras.keys():
+		if event.is_action(i):
+			turn_off_all_exept(cameras[i])
+
+func turn_off_all_exept(exept:NodePath):
+	for i in cameras.values():
+		get_node(i).current=i==exept

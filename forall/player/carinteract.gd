@@ -21,5 +21,5 @@ func _on_car_needsorders():
 	if Input.is_action_pressed("forward"):
 		get_parent().orders.append("accel")
 	if Input.is_action_pressed("back"):
-		get_parent().orders.append("break")
+		get_parent().orders.append("brake")
 
