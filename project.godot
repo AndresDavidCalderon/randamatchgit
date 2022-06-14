@@ -19,16 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://forall/scripts/player.gd"
 }, {
-"base": "Button",
-"class": "input",
-"language": "GDScript",
-"path": "res://gui/debug/input.gd"
-}, {
-"base": "Button",
-"class": "output",
-"language": "GDScript",
-"path": "res://gui/debug/output.gd"
-}, {
 "base": "Node",
 "class": "resman",
 "language": "GDScript",
@@ -37,8 +27,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "aligner": "res://gui/images/extendericon.png",
 "car": "res://classicons/player.png",
-"input": "res://gui/debug/input.png",
-"output": "res://gui/debug/output.png",
 "resman": "res://forall/sistematic/resman.png"
 }
 

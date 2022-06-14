@@ -3,7 +3,9 @@ var closeonback=true
 var fileman=File.new()
 var dirs=Directory.new()
 var savedir:String="user://randamatchuser.json"
-var file:Dictionary
+var file:={
+	"coins":0
+}
 signal filedone(file)
 var loaded=false
 func save():
@@ -36,6 +38,7 @@ func _ready():
 			buttons[1].connect("pressed",self,"reset")
 			buttons[2].text="quit"
 			buttons[1].connect("pressed",self,"quiterror")
+
 	loaded=true
 	fileman.close()
 	emit_signal("filedone",file)
