@@ -4,3 +4,6 @@
 
 [node name="globals" type="Node"]
 script = ExtResource( 1 )
+
+[connection signal="end" from="." to="." method="_on_globals_end"]
+[connection signal="start" from="." to="." method="_on_globals_start"]

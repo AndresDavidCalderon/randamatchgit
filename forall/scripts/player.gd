@@ -25,6 +25,7 @@ func kill():
 	hastokill=true
 	sleeping=true
 	emit_signal("kill")
+	
 
 var ruedarot=0
 var tocallonint=[]
@@ -41,6 +42,8 @@ var orders=[]
 
 
 func _integrate_forces(state):
+	if not globals.on_match: return
+	
 	var done=0
 	orders=[]
 	emit_signal("needsorders")
@@ -53,8 +56,7 @@ func _integrate_forces(state):
 	
 	#the speed affected by changing data
 	var current_speed=speed
-	if Input.is_action_just_pressed("jump"):
-		apply_central_impulse(get_rotated_vector(Vector3(0,jump_force,0)))
+	
 	if $getfront.get_overlapping_bodies().size()==0 or $getback.get_overlapping_bodies().size()==0:
 		current_speed/=2
 		if orders.has("accel"):

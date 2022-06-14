@@ -112,3 +112,8 @@ func doline():
 func reset():
 	for i in get_tree().get_nodes_in_group("chunks"):
 		i.queue_free()
+	rows_done=0
+	pos=Vector3(0,-30,0)
+	chunkbypos.clear()
+	chunksbystage.clear()
+	set_process(false)

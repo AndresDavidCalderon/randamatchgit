@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://gui/titlefont.tres" type="DynamicFont" id=19]
 [ext_resource path="res://gui/smallfont.tres" type="DynamicFont" id=20]
 [ext_resource path="res://gui/MainMenu/Main.gd" type="Script" id=21]
+[ext_resource path="res://gui/UI.gd" type="Script" id=22]
 [ext_resource path="res://ChunkTypes/chunk.tscn" type="PackedScene" id=23]
 [ext_resource path="res://ChunkTypes/chunk.gd" type="Script" id=24]
 [ext_resource path="res://ChunkTypes/grass/hill/hill.gd" type="Script" id=25]
@@ -79,11 +80,12 @@ gravity_scale = 1.5
 linear_velocity = Vector3( 0, -10, 0 )
 linear_damp = 0.025
 angular_damp = 4.159
-speed = 120.0
-balancing_force = 80.0
-rotonair = 80.0
+speed = 50.0
+rotspeed = 80.0
+balancing_force = 20.0
+rotonair = 40.0
 jump_force = 80.0
-impulse_offset = Vector3( 0, -3, 0 )
+impulse_offset = Vector3( 0, 3, 0 )
 
 [node name="col" parent="player/getflor" index="0"]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.65557, 1.58941 )
@@ -193,6 +195,7 @@ script = ExtResource( 32 )
 initresources = [ ExtResource( 33 ), ExtResource( 36 ), ExtResource( 37 ) ]
 
 [node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource( 22 )
 
 [node name="popup" parent="UI" instance=ExtResource( 2 )]
 visible = false
@@ -202,7 +205,6 @@ margin_right = 159.0
 margin_bottom = 63.0
 
 [node name="OnMatch" type="Control" parent="UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -225,7 +227,7 @@ action = "jump"
 script = ExtResource( 18 )
 
 [node name="CoolDown" type="Timer" parent="UI/OnMatch/Jump"]
-wait_time = 3.0
+wait_time = 8.0
 one_shot = true
 
 [node name="BottomRight" type="Control" parent="UI/OnMatch"]
@@ -233,10 +235,8 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 944.0
-margin_top = 520.0
-margin_right = 984.0
-margin_bottom = 560.0
+margin_left = -40.0
+margin_top = -40.0
 
 [node name="JumpProgress" type="TextureProgress" parent="UI/OnMatch/BottomRight"]
 margin_left = -186.0
@@ -282,17 +282,17 @@ margin_bottom = -96.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5441, 8.51478, 0.395824 )
 
 [node name="Killer" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.4429, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.4429, -47.2841 )
 script = ExtResource( 10 )
 speed = 20.0
 max_difference = 60.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Killer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -39.7832, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -39.7832, -5.13764 )
 shape = SubResource( 5 )
 
 [node name="Sprite3D" type="Sprite3D" parent="Killer"]
-transform = Transform( -4.37114e-08, -1200, 0, 1, -5.24537e-05, 0, 0, 0, 1, 0.138657, -42.523, -25.2518 )
+transform = Transform( -4.37114e-08, -1200, 0, 1, -5.24537e-05, 0, 0, 0, 1, 0.139, -42.523, 0 )
 modulate = Color( 1, 1, 1, 0.317647 )
 pixel_size = 0.2
 texture = SubResource( 7 )

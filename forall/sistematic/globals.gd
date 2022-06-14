@@ -5,6 +5,8 @@ signal debug_priority_changed(priority)
 signal start
 signal end
 
+var on_match:bool=false
+
 var debug_prority:bool=false
 var console:Node2D
 var res:resman
@@ -12,7 +14,7 @@ var camera
 var ostype:String
 var popuper:Panel
 
-var playernd:Spatial
+var playernd:RigidBody
 
 var paused=false
 
@@ -36,3 +38,11 @@ func _input(event):
 		emit_signal("debug_priority_changed",debug_prority)
 	
 
+
+
+func _on_globals_start():
+	on_match=true
+
+
+func _on_globals_end():
+	on_match=false

@@ -19,7 +19,7 @@ func on_start():
 	$Timer.start()
 
 func on_end():
-	translation.z=0
+	translation.z=-50
 	set_process(false)
 
 func _on_Timer_timeout():
