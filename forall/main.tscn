@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=2]
@@ -33,8 +33,12 @@
 [ext_resource path="res://Coins/GUI/Coins.gd" type="Script" id=31]
 [ext_resource path="res://forall/sistematic/resoursman.gd" type="Script" id=32]
 [ext_resource path="res://ChunkTypes/caves/entrance/CaveEntrance.tscn" type="PackedScene" id=33]
+[ext_resource path="res://gui/Garage/Icon.png" type="Texture" id=34]
+[ext_resource path="res://gui/Garage/View.gd" type="Script" id=35]
 [ext_resource path="res://ChunkTypes/caves/DebugIcons/tohill.png" type="Texture" id=36]
 [ext_resource path="res://ChunkTypes/caves/tunnel/cavetunnel.gd" type="Script" id=37]
+[ext_resource path="res://gui/images/quit.png" type="Texture" id=38]
+[ext_resource path="res://gui/Garage/Garage.gd" type="Script" id=39]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.244001, 3.86637, 0.307593 )
@@ -178,6 +182,14 @@ margin = 5.17
 process_mode = 1
 collision_mask = 4
 
+[node name="GarageCam" type="Spatial" parent="player"]
+
+[node name="Camera" type="Camera" parent="player/GarageCam"]
+transform = Transform( -1, 0, -8.74228e-08, -4.74499e-08, 0.839885, 0.542764, 7.34251e-08, 0.542764, -0.839885, 0.365373, 14.9889, -26.5247 )
+
+[node name="RemoteTransform" type="RemoteTransform" parent="player/GarageCam/Camera"]
+remote_path = NodePath("../../../../UI/Garage/View/Viewport/Camera")
+
 [node name="floor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36519, 0 )
 collision_layer = 3
@@ -310,7 +322,10 @@ valign = 1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -68.0
+margin_left = -2.0
+margin_top = -145.0
+margin_right = -2.0
+margin_bottom = -77.0
 text = "tap to play"
 align = 1
 valign = 1
@@ -324,6 +339,19 @@ margin_top = 76.0
 margin_right = -88.0
 margin_bottom = -96.0
 
+[node name="Options" type="HBoxContainer" parent="UI/Main"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -70.0
+alignment = 1
+
+[node name="Garage" type="Button" parent="UI/Main/Options"]
+margin_left = 474.0
+margin_right = 550.0
+margin_bottom = 70.0
+icon = ExtResource( 34 )
+
 [node name="Command" type="LineEdit" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -331,6 +359,97 @@ margin_left = -317.0
 margin_bottom = 34.0
 placeholder_text = "command here"
 script = ExtResource( 27 )
+
+[node name="Garage" type="Control" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 39 )
+
+[node name="Background" type="ColorRect" parent="UI/Garage"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.329412, 0.188235, 0.152941, 1 )
+
+[node name="TabContainer" type="TabContainer" parent="UI/Garage"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -239.0
+
+[node name="Color" type="Control" parent="UI/Garage/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Hats" type="Control" parent="UI/Garage/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Car Shape" type="Control" parent="UI/Garage/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Stickers" type="Control" parent="UI/Garage/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Lights" type="Control" parent="UI/Garage/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Wheels" type="Control" parent="UI/Garage/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="View" type="ViewportContainer" parent="UI/Garage"]
+margin_right = 1027.0
+margin_bottom = 353.0
+script = ExtResource( 35 )
+
+[node name="Viewport" type="Viewport" parent="UI/Garage/View"]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="UI/Garage/View/Viewport"]
+transform = Transform( 1, -4.26326e-14, 8.74228e-08, -4.74499e-08, 0.839885, 0.542764, -7.34251e-08, -0.542764, 0.839885, -0.375373, 30.0769, 20.7399 )
+cull_mask = 2
+
+[node name="Exit" type="Button" parent="UI/Garage"]
+margin_left = 18.0
+margin_top = 27.0
+margin_right = 30.0
+margin_bottom = 47.0
+icon = ExtResource( 38 )
 
 [node name="HillWall" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5441, 8.51478, 0.395824 )
@@ -375,7 +494,9 @@ move_speed = 10.0
 [connection signal="body_entered" from="player/ruedafront/front" to="player/Suspension" method="_on_front_body_entered"]
 [connection signal="pressed" from="UI/OnMatch/Jump" to="UI/OnMatch/Jump" method="_on_Jump_pressed"]
 [connection signal="pressed" from="UI/Main/Play" to="UI/Main" method="_on_Play_pressed"]
+[connection signal="pressed" from="UI/Main/Options/Garage" to="UI" method="_on_Garage_pressed"]
 [connection signal="text_entered" from="UI/Command" to="UI/Command" method="_on_Command_text_entered"]
+[connection signal="pressed" from="UI/Garage/Exit" to="UI" method="_on_Exit_pressed"]
 [connection signal="body_entered" from="Killer" to="Killer" method="_on_Killer_body_entered"]
 [connection signal="timeout" from="Killer/Timer" to="Killer" method="_on_Timer_timeout"]
 

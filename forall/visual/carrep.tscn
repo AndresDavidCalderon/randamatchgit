@@ -26,6 +26,7 @@ script = ExtResource( 4 )
 
 [node name="front" type="CSGBox" parent="."]
 transform = Transform( -1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, -3.18914, 3.92532, -6.8598 )
+layers = 3
 material_override = SubResource( 1 )
 width = 8.03011
 height = 4.8112
@@ -35,9 +36,11 @@ depth = 0.34313
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.051, 0, 0 )
 
 [node name="car" parent="car3" index="0"]
+layers = 3
 generate_lightmap = false
 
 [node name="glass" parent="car3" index="1"]
+layers = 3
 generate_lightmap = false
 material/0 = ExtResource( 5 )
 
@@ -46,14 +49,17 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -4.293, 0, 0 )
 
 [node name="car" parent="car4" index="0"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 0.764354, -2.09751, 4.76837e-07, -9.53674e-07 )
+layers = 3
 generate_lightmap = false
 
 [node name="glass" parent="car4" index="1"]
+layers = 3
 generate_lightmap = false
 material/0 = ExtResource( 5 )
 
 [node name="spl" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0334697, 1.15333, -13.2159 )
+layers = 3
 light_color = Color( 0.741176, 0.717647, 0.65098, 1 )
 light_energy = 2.04
 light_indirect_energy = 0.59
@@ -64,6 +70,7 @@ spot_angle = 33.3
 
 [node name="sp" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4045, 1.11938, -13.2269 )
+layers = 3
 light_color = Color( 0.741176, 0.717647, 0.65098, 1 )
 light_energy = 2.04
 light_indirect_energy = 0.59
@@ -74,6 +81,7 @@ spot_angle = 33.3
 
 [node name="light" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15529, -13.0814 )
+layers = 3
 material_override = SubResource( 2 )
 width = 1.37645
 height = 0.63865
@@ -81,6 +89,7 @@ depth = 0.241405
 
 [node name="light2" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.321, 1.155, -13.081 )
+layers = 3
 material_override = SubResource( 2 )
 width = 1.37645
 height = 0.63865
@@ -90,6 +99,7 @@ depth = 0.241405
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96845, 0, 0 )
 
 [node name="placa" parent="placa" index="0"]
+layers = 3
 material/0 = ExtResource( 2 )
 
 [node name="driverseat" type="Spatial" parent="."]

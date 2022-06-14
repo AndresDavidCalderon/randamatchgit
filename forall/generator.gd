@@ -29,7 +29,7 @@ func _ready():
 	globals.connect("start",self,"set_process",[true])
 	globals.connect("end",self,"reset")
 
-func _process(delta):
+func _process(_delta):
 	if globals.playernd.translation.z>((rows_done-30)*60):
 		
 		doline()
