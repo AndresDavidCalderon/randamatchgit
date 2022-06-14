@@ -8,3 +8,9 @@ func _on_Jump_pressed():
 	$CoolDown.start()
 	yield(globals.playernd,"onfis")
 	globals.playernd.apply_central_impulse(globals.playernd.get_rotated_vector(Vector3(0,globals.playernd.jump_force,0)))
+
+func _ready():
+	globals.connect("start",self,"on_start")
+
+func on_start():
+	$CoolDown.stop()

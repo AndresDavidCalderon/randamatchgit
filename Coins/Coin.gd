@@ -2,7 +2,13 @@ extends Area
 
 export var icon_per_amount:Dictionary
 export var max_icon:NodePath
-var amount:int=1 setget set_amount
+export var amount:int=1 setget set_amount
+export (float,0,100) var probability=20.0
+
+func _ready():
+	if randman.randbool(100-probability):
+		queue_free()
+
 
 func set_amount(total:int):
 	amount=total
@@ -22,4 +28,5 @@ func hide_all():
 
 func _on_Coin_body_entered(body):
 	if body==globals.playernd:
-		economy.coins+=1
+		economy.coins+=amount
+		queue_free()

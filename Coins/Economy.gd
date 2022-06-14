@@ -20,6 +20,7 @@ func set_coins(value:int):
 
 func on_start():
 	current_match_coins=0
+	emit_signal("coins_changed")
 
 func on_save():
 	saver.file["coins"]=coins

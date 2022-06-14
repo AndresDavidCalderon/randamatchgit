@@ -5,7 +5,7 @@ func _ready():
 	random.randomize()
 
 var random:RandomNumberGenerator=RandomNumberGenerator.new()
-func randbool(posibility):
+func randbool(posibility:float):
 	var randbase=random.randf_range(0,100)
 	if randbase<posibility:
 		return true
