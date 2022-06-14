@@ -22,4 +22,4 @@ func hide_all():
 
 func _on_Coin_body_entered(body):
 	if body==globals.playernd:
-		saver.file["coins"]+=1
+		economy.coins+=1
