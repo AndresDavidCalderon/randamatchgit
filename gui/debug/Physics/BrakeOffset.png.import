@@ -2,9 +2,9 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/BrakePoint.png-deadc1381f20e5d75d2249037fb50f06.s3tc.stex"
-path.etc2="res://.import/BrakePoint.png-deadc1381f20e5d75d2249037fb50f06.etc2.stex"
-path.etc="res://.import/BrakePoint.png-deadc1381f20e5d75d2249037fb50f06.etc.stex"
+path.s3tc="res://.import/BrakeOffset.png-f9baef8f433e898e19f474472d79f127.s3tc.stex"
+path.etc2="res://.import/BrakeOffset.png-f9baef8f433e898e19f474472d79f127.etc2.stex"
+path.etc="res://.import/BrakeOffset.png-f9baef8f433e898e19f474472d79f127.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://gui/debug/BrakePoint.png"
-dest_files=[ "res://.import/BrakePoint.png-deadc1381f20e5d75d2249037fb50f06.s3tc.stex", "res://.import/BrakePoint.png-deadc1381f20e5d75d2249037fb50f06.etc2.stex", "res://.import/BrakePoint.png-deadc1381f20e5d75d2249037fb50f06.etc.stex" ]
+source_file="res://gui/debug/Physics/BrakeOffset.png"
+dest_files=[ "res://.import/BrakeOffset.png-f9baef8f433e898e19f474472d79f127.s3tc.stex", "res://.import/BrakeOffset.png-f9baef8f433e898e19f474472d79f127.etc2.stex", "res://.import/BrakeOffset.png-f9baef8f433e898e19f474472d79f127.etc.stex" ]
 
 [params]
 

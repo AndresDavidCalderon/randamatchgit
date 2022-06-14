@@ -55,7 +55,7 @@ func generate():
 				obstructing_chunk.queue_free()
 				
 				var warning=Sprite3D.new()
-				warning.texture=preload("res://gui/debug/CaveOutReplace.png")
+				warning.texture=preload("res://ChunkTypes/caves/DebugIcons/CaveOutReplace.png")
 				get_node("/root/main").add_child(warning)
 				warning.translation=obstructing_chunk.translation
 				warning.translation.y+=30

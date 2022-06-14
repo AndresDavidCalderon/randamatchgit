@@ -105,9 +105,12 @@ func _integrate_forces(state):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("left"):
 				add_torque(Vector3(0,-rotspeed,0))
-		var direction=get_rotated_vector(Vector3(0,0,current_speed),Vector3(PI,0,0))
-		add_force(direction,get_rotated_vector(-impulse_offset))
+		var direction=get_rotated_vector(Vector3(0,0,current_speed))
+		var offset=get_rotated_vector(Vector3(0,3,0),Vector3(PI,0,0))
+		add_force(direction,offset)
 		$Debug/BrakePoint.translation=direction
+		$Debug/BrakeOffset.translation=offset
+		
 	
 	if balancing:
 		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
@@ -125,7 +128,7 @@ func apply_local_torque_impulse(axisarg:String,num:float):
 
 func get_rotated_vector(vec:Vector3,offset:Vector3=Vector3(0,0,0)):
 	var newvec:Vector3=vec
-	newvec=newvec.rotated(Vector3(0,0,1),transform.basis.get_euler().z+offset.z)
-	newvec=newvec.rotated(Vector3(1,0,0),transform.basis.get_euler().x+offset.z)
+	newvec=newvec.rotated(Vector3(0,0,1),transform.basis.get_euler().z+offset.x)
+	newvec=newvec.rotated(Vector3(1,0,0),transform.basis.get_euler().x+offset.y)
 	newvec=newvec.rotated(Vector3(0,1,0),transform.basis.get_euler().y+offset.z)
 	return newvec
