@@ -228,7 +228,7 @@ action = "jump"
 script = ExtResource( 18 )
 
 [node name="CoolDown" type="Timer" parent="UI/OnMatch/Jump"]
-wait_time = 8.0
+wait_time = 12.0
 one_shot = true
 
 [node name="BottomRight" type="Control" parent="UI/OnMatch"]
@@ -294,7 +294,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.5441, 8.51478, 0.395824 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.4429, -47.2841 )
 script = ExtResource( 10 )
 speed = 20.0
-max_difference = 60.0
+max_difference = 800.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Killer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -39.7832, -5.13764 )
@@ -330,6 +330,7 @@ move_speed = 10.0
 [connection signal="body_entered" from="player/ruedafront/front" to="player/Suspension" method="_on_front_body_entered"]
 [connection signal="pressed" from="UI/OnMatch/Jump" to="UI/OnMatch/Jump" method="_on_Jump_pressed"]
 [connection signal="pressed" from="UI/Main/Play" to="UI/Main" method="_on_Play_pressed"]
+[connection signal="text_entered" from="UI/Command" to="UI/Command" method="_on_Command_text_entered"]
 [connection signal="body_entered" from="Killer" to="Killer" method="_on_Killer_body_entered"]
 [connection signal="timeout" from="Killer/Timer" to="Killer" method="_on_Timer_timeout"]
 

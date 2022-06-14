@@ -2,7 +2,7 @@ extends Node
 
 export var cameras:Dictionary
 
-func _input(event:InputEvent):
+func _unhandled_input(event:InputEvent):
 	for i in cameras.keys():
 		if event.is_action(i):
 			turn_off_all_exept(cameras[i])
