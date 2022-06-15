@@ -1,16 +1,30 @@
 extends Node
 
+export var default_skin:PackedScene
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	set_skin(default_skin.instance())
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+var collisions:=[]
+var last_skin:Spatial
+func set_skin(skin:Spatial):
+	if last_skin!=null:
+		last_skin.queue_free()
+	
+	get_parent().call_deferred("add_child",skin)
+	
+	get_parent().get_node("FrontWheel").translation=skin.get_node("WheelA").translation
+	get_parent().get_node("BackWheel").translation=skin.get_node("WheelB").translation
+	
+	for i in collisions:
+		i.queue_free()
+	collisions.clear()
+	
+	var collision_container:Spatial=skin.get_node("Collisions")
+	for i in collision_container.get_children():
+		collision_container.remove_child(i)
+		get_parent().call_deferred("add_child",i)
+		collisions.append(i)
+	
+	last_skin=skin
+	
