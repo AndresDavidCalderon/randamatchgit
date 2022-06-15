@@ -1,5 +1,5 @@
 extends RigidBody
-class_name car,"res://classicons/player.png"
+class_name car,"res://Player/player.png"
 signal needsorders
 export(float) var speed
 export(float) var rotspeed

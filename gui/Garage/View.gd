@@ -8,3 +8,4 @@ func update_size():
 	$Viewport.size.x=get_viewport_rect().size.x
 	$Viewport.size.y=get_viewport_rect().size.y-get_parent().get_node("TabContainer").rect_size.y
 	rect_size=$Viewport.size
+	$slide.rect_size=rect_size

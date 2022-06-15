@@ -26,7 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "aligner": "res://gui/images/extendericon.png",
-"car": "res://classicons/player.png",
+"car": "res://Player/player.png",
 "resman": "res://forall/sistematic/resman.png"
 }
 

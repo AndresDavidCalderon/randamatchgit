@@ -1,14 +1,14 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
-[ext_resource path="res://forall/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://forall/visual/camera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ChunkTypes/walls/hill/HillWall.gltf" type="PackedScene" id=4]
 [ext_resource path="res://forall/generator.gd" type="Script" id=5]
 [ext_resource path="res://Camera/LookSwitch.gd" type="Script" id=6]
 [ext_resource path="res://gui/movement.tscn" type="PackedScene" id=7]
-[ext_resource path="res://forall/player/Debug.gd" type="Script" id=8]
-[ext_resource path="res://forall/player/suspension.gd" type="Script" id=9]
+[ext_resource path="res://Player/Debug.gd" type="Script" id=8]
+[ext_resource path="res://Player/suspension.gd" type="Script" id=9]
 [ext_resource path="res://forall/Killer.gd" type="Script" id=10]
 [ext_resource path="res://gui/debug/FreeCamera.gd" type="Script" id=11]
 [ext_resource path="res://gui/debug/Physics/ThrottlePoint.png" type="Texture" id=12]
@@ -39,6 +39,7 @@
 [ext_resource path="res://ChunkTypes/caves/tunnel/cavetunnel.gd" type="Script" id=37]
 [ext_resource path="res://gui/images/quit.png" type="Texture" id=38]
 [ext_resource path="res://gui/Garage/Garage.gd" type="Script" id=39]
+[ext_resource path="res://gui/Garage/GarageCam.gd" type="Script" id=40]
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.244001, 3.86637, 0.307593 )
@@ -98,15 +99,12 @@ impulse_offset = Vector3( 0, 3, 0 )
 [node name="col" parent="player/getflor" index="0"]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.65557, 1.58941 )
 
-[node name="vis" parent="player" index="8"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.37464, 0.288897, -0.128355 )
-
-[node name="ruedaback" parent="player" index="9"]
+[node name="ruedaback" parent="player" index="8"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.267883, -1.00491, 1.71085 )
 
-[node name="ruedafront" parent="player" index="10"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.139058, -1.00491, -10.4764 )
-lifted_offset = Vector3( 0, 5, 0 )
+[node name="ruedafront" parent="player" index="9"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.302081, -1.00491, -10.4764 )
+script = null
 
 [node name="front" type="Area" parent="player/ruedafront" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44103, -0.128825, -1.7433 )
@@ -117,7 +115,7 @@ collision_mask = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190497, 0 )
 shape = SubResource( 4 )
 
-[node name="playerinteract" parent="player" index="13"]
+[node name="playerinteract" parent="player" index="12"]
 mounted = true
 
 [node name="Suspension" type="Node" parent="player"]
@@ -183,9 +181,12 @@ process_mode = 1
 collision_mask = 4
 
 [node name="GarageCam" type="Spatial" parent="player"]
+transform = Transform( 0.1215, 0.0269703, 0.992225, 0.0516348, 0.998106, -0.0334529, -0.991248, 0.0552979, 0.119877, -2.47732e-07, 0, 0 )
+script = ExtResource( 40 )
+rotation_speed = Vector2( 0.01, 0.003 )
 
 [node name="Camera" type="Camera" parent="player/GarageCam"]
-transform = Transform( -1, 0, -8.74228e-08, -4.74499e-08, 0.839885, 0.542764, 7.34251e-08, 0.542764, -0.839885, 0.365373, 14.9889, -26.5247 )
+transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.365001, 0, -26.525 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="player/GarageCam/Camera"]
 remote_path = NodePath("../../../../UI/Garage/View/Viewport/Camera")
@@ -221,6 +222,7 @@ initresources = [ ExtResource( 33 ), ExtResource( 36 ), ExtResource( 37 ) ]
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource( 22 )
+screens = [ NodePath("Main"), NodePath("OnMatch"), NodePath("Garage") ]
 
 [node name="popup" parent="UI" instance=ExtResource( 2 )]
 visible = false
@@ -234,17 +236,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="movement" parent="UI/OnMatch" instance=ExtResource( 7 )]
-
-[node name="Jump" type="TouchScreenButton" parent="UI/OnMatch"]
-position = Vector2( 899, 285 )
-normal = ExtResource( 15 )
-pressed = ExtResource( 14 )
-action = "jump"
-script = ExtResource( 18 )
-
-[node name="CoolDown" type="Timer" parent="UI/OnMatch/Jump"]
-wait_time = 25.0
-one_shot = true
 
 [node name="BottomRight" type="Control" parent="UI/OnMatch"]
 anchor_left = 1.0
@@ -261,6 +252,17 @@ margin_right = -100.0
 margin_bottom = -226.0
 texture_over = ExtResource( 17 )
 texture_progress = ExtResource( 16 )
+
+[node name="Jump" type="TouchScreenButton" parent="UI/OnMatch/BottomRight"]
+position = Vector2( -85, -275 )
+normal = ExtResource( 15 )
+pressed = ExtResource( 14 )
+action = "jump"
+script = ExtResource( 18 )
+
+[node name="CoolDown" type="Timer" parent="UI/OnMatch/BottomRight/Jump"]
+wait_time = 25.0
+one_shot = true
 
 [node name="Stats" type="VBoxContainer" parent="UI/OnMatch"]
 margin_right = 40.0
@@ -441,8 +443,15 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="UI/Garage/View/Viewport"]
-transform = Transform( 1, -4.26326e-14, 8.74228e-08, -4.74499e-08, 0.839885, 0.542764, -7.34251e-08, -0.542764, 0.839885, -0.375373, 30.0769, 20.7399 )
+transform = Transform( 0.1215, -0.0269703, 0.992225, -0.0516348, 0.998106, 0.0334529, -0.991248, -0.0552978, 0.119877, 26.2644, 15.9942, -2.2433 )
 cull_mask = 2
+
+[node name="slide" type="Button" parent="UI/Garage/View"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 4.0
+margin_top = 17.0
+margin_right = 965.0
+margin_bottom = 362.0
 
 [node name="Exit" type="Button" parent="UI/Garage"]
 margin_left = 18.0
@@ -492,11 +501,14 @@ rotation_speed = 0.1
 move_speed = 10.0
 
 [connection signal="body_entered" from="player/ruedafront/front" to="player/Suspension" method="_on_front_body_entered"]
-[connection signal="pressed" from="UI/OnMatch/Jump" to="UI/OnMatch/Jump" method="_on_Jump_pressed"]
+[connection signal="pressed" from="UI/OnMatch/BottomRight/Jump" to="UI/OnMatch/BottomRight/Jump" method="_on_Jump_pressed"]
+[connection signal="pressed" from="UI/Main/Play" to="UI" method="set_screen" binds= [ 1 ]]
 [connection signal="pressed" from="UI/Main/Play" to="UI/Main" method="_on_Play_pressed"]
-[connection signal="pressed" from="UI/Main/Options/Garage" to="UI" method="_on_Garage_pressed"]
+[connection signal="pressed" from="UI/Main/Options/Garage" to="UI" method="set_screen" binds= [ 2 ]]
 [connection signal="text_entered" from="UI/Command" to="UI/Command" method="_on_Command_text_entered"]
-[connection signal="pressed" from="UI/Garage/Exit" to="UI" method="_on_Exit_pressed"]
+[connection signal="button_down" from="UI/Garage/View/slide" to="player/GarageCam" method="_on_slide_button_down"]
+[connection signal="button_up" from="UI/Garage/View/slide" to="player/GarageCam" method="_on_slide_button_up"]
+[connection signal="pressed" from="UI/Garage/Exit" to="UI" method="set_screen" binds= [ 0 ]]
 [connection signal="body_entered" from="Killer" to="Killer" method="_on_Killer_body_entered"]
 [connection signal="timeout" from="Killer/Timer" to="Killer" method="_on_Timer_timeout"]
 

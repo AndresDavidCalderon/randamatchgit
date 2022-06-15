@@ -1,20 +1,11 @@
 extends CanvasLayer
 
+export(Array,NodePath) var screens
+
 func _ready():
-	globals.connect("end",self,"on_end")
-	$OnMatch.visible=false
-	$Main.visible=true
+	globals.connect("end",self,"set_screen",[0])
+	set_screen(0)
 
-func on_end():
-	$OnMatch.visible=false
-	$Main.visible=true
-
-
-func _on_Garage_pressed():
-	$Main.visible=false
-	$Garage.visible=true
-
-
-func _on_Exit_pressed():
-	$Garage.visible=false
-	$Main.visible=true
+func set_screen(idx:int):
+	for i in screens.size():
+		get_node(screens[i]).visible=i==idx

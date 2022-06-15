@@ -66,7 +66,7 @@ func generate():
 				
 				continue_cave(offset)
 			"tunnel":
-				if obstructing_chunk.hilltype=="down" and hilltype=="forward":
+				if (obstructing_chunk.hilltype=="down" and hilltype=="forward") or(hilltype=="down" and obstructing_chunk.hilltype=="forward") :
 					$debug.texture=globals.res.getres("res://ChunkTypes/caves/DebugIcons/CaveDownReplace.png")
 					obstructing_chunk.queue_free()
 					

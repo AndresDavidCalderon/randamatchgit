@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Models/Default/car.gltf" type="PackedScene" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 3.70616, 1.70053, 8.72188 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 3.70616, 1.70053, 4.1491 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 3.70616, 1.70053, 2.73907 )
+
+[node name="CarVisual" type="Spatial"]
+
+[node name="Model" parent="." instance=ExtResource( 1 )]
+
+[node name="Collisions" type="Spatial" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Collisions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0434279, 0.710248, -2.38589 )
+shape = SubResource( 1 )
+
+[node name="Top" type="CollisionShape" parent="Collisions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0434279, 4.23562, 1.42033 )
+shape = SubResource( 3 )
+
+[node name="Glass" type="CollisionShape" parent="Collisions"]
+transform = Transform( 1, 0, 0, 0, -0.743577, -0.668651, 0, 0.668651, -0.743577, -0.18717, 2.66358, -3.92095 )
+shape = SubResource( 2 )
+
+[node name="WheelB" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.850131, 3.95248 )
+
+[node name="WheelA" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.891329, -8.2098 )
