@@ -31,4 +31,22 @@ func set_skin(skin:Spatial):
 			i.set_layer_mask_bit(1,true)
 	
 	last_skin=skin
+	update_hat_pos()
+
+var hat:Spatial
+
+func set_hat(new_hat:Spatial):
+	if hat!=null:
+		hat.queue_free()
+	hat=new_hat
+	if hat!=null:
+		get_parent().add_child(hat)
+		for i in hat.get_node("Model").get_children():
+			if i is MeshInstance:
+				i.set_layer_mask_bit(1,true)
+	update_hat_pos()
+
+func update_hat_pos():
+	if hat!=null:
+		hat.translation=last_skin.get_node("HatSpot").translation
 	

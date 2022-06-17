@@ -40,4 +40,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.850131, 3.95248 )
 [node name="WheelF" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.891329, -8.2098 )
 
+[node name="HatSpot" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9326, 0.855676 )
+
 [editable path="Model"]
