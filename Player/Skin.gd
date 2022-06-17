@@ -13,7 +13,7 @@ func set_skin(skin:Spatial):
 	
 	get_parent().call_deferred("add_child",skin)
 	
-	get_parent().get_node("FrontWheel").translation=skin.get_node("WheelA").translation
+	get_parent().get_node("FrontWheel").translation=skin.get_node("WheelF").translation
 	get_parent().get_node("BackWheel").translation=skin.get_node("WheelB").translation
 	
 	for i in collisions:
@@ -25,6 +25,10 @@ func set_skin(skin:Spatial):
 		collision_container.remove_child(i)
 		get_parent().call_deferred("add_child",i)
 		collisions.append(i)
+	
+	for i in skin.get_node("Model").get_children():
+		if i is MeshInstance:
+			i.set_layer_mask_bit(1,true)
 	
 	last_skin=skin
 	

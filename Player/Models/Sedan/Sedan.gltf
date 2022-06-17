@@ -23,9 +23,9 @@
                 0
             ],
             "scale" : [
-                -1,
-                -1,
-                -0.7643543481826782
+                -0.9491819739341736,
+                -0.9491819739341736,
+                -0.7255113124847412
             ],
             "translation" : [
                 -0.08545637130737305,
@@ -70,7 +70,7 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 725,
+            "count" : 870,
             "max" : [
                 5.232640266418457,
                 5.837404727935791,
@@ -79,67 +79,67 @@
             "min" : [
                 -5.232640266418457,
                 -1,
-                -17.29168701171875
+                -20.691862106323242
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 725,
+            "count" : 870,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 725,
+            "count" : 870,
             "type" : "VEC2"
         },
         {
             "bufferView" : 3,
             "componentType" : 5123,
-            "count" : 725,
+            "count" : 870,
             "normalized" : true,
             "type" : "VEC4"
         },
         {
             "bufferView" : 4,
             "componentType" : 5123,
-            "count" : 1224,
+            "count" : 1314,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 8700,
+            "byteLength" : 10440,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 8700,
-            "byteOffset" : 8700
+            "byteLength" : 10440,
+            "byteOffset" : 10440
         },
         {
             "buffer" : 0,
-            "byteLength" : 5800,
-            "byteOffset" : 17400
+            "byteLength" : 6960,
+            "byteOffset" : 20880
         },
         {
             "buffer" : 0,
-            "byteLength" : 5800,
-            "byteOffset" : 23200
+            "byteLength" : 6960,
+            "byteOffset" : 27840
         },
         {
             "buffer" : 0,
-            "byteLength" : 2448,
-            "byteOffset" : 29000
+            "byteLength" : 2628,
+            "byteOffset" : 34800
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 31448,
-            "uri" : "car.bin"
+            "byteLength" : 37428,
+            "uri" : "Sedan.bin"
         }
     ]
 }

@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "resman",
 "language": "GDScript",
 "path": "res://forall/sistematic/resoursman.gd"
+}, {
+"base": "Node",
+"class": "switcher",
+"language": "GDScript",
+"path": "res://gui/switcher.gd"
 } ]
 _global_script_class_icons={
 "aligner": "res://gui/images/extendericon.png",
 "car": "res://Player/player.png",
-"resman": "res://forall/sistematic/resman.png"
+"resman": "res://forall/sistematic/resman.png",
+"switcher": ""
 }
 
 [application]
@@ -58,6 +64,10 @@ multirun/other_window_args="join"
 
 version_control/autoload_on_startup=true
 version_control/plugin_name="GitAPI"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/Radio/plugin.cfg" )
 
 [gdnative]
 
@@ -186,7 +196,7 @@ pointing/emulate_touch_from_mouse=true
 
 3d_render/layer_1="default"
 2d_render/layer_2="player"
-3d_render/layer_2="targets"
+3d_render/layer_2="garage"
 3d_physics/layer_1="default"
 3d_physics/layer_2="impulse"
 3d_physics/layer_3="stopcamera"

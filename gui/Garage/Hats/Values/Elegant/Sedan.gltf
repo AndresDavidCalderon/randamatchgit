@@ -15,28 +15,18 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "car",
-            "rotation" : [
-                1,
-                0,
-                0,
-                0
-            ],
-            "scale" : [
-                -1,
-                -1,
-                -0.7643543481826782
-            ],
+            "name" : "Cylinder",
             "translation" : [
-                -0.08545637130737305,
                 0,
-                2.252285957336426
+                1.033153772354126,
+                0
             ]
         }
     ],
     "materials" : [
         {
-            "name" : "Material",
+            "doubleSided" : true,
+            "name" : "Material.002",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.800000011920929,
@@ -51,16 +41,15 @@
     ],
     "meshes" : [
         {
-            "name" : "Cube.003",
+            "name" : "Cylinder",
             "primitives" : [
                 {
                     "attributes" : {
                         "POSITION" : 0,
                         "NORMAL" : 1,
-                        "TEXCOORD_0" : 2,
-                        "COLOR_0" : 3
+                        "TEXCOORD_0" : 2
                     },
-                    "indices" : 4,
+                    "indices" : 3,
                     "material" : 0
                 }
             ]
@@ -70,76 +59,64 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 725,
+            "count" : 576,
             "max" : [
-                5.232640266418457,
-                5.837404727935791,
-                5.195165634155273
+                1.770960807800293,
+                1,
+                1.770960807800293
             ],
             "min" : [
-                -5.232640266418457,
-                -1,
-                -17.29168701171875
+                -1.770960807800293,
+                -1.0779366493225098,
+                -1.770960807800293
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 725,
+            "count" : 576,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 725,
+            "count" : 576,
             "type" : "VEC2"
         },
         {
             "bufferView" : 3,
             "componentType" : 5123,
-            "count" : 725,
-            "normalized" : true,
-            "type" : "VEC4"
-        },
-        {
-            "bufferView" : 4,
-            "componentType" : 5123,
-            "count" : 1224,
+            "count" : 948,
             "type" : "SCALAR"
         }
     ],
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 8700,
+            "byteLength" : 6912,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 8700,
-            "byteOffset" : 8700
+            "byteLength" : 6912,
+            "byteOffset" : 6912
         },
         {
             "buffer" : 0,
-            "byteLength" : 5800,
-            "byteOffset" : 17400
+            "byteLength" : 4608,
+            "byteOffset" : 13824
         },
         {
             "buffer" : 0,
-            "byteLength" : 5800,
-            "byteOffset" : 23200
-        },
-        {
-            "buffer" : 0,
-            "byteLength" : 2448,
-            "byteOffset" : 29000
+            "byteLength" : 1896,
+            "byteOffset" : 18432
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 31448,
-            "uri" : "car.bin"
+            "byteLength" : 20328,
+            "uri" : "Sedan.bin"
         }
     ]
 }

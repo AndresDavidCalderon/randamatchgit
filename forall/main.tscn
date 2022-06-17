@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/popup.tscn" type="PackedScene" id=2]
@@ -40,9 +40,11 @@
 [ext_resource path="res://gui/images/quit.png" type="Texture" id=38]
 [ext_resource path="res://gui/Garage/Garage.gd" type="Script" id=39]
 [ext_resource path="res://gui/Garage/GarageCam.gd" type="Script" id=40]
-
-[sub_resource type="BoxShape" id=4]
-extents = Vector3( 0.244001, 3.86637, 0.307593 )
+[ext_resource path="res://gui/Garage/CarShape/Icons/Default.png" type="Texture" id=41]
+[ext_resource path="res://gui/Garage/CarShape/CarShape.gd" type="Script" id=42]
+[ext_resource path="res://addons/Radio/Radio.gd" type="Script" id=43]
+[ext_resource path="res://Player/Models/Default/Car.tscn" type="PackedScene" id=44]
+[ext_resource path="res://Player/Models/Sedan/sedan.tscn" type="PackedScene" id=45]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 36.0174, 1, 34.3437 )
@@ -167,22 +169,13 @@ collision_mask = 4
 [node name="GarageCam" type="Spatial" parent="player"]
 transform = Transform( 0.1215, 0.0269703, 0.992225, 0.0516348, 0.998106, -0.0334529, -0.991248, 0.0552979, 0.119877, -2.47732e-07, 0, 0 )
 script = ExtResource( 40 )
-rotation_speed = Vector2( 0.01, 0.003 )
+rotation_speed = Vector2( 0.1, 0.03 )
 
 [node name="Camera" type="Camera" parent="player/GarageCam"]
 transform = Transform( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.365001, 0, -26.525 )
 
 [node name="RemoteTransform" type="RemoteTransform" parent="player/GarageCam/Camera"]
 remote_path = NodePath("../../../../UI/Garage/View/Viewport/Camera")
-
-[node name="player@ruedafront@front" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44103, -0.128825, -1.7433 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="player@ruedafront@front@col" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190497, 0 )
-shape = SubResource( 4 )
 
 [node name="floor" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36519, 0 )
@@ -194,6 +187,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00014019, 0.0109382, 0.0236
 shape = SubResource( 1 )
 
 [node name="box" type="CSGBox" parent="floor"]
+layers = 3
 use_in_baked_light = true
 use_collision = true
 width = 71.6837
@@ -201,10 +195,9 @@ depth = 68.5282
 
 [node name="sun" type="DirectionalLight" parent="."]
 transform = Transform( 0.907946, 3.92074e-07, 0.419088, -0.319899, -0.646017, 0.693056, 0.270738, -0.763323, -0.586548, 39.0947, 32.5736, -16.4536 )
+layers = 3
 shadow_enabled = true
-directional_shadow_blend_splits = true
-directional_shadow_depth_range = 1
-directional_shadow_max_distance = 274.2
+shadow_reverse_cull_face = true
 
 [node name="env" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
@@ -366,69 +359,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0.329412, 0.188235, 0.152941, 1 )
 
-[node name="TabContainer" type="TabContainer" parent="UI/Garage"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -239.0
-
-[node name="Color" type="Control" parent="UI/Garage/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Hats" type="Control" parent="UI/Garage/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Car Shape" type="GridContainer" parent="UI/Garage/TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Button" type="Button" parent="UI/Garage/TabContainer/Car Shape"]
-margin_right = 12.0
-margin_bottom = 20.0
-
-[node name="Stickers" type="Control" parent="UI/Garage/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 24.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Lights" type="Control" parent="UI/Garage/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 24.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="Wheels" type="Control" parent="UI/Garage/TabContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 24.0
-margin_right = -4.0
-margin_bottom = -4.0
-
 [node name="View" type="ViewportContainer" parent="UI/Garage"]
 margin_right = 1027.0
 margin_bottom = 353.0
@@ -449,6 +379,79 @@ margin_left = 4.0
 margin_top = 17.0
 margin_right = 965.0
 margin_bottom = 362.0
+
+[node name="Selection" type="TabContainer" parent="UI/Garage"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -239.0
+
+[node name="Color" type="Control" parent="UI/Garage/Selection"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Hats" type="Control" parent="UI/Garage/Selection"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Shape" type="ScrollContainer" parent="UI/Garage/Selection"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 120, 0 )
+scroll_vertical_enabled = false
+script = ExtResource( 42 )
+skin_per_index = [ ExtResource( 44 ), ExtResource( 45 ) ]
+
+[node name="Grid" type="HBoxContainer" parent="UI/Garage/Selection/Shape"]
+margin_right = 268.0
+margin_bottom = 126.0
+alignment = 1
+
+[node name="Default" type="Button" parent="UI/Garage/Selection/Shape/Grid"]
+margin_right = 132.0
+margin_bottom = 126.0
+icon = ExtResource( 41 )
+
+[node name="Default2" type="Button" parent="UI/Garage/Selection/Shape/Grid"]
+margin_left = 136.0
+margin_right = 268.0
+margin_bottom = 126.0
+icon = ExtResource( 41 )
+
+[node name="RadioSelector" type="Node" parent="UI/Garage/Selection/Shape/Grid"]
+script = ExtResource( 43 )
+
+[node name="Lights" type="Control" parent="UI/Garage/Selection"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Wheels" type="Control" parent="UI/Garage/Selection"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="Exit" type="Button" parent="UI/Garage"]
 margin_left = 18.0
@@ -504,6 +507,7 @@ move_speed = 10.0
 [connection signal="text_entered" from="UI/Command" to="UI/Command" method="_on_Command_text_entered"]
 [connection signal="button_down" from="UI/Garage/View/slide" to="player/GarageCam" method="_on_slide_button_down"]
 [connection signal="button_up" from="UI/Garage/View/slide" to="player/GarageCam" method="_on_slide_button_up"]
+[connection signal="selected" from="UI/Garage/Selection/Shape/Grid/RadioSelector" to="UI/Garage/Selection/Shape" method="_on_RadioSelector_selected"]
 [connection signal="pressed" from="UI/Garage/Exit" to="UI" method="set_screen" binds= [ 0 ]]
 [connection signal="body_entered" from="Killer" to="Killer" method="_on_Killer_body_entered"]
 [connection signal="timeout" from="Killer/Timer" to="Killer" method="_on_Timer_timeout"]
