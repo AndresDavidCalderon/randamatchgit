@@ -10,4 +10,5 @@ func generate():
 		add_child(preload("res://ChunkTypes/caves/entrance/CaveEntrance.tscn").instance() as StaticBody)
 		var child=createcont(Vector3(0,-1,0),globals.res.getres("res://ChunkTypes/caves/tunnel/cavetunnel.gd"))
 		child.typestr="tunnel"
+		child.hillposibs=["forward"]
 		child.created()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Models/Default/car.gltf" type="PackedScene" id=1]
 
@@ -12,6 +12,9 @@ extents = Vector3( 3.70616, 1.70053, 4.1491 )
 
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 3.70616, 1.70053, 2.73907 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 5.21962, 1.1307, 8.01676 )
 
 [node name="CarVisual" type="Spatial"]
 
@@ -42,5 +45,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.891329, -8.2098 )
 
 [node name="HatSpot" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9326, 0.855676 )
+
+[node name="Floor" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.84217e-14, 0, 1, -0.384955, -3.80023, -2.59529 )
+shape = SubResource( 5 )
 
 [editable path="Model"]

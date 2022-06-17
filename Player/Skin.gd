@@ -30,6 +30,11 @@ func set_skin(skin:Spatial):
 		if i is MeshInstance:
 			i.set_layer_mask_bit(1,true)
 	
+	var floor_reference:CollisionShape=skin.get_node("Floor")
+	get_parent().get_node("getflor").translation.x=floor_reference.translation.x
+	get_parent().get_node("getflor").translation.y=floor_reference.translation.y
+	get_parent().get_node("getflor/col").shape=floor_reference.shape
+	
 	last_skin=skin
 	update_hat_pos()
 

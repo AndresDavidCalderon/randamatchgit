@@ -57,7 +57,7 @@ func _integrate_forces(state):
 	#the speed affected by changing data
 	var current_speed=speed
 	
-	if $getfront.get_overlapping_bodies().size()==0 or $getback.get_overlapping_bodies().size()==0:
+	if $FrontWheel/FrontFloor.get_overlapping_bodies().size()==0 or $BackWheel/BackFloor.get_overlapping_bodies().size()==0:
 		current_speed/=2
 		if orders.has("accel"):
 			addlocaltorque("x",-rotonair)
@@ -89,7 +89,7 @@ func _integrate_forces(state):
 		globals.emit_signal("end")
 	
 	if orders.has("accel"):
-		if $getfront.get_overlapping_bodies().size()>0:
+		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()>0:
 			if orders.has("left"):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("right"):
@@ -100,7 +100,7 @@ func _integrate_forces(state):
 		$Debug/ThrottlePoint.translation=direction
 	
 	if orders.has("brake"):
-		if $getfront.get_overlapping_bodies().size()>0:
+		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()>0:
 			if orders.has("right"):
 				add_torque(Vector3(0,rotspeed,0))
 			if orders.has("left"):
@@ -113,9 +113,9 @@ func _integrate_forces(state):
 		
 	
 	if balancing:
-		if $getfront.get_overlapping_bodies().size()<1 and rotation.x>0:
+		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()<1 and rotation.x>0:
 			addlocaltorque("x",-balancing_force)
-		if $getback.get_overlapping_bodies().size()<1 and rotation.x<0:
+		if $BackWheel/BackFloor.get_overlapping_bodies().size()<1 and rotation.x<0:
 			addlocaltorque("x",balancing_force)
 
 
