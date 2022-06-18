@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://gui/images/accelpress.png" type="Texture" id=3]
 [ext_resource path="res://gui/images/accel.png" type="Texture" id=4]
@@ -6,45 +6,11 @@
 [ext_resource path="res://gui/images/side.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 40, 45 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 40, 45 )
+extents = Vector2( 120, 120 )
 
 [node name="movement" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="direction" type="Control" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -225.0
-margin_right = 355.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="dirl" type="TouchScreenButton" parent="direction"]
-position = Vector2( 150.657, 181.404 )
-rotation = -3.14159
-scale = Vector2( 1.2, 1.2 )
-normal = ExtResource( 6 )
-pressed = ExtResource( 5 )
-shape = SubResource( 1 )
-passby_press = true
-action = "left"
-
-[node name="dir" type="TouchScreenButton" parent="direction"]
-position = Vector2( 189.707, 84.7747 )
-scale = Vector2( 1.2, 1.2 )
-normal = ExtResource( 6 )
-pressed = ExtResource( 5 )
-shape = SubResource( 2 )
-passby_press = true
-action = "right"
 
 [node name="accel" type="Control" parent="."]
 anchor_left = 1.0
@@ -71,3 +37,7 @@ normal = ExtResource( 6 )
 pressed = ExtResource( 5 )
 passby_press = true
 action = "back"
+
+[node name="JoyDetect" type="TouchScreenButton" parent="."]
+position = Vector2( 57, 322 )
+shape = SubResource( 1 )

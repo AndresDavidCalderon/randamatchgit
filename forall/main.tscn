@@ -105,7 +105,7 @@ impulse_offset = Vector3( 0, 3, 0 )
 [node name="col" parent="player/getflor" index="0"]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.65557, 1.58941 )
 
-[node name="playerinteract" parent="player" index="8"]
+[node name="playerinteract" parent="player" index="6"]
 mounted = true
 
 [node name="Suspension" type="Node" parent="player"]
