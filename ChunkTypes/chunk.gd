@@ -20,7 +20,7 @@ func getnewwall(is_hill):
 	else:
 		return preload("res://ChunkTypes/walls/hill/HillWall.tscn").instance()
 
-var player:RigidBody
+var player:Spatial
 
 func _on_killdown_body_entered(body):
 	if body==player:

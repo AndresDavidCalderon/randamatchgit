@@ -1,7 +1,9 @@
-extends RigidBody
+extends Spatial
 class_name car,"res://Player/player.png"
 signal needsorders
-export(float) var speed
+export(float) var acceleration
+#max speed is set on the joint scene
+
 export(float) var rotspeed
 export(bool) var balancing
 export(float) var balancing_force
@@ -23,9 +25,12 @@ func _init():
 
 func kill():
 	hastokill=true
-	sleeping=true
 	emit_signal("kill")
 	
+
+func _input(event):
+	if event.is_action_pressed("up_jump"):
+		translation.y+=40
 
 var ruedarot=0
 var tocallonint=[]
@@ -41,9 +46,7 @@ func callonint(funct:String,args:Array):
 var orders=[]
 
 
-func _integrate_forces(state):
-	if not globals.on_match: return
-	
+func _integrate_forces():
 	var done=0
 	orders=[]
 	emit_signal("needsorders")
@@ -52,13 +55,11 @@ func _integrate_forces(state):
 		done+=1
 	tocallonint=[]
 	tocallonintargs=[]
-	emit_signal("onfis",state)
-	
 	#the speed affected by changing data
-	var current_speed=speed
+	var current_acceleration=acceleration
 	
 	if $FrontWheel/FrontFloor.get_overlapping_bodies().size()==0 or $BackWheel/BackFloor.get_overlapping_bodies().size()==0:
-		current_speed/=2
+		current_acceleration/=2
 		if orders.has("accel"):
 			addlocaltorque("x",-rotonair)
 		elif orders.has("brake"):
@@ -78,38 +79,28 @@ func _integrate_forces(state):
 				addlocaltorque("z",-rotonair*1.5)
 		
 	if hastokill:
-		state.transform.origin=inittrans
 		translation=inittrans
 		rotation=initrot
-		state.transform.basis=Basis(initrot)
-		state.linear_velocity=Vector3()
-		state.angular_velocity=Vector3()
-		sleeping=false
 		hastokill=false
 		globals.emit_signal("end")
 	
 	if orders.has("accel"):
 		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()>0:
 			if orders.has("left"):
-				add_torque(Vector3(0,rotspeed,0))
+				$CarBody.add_torque(Vector3(0,rotspeed,0))
 			if orders.has("right"):
-				add_torque(Vector3(0,-rotspeed,0))
+				$CarBody.add_torque(Vector3(0,-rotspeed,0))
+		$BackJoint.set("angular_motor_x/enabled",true)
+		$BackJoint.set("angular_motor_x/target_velocity",current_acceleration)
 		
-		var direction=get_rotated_vector(Vector3(0,0,-current_speed))
-		add_force(direction,get_rotated_vector(impulse_offset))
-		$Debug/ThrottlePoint.translation=direction
-	
 	if orders.has("brake"):
 		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()>0:
 			if orders.has("right"):
-				add_torque(Vector3(0,rotspeed,0))
+				$CarBody.add_torque(Vector3(0,rotspeed,0))
 			if orders.has("left"):
-				add_torque(Vector3(0,-rotspeed,0))
-		var direction=get_rotated_vector(Vector3(0,0,current_speed))
-		var offset=get_rotated_vector(Vector3(0,3,0),Vector3(PI,0,0))
-		add_force(direction,offset)
-		$Debug/BrakePoint.translation=direction
-		$Debug/BrakeOffset.translation=offset
+				$CarBody.add_torque(Vector3(0,-rotspeed,0))
+		$BackJoint.set("angular_motor_x/enabled",true)
+		$BackJoint.set("angular_motor_x/target_velocity",-current_acceleration)
 		
 	
 	if balancing:
@@ -122,9 +113,9 @@ func _integrate_forces(state):
 func addlocaltorque(axisarg:String,num:float):
 	var rot=get_indexed("transform:basis:"+axisarg)*num
 	
-	add_torque(rot)
+	$CarBody.add_torque(rot)
 func apply_local_torque_impulse(axisarg:String,num:float):
-	apply_torque_impulse(get_indexed("transform:basis:"+axisarg)*num)
+	$CarBody.apply_torque_impulse(get_indexed("transform:basis:"+axisarg)*num)
 
 func get_rotated_vector(vec:Vector3,offset:Vector3=Vector3(0,0,0)):
 	var newvec:Vector3=vec

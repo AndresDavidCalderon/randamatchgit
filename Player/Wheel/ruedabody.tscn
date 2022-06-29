@@ -1,36 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Player/Wheel/rueda.gltf" type="PackedScene" id=1]
-[ext_resource path="res://Player/Wheel/ruedamaterial.material" type="Material" id=3]
 
 [sub_resource type="CylinderShape" id=1]
-height = 8.77372
-radius = 1.96
+height = 9.13604
+radius = 1.94337
 
-[node name="rueda3" type="CollisionShape"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
-shape = SubResource( 1 )
+[node name="Wheel" type="RigidBody"]
 
 [node name="vis" type="Spatial" parent="."]
-transform = Transform( 1.1, 0, 0, 0, 1, 0, 0, 0, 1.1, 0, 0, 0.0732205 )
+transform = Transform( 1.1, 0, 0, 0, 1, 0, 0, 0, 1.1, 0, 0, 0 )
 
 [node name="rueda3" parent="vis" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.821437, -4.21905, -0.0665641 )
+transform = Transform( 0.909061, 0.00804594, 0, -0.00804595, 1.09996, 0, 0, 0, 1, 4.3, 0, -0.067 )
 
 [node name="Cylinder" parent="vis/rueda3" index="0"]
 layers = 3
 generate_lightmap = false
-material/0 = ExtResource( 3 )
 
 [node name="rueda4" parent="vis" instance=ExtResource( 1 )]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.815273, 4.27363, -0.0792239 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, -0.079 )
 
 [node name="Cylinder" parent="vis/rueda4" index="0"]
 layers = 3
 generate_lightmap = false
-material/0 = ExtResource( 3 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 1 )
 
 [editable path="vis/rueda3"]
 [editable path="vis/rueda4"]

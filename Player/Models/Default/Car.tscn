@@ -38,7 +38,7 @@ transform = Transform( 1, 0, 0, 0, -0.743577, -0.668651, 0, 0.668651, -0.743577,
 shape = SubResource( 2 )
 
 [node name="WheelB" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.850131, 3.95248 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.905553, 3.95248 )
 
 [node name="WheelF" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.891329, -8.2098 )

@@ -19,9 +19,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -270.0
 margin_top = -228.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="accel" type="TouchScreenButton" parent="accel"]
 position = Vector2( 159.214, 21.6833 )

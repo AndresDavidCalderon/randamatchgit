@@ -17,6 +17,7 @@ func _ready():
 	if get_parent().get_child_count()>1:
 		if get_parent().get_child(selected_index)==self:
 			selected_index+=1
+		selected=get_parent().get_child(selected_index)
 		get_parent().get_child(selected_index).pressed=true
 
 

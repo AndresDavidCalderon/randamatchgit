@@ -10,8 +10,8 @@ func generate():
 	var offset=Vector3()
 	
 	hilltype=randman.choose(hillposibs)
+	
 	#add our own structure
-	var child:Spatial
 	#spots that need to be free
 	var chunks_to_check:=[]
 	match hilltype:

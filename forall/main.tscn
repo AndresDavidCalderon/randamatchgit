@@ -89,24 +89,10 @@ width = 1200
 [node name="main" type="Node"]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, -0.01, 15.088, -5.78484 )
-mass = 1.0
-gravity_scale = 1.5
-linear_velocity = Vector3( 0, -10, 0 )
-linear_damp = 0.025
-angular_damp = 4.159
-speed = 50.0
-rotspeed = 80.0
-balancing_force = 20.0
-rotonair = 40.0
-jump_force = 80.0
-impulse_offset = Vector3( 0, 3, 0 )
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, -0.01, 3.51916, -5.78484 )
 
 [node name="col" parent="player/getflor" index="0"]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.65557, 1.58941 )
-
-[node name="playerinteract" parent="player" index="6"]
-mounted = true
 
 [node name="Suspension" type="Node" parent="player"]
 script = ExtResource( 9 )
@@ -297,6 +283,7 @@ margin_bottom = 39.0
 text = "total:0"
 
 [node name="Main" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( 8 )
@@ -353,6 +340,7 @@ placeholder_text = "command here"
 script = ExtResource( 27 )
 
 [node name="Garage" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 39 )
@@ -371,10 +359,10 @@ script = ExtResource( 35 )
 [node name="Viewport" type="Viewport" parent="UI/Garage/View"]
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Camera" type="Camera" parent="UI/Garage/View/Viewport"]
-transform = Transform( 0.1215, -0.0269703, 0.992225, -0.0516348, 0.998106, 0.0334529, -0.991248, -0.0552978, 0.119877, 26.2644, 15.9942, -2.2433 )
+transform = Transform( 0.1215, -0.0269703, 0.992225, -0.0516348, 0.998106, 0.0334529, -0.991248, -0.0552978, 0.119877, 26.2644, 4.42534, -2.2433 )
 cull_mask = 2
 
 [node name="slide" type="Button" parent="UI/Garage/View"]

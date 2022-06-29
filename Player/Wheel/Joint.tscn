@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="BackJoint" type="Generic6DOFJoint"]
+angular_limit_x/enabled = false
+angular_motor_x/target_velocity = 120.0
+angular_motor_x/force_limit = 800.0
+linear_limit_y/upper_distance = -0.8
+linear_limit_y/lower_distance = -0.8
+linear_limit_y/softness = 0.01
+linear_limit_y/restitution = 0.01
+linear_limit_y/damping = 16.0
+linear_limit_z/softness = 0.01
+linear_limit_z/restitution = 0.01
