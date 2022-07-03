@@ -48,7 +48,7 @@ var orders=[]
 
 func _integrate_forces():
 	var done=0
-	orders=[]
+	orders={}
 	emit_signal("needsorders")
 	while done<tocallonint.size():
 		callv(tocallonint[done],tocallonintargs[done])
@@ -60,66 +60,34 @@ func _integrate_forces():
 	
 	if $FrontWheel/FrontFloor.get_overlapping_bodies().size()==0 or $BackWheel/BackFloor.get_overlapping_bodies().size()==0:
 		current_acceleration/=2
-		if orders.has("accel"):
-			addlocaltorque("x",-rotonair)
-		elif orders.has("brake"):
-			addlocaltorque("x",rotonair*5)
+		if orders["front"]>0:
+			$CarBody.addlocaltorque("x",-rotonair*orders["front"])
+		elif orders["front"]<0:
+			$CarBody.addlocaltorque("x",rotonair*5*orders["front"])
 	
 	if $GetRight.get_overlapping_bodies().size()==0 or $GetLeft.get_overlapping_bodies().size()==0:
-		
-		if ($GetRight.get_overlapping_bodies().size()==0)!=($GetLeft.get_overlapping_bodies().size()==0):
-			if orders.has("r"):
-				addlocaltorque("z",-rotonair*2.5)
-			elif orders.has("l"):
-				addlocaltorque("z",rotonair*2.5)
-		else:
-			if orders.has("l"):
-				addlocaltorque("z",rotonair*1.5)
-			elif orders.has("r"):
-				addlocaltorque("z",-rotonair*1.5)
-		
+		var rot_multiplier:float=2.5 if ($GetRight.get_overlapping_bodies().size()==0)!=($GetLeft.get_overlapping_bodies().size()==0) else 1.5
+		$CarBody.addlocaltorque("z",rotonair*rot_multiplier)
+	
 	if hastokill:
 		translation=inittrans
 		rotation=initrot
 		hastokill=false
 		globals.emit_signal("end")
-	
-	if orders.has("accel"):
-		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()>0:
-			if orders.has("left"):
-				$CarBody.add_torque(Vector3(0,rotspeed,0))
-			if orders.has("right"):
-				$CarBody.add_torque(Vector3(0,-rotspeed,0))
-		$BackJoint.set("angular_motor_x/enabled",true)
-		$BackJoint.set("angular_motor_x/target_velocity",current_acceleration)
 		
-	if orders.has("brake"):
-		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()>0:
-			if orders.has("right"):
-				$CarBody.add_torque(Vector3(0,rotspeed,0))
-			if orders.has("left"):
-				$CarBody.add_torque(Vector3(0,-rotspeed,0))
-		$BackJoint.set("angular_motor_x/enabled",true)
-		$BackJoint.set("angular_motor_x/target_velocity",-current_acceleration)
 		
+	if abs(orders["front"])>0:
+		$BackJoint.set("angular_motor_x/target_velocity",current_acceleration*orders["front"])
+		$BackJoint.set("angular_motor_x/enabled",true)
+	else:
+		$BackJoint.set("angular_motor_x/enabled",false)
 	
 	if balancing:
 		if $FrontWheel/FrontFloor.get_overlapping_bodies().size()<1 and rotation.x>0:
-			addlocaltorque("x",-balancing_force)
+			$CarBody.addlocaltorque("x",-balancing_force)
 		if $BackWheel/BackFloor.get_overlapping_bodies().size()<1 and rotation.x<0:
-			addlocaltorque("x",balancing_force)
+			$CarBody.addlocaltorque("x",balancing_force)
 
-
-func addlocaltorque(axisarg:String,num:float):
-	var rot=get_indexed("transform:basis:"+axisarg)*num
-	
-	$CarBody.add_torque(rot)
-func apply_local_torque_impulse(axisarg:String,num:float):
-	$CarBody.apply_torque_impulse(get_indexed("transform:basis:"+axisarg)*num)
-
-func get_rotated_vector(vec:Vector3,offset:Vector3=Vector3(0,0,0)):
-	var newvec:Vector3=vec
-	newvec=newvec.rotated(Vector3(0,0,1),transform.basis.get_euler().z+offset.x)
-	newvec=newvec.rotated(Vector3(1,0,0),transform.basis.get_euler().x+offset.y)
-	newvec=newvec.rotated(Vector3(0,1,0),transform.basis.get_euler().y+offset.z)
-	return newvec
+func set_direction_step(angle:float):
+	$FrontJoint.rotation=angle
+	$FrontWheel.rotation=angle
