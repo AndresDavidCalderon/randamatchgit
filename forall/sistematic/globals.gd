@@ -14,7 +14,7 @@ var camera
 var ostype:String
 var popuper:Panel
 
-var playernd:Spatial
+var playernd:Node
 
 var paused=false
 

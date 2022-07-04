@@ -11,7 +11,7 @@ func addlocaltorque(axisarg:String,num:float):
 func apply_local_torque_impulse(axisarg:String,num:float):
 	apply_torque_impulse(get_indexed("transform:basis:"+axisarg)*num)
 
-func get_rotated_vector(vec:Vector3,offset:Vector3=Vector3(0,0,0)):
+func get_rotated_vector(vec:Vector3,offset:Vector3=Vector3(0,0,0))->Vector3:
 	var newvec:Vector3=vec
 	newvec=newvec.rotated(Vector3(0,0,1),transform.basis.get_euler().z+offset.x)
 	newvec=newvec.rotated(Vector3(1,0,0),transform.basis.get_euler().x+offset.y)

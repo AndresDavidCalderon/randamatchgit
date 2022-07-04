@@ -16,8 +16,8 @@ func set_skin(skin:Spatial):
 	
 	get_parent().get_node("FrontWheel").translation=skin.get_node("WheelF").translation
 	get_parent().get_node("BackWheel").translation=skin.get_node("WheelB").translation
-	get_parent().get_node("FrontJoint").translation=skin.get_node("WheelF").translation
-	get_parent().get_node("BackJoint").translation=skin.get_node("WheelB").translation
+	get_parent().get_node("FrontJoint").translation=skin.get_node("WheelF").translation+Vector3(0,0,0)
+	get_parent().get_node("BackJoint").translation=skin.get_node("WheelB").translation+Vector3(0,0,0)
 
 	for i in collisions:
 		i.queue_free()

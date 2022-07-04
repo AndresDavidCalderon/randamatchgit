@@ -30,6 +30,10 @@ rotspeed = 8000.0
 balancing_force = 20.0
 rotonair = 40.0
 jump_force = 80.0
+dir_rotation_speed = 400.0
+dir_rot_limit = 8.0
+magical_rotation = 9000.0
+impulse_treshold = 2.0
 impulse_offset = Vector3( 0, 3, 0 )
 
 [node name="getflor" type="Area" parent="."]
@@ -106,17 +110,6 @@ shape = SubResource( 7 )
 script = ExtResource( 4 )
 default_skin = ExtResource( 2 )
 
-[node name="BackJoint" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.83566, 1.45592 )
-nodes/node_a = NodePath("../CarBody")
-nodes/node_b = NodePath("../BackWheel")
-angular_motor_z/target_velocity = 120.0
-
-[node name="FrontJoint" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1084, -10.3405 )
-nodes/node_a = NodePath("../CarBody")
-nodes/node_b = NodePath("../FrontWheel")
-
 [node name="CarBody" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7804, 0 )
 mass = 100.0
@@ -127,5 +120,24 @@ script = ExtResource( 7 )
 
 [node name="KeyInteract" type="Node" parent="."]
 script = ExtResource( 5 )
+
+[node name="BackJoint" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.836, 1.456 )
+nodes/node_a = NodePath("../CarBody")
+nodes/node_b = NodePath("../BackWheel")
+angular_motor_z/target_velocity = 120.0
+
+[node name="FrontJoint" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2.108, -10.341 )
+nodes/node_a = NodePath("../CarBody")
+nodes/node_b = NodePath("../FrontWheel")
+linear_motor_x/enabled = true
+linear_motor_x/force_limit = 1000.0
+angular_limit_y/upper_angle = 10.0
+angular_limit_y/lower_angle = -10.0
+angular_motor_y/enabled = true
+
+[node name="AccelTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="needsorders" from="." to="KeyInteract" method="_on_car_needsorders"]

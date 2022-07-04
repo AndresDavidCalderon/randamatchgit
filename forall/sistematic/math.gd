@@ -8,3 +8,9 @@ func vectorad(vec:Vector3):
 	vec.y=deg2rad(vec.y)
 	vec.z=deg2rad(vec.z)
 	return vec
+
+func distance(a:float,b:float)->float:
+	if sign(a)!=sign(b):
+		return a+b
+	else:
+		return abs(a-b)

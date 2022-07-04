@@ -88,7 +88,10 @@ width = 1200
 [node name="main" type="Node"]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, -1, -0.01, 3.51916, -5.78484 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.81002, 0 )
+
+[node name="getflor" parent="player" index="0"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.532305, -3.80023, -4.15349 )
 
 [node name="col" parent="player/getflor" index="0"]
 transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, -0.978917, 2.65557, 1.58941 )
@@ -103,7 +106,7 @@ margin = 3.82
 process_mode = 1
 
 [node name="BackCamera" type="ClippedCamera" parent="player"]
-transform = Transform( -0.99721, 0.0564289, -0.0488682, 0.00373632, 0.691559, 0.722311, 0.0745545, 0.720113, -0.68984, 2.29105e-07, 32.0218, -35.7128 )
+transform = Transform( -0.99721, 0.056429, -0.0488682, 0.00373632, 0.691559, 0.722311, 0.0745545, 0.720113, -0.68984, 2.29105e-07, 18.1735, -22.6325 )
 fov = 101.5
 far = 900.0
 margin = 3.59
@@ -357,7 +360,7 @@ handle_input_locally = false
 render_target_update_mode = 0
 
 [node name="Camera" type="Camera" parent="UI/Garage/View/Viewport"]
-transform = Transform( 0.1215, -0.0269703, 0.992225, -0.0516348, 0.998106, 0.0334529, -0.991248, -0.0552978, 0.119877, 26.2644, 4.42534, -2.2433 )
+transform = Transform( -0.1215, 0.0269703, -0.992225, -0.0516348, 0.998106, 0.0334529, 0.991248, 0.0552978, -0.119877, -26.2744, 10.7162, -3.54154 )
 cull_mask = 2
 
 [node name="slide" type="Button" parent="UI/Garage/View"]
