@@ -23,7 +23,7 @@ func getnewwall(is_hill):
 var player:Spatial
 
 func _on_killdown_body_entered(body):
-	if body==player:
+	if body==globals.car_body:
 		player.kill()
 
 
@@ -57,7 +57,7 @@ func getnewchunk(script:Script)->Spatial:
 	var new=load("res://ChunkTypes/chunk.tscn").instance() as Spatial
 	new.set_script(script)
 	new.gen=get_node("/root/main/Generator")
-	new.player=get_node("/root/main/player")
+	new.player=get_node("/root/main/player/CarBody")
 
 	return new
 
@@ -65,7 +65,7 @@ func getnewchunk(script:Script)->Spatial:
 func created():
 	$Type.text=typestr
 	gen=get_node("/root/main/Generator")
-	player=get_node("/root/main/player")
+	player=get_node("/root/main/player/CarBody")
 	
 	gen.connect("make_row",self,"check_row")
 

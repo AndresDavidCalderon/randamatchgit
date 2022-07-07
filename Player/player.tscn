@@ -2,142 +2,149 @@
 
 [ext_resource path="res://forall/scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Models/Default/Car.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Player/Wheel/ruedabody.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Wheel/WheelJoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Skin.gd" type="Script" id=4]
 [ext_resource path="res://Player/KeyInteract.gd" type="Script" id=5]
-[ext_resource path="res://Player/Wheel/Joint.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Player/Wheel/ruedabody.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/CarBody.gd" type="Script" id=7]
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 7.17086, 7.65976, 12.9206 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 5.21962, 1.1307, 8.01676 )
 
 [sub_resource type="BoxShape" id=5]
-extents = Vector3( 3.96996, 0.843558, 1.26515 )
+extents = Vector3( 3.96996, 0.549542, 1.26515 )
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 4.37119, 1.93052, 2.04197 )
+extents = Vector3( 0.723719, 3.91933, 2.04197 )
 
 [sub_resource type="BoxShape" id=9]
-extents = Vector3( 0.328209, 4.5919, 0.542621 )
-
-[sub_resource type="BoxShape" id=7]
-extents = Vector3( 7.17086, 7.65976, 12.9206 )
+extents = Vector3( 4.4985, 0.271371, 1.38675 )
 
 [node name="car" type="Spatial"]
 script = ExtResource( 1 )
-acceleration = 800.0
+acceleration = 200.0
 rotspeed = 8000.0
-balancing_force = 20.0
 rotonair = 40.0
 jump_force = 80.0
-dir_rotation_speed = 400.0
-dir_rot_limit = 8.0
-magical_rotation = 9000.0
-impulse_treshold = 2.0
-impulse_offset = Vector3( 0, 3, 0 )
-
-[node name="getflor" type="Area" parent="."]
-transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 0.532305, -3.80023, -4.15349 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="col" type="CollisionShape" parent="getflor"]
-transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0, 0, 0 )
-shape = SubResource( 3 )
-
-[node name="GetRight" type="Area" parent="."]
-transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -3.71438, -4.79198, -4.37423 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="col" type="CollisionShape" parent="GetRight"]
-transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420213 )
-shape = SubResource( 5 )
-
-[node name="GetLeft" type="Area" parent="."]
-transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 4.95577, -4.79198, -4.37423 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="col" type="CollisionShape" parent="GetLeft"]
-transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420213 )
-shape = SubResource( 5 )
-
-[node name="BackWheel" parent="." instance=ExtResource( 3 )]
-transform = Transform( 0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, 0.999391, -0.0771024, -1.93855, 1.71085 )
-mass = 20.0
-can_sleep = false
-
-[node name="BackFloor" type="Area" parent="BackWheel"]
-transform = Transform( -4.37114e-08, 1, 1.24235e-21, -1, -4.37114e-08, 2.84217e-14, 0, 0, 1, -3.57404, -1.25899, -0.52253 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="col" type="CollisionShape" parent="BackWheel/BackFloor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4215, 2.23199, 0.930443 )
-shape = SubResource( 4 )
-
-[node name="FrontWheel" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0771014, -1.84415, -10.4764 )
-mass = 20.0
-can_sleep = false
-
-[node name="front" type="Area" parent="FrontWheel"]
-transform = Transform( 1, 3.34075e-22, 0, 3.34075e-22, 1, 0, 0, 0, 1, -1.65936, 1.2666e-07, -1.34426 )
-
-[node name="CollisionShape" type="CollisionShape" parent="FrontWheel/front"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219571, 0, 0 )
-shape = SubResource( 9 )
-
-[node name="FrontFloor" type="Area" parent="FrontWheel"]
-transform = Transform( -4.37114e-08, 0.999999, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.60044, -1.44658, 0.282001 )
-collision_layer = 2
-collision_mask = 2
-
-[node name="col" type="CollisionShape" parent="FrontWheel/FrontFloor"]
-transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420212 )
-shape = SubResource( 4 )
-
-[node name="chunkdect" type="Area" parent="."]
-collision_layer = 8
-collision_mask = 8
-
-[node name="col" type="CollisionShape" parent="chunkdect"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.61572 )
-shape = SubResource( 7 )
+dir_rotation_speed = 900.0
+dir_rot_limit = 30.0
+magical_rotation = 3000.0
+force_joints = [ NodePath("BLJoint"), NodePath("BRJoint") ]
+steer_joints = [ NodePath("FLJoint"), NodePath("FRJoint") ]
+joints = [ NodePath("FLJoint"), NodePath("FRJoint"), NodePath("BLJoint"), NodePath("BRJoint") ]
 
 [node name="Skin" type="Node" parent="."]
 script = ExtResource( 4 )
 default_skin = ExtResource( 2 )
+joint_template = ExtResource( 3 )
+wheel_template = ExtResource( 6 )
 
 [node name="CarBody" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7804, 0 )
-mass = 100.0
+mass = 70.0
 can_sleep = false
 script = ExtResource( 7 )
 
-[node name="DirectionTween" type="Tween" parent="."]
+[node name="chunkdect" type="Area" parent="CarBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7804, 0 )
+collision_layer = 8
+collision_mask = 8
+
+[node name="col" type="CollisionShape" parent="CarBody/chunkdect"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.61572 )
+shape = SubResource( 7 )
+
+[node name="getflor" type="Area" parent="CarBody"]
+transform = Transform( 1, 0, -2.84217e-14, 0, 1, 0, 0, 0, 1, 0.532305, -3.01983, -4.15349 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="CarBody/getflor"]
+transform = Transform( 1, 0, 2.84217e-14, 0, 1, 0, -2.84217e-14, 0, 1, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="GetRight" type="Area" parent="CarBody"]
+transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, -3.71438, -3.30533, -4.37423 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="CarBody/GetRight"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="GetLeft" type="Area" parent="CarBody"]
+transform = Transform( -4.37113e-08, 0, 1, 0, 0.999999, 0, -0.999999, 0, -4.37114e-08, 4.95577, -3.65465, -4.14365 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="CarBody/GetLeft"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="BackFloor" type="Area" parent="CarBody"]
+transform = Transform( -4.36848e-08, 0.999391, 0.0348995, -1, -4.37114e-08, 2.84217e-14, 1.52551e-09, -0.0348995, 0.999391, -3.6672, -2.41714, 1.31337 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="CarBody/BackFloor"]
+transform = Transform( 1, -4.20323e-14, 0, 4.43118e-14, 1, 0, -1.22125e-15, 0, 1, 1.50271, 3.32375, 0.83111 )
+shape = SubResource( 4 )
+
+[node name="front" type="Area" parent="CarBody"]
+transform = Transform( 1, 3.34075e-22, 0, 3.34075e-22, 1, 0, 0, 0, 1, -0.836402, -3.17343, -10.6522 )
+
+[node name="CollisionShape" type="CollisionShape" parent="CarBody/front"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.219571, 0, 0 )
+shape = SubResource( 9 )
+
+[node name="FrontFloor" type="Area" parent="CarBody"]
+transform = Transform( -4.37114e-08, 0.999999, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.67754, -2.51033, -10.1944 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="col" type="CollisionShape" parent="CarBody/FrontFloor"]
+transform = Transform( 0.999992, -0.00431095, 2.84217e-14, 0.00431095, 0.999991, 0, -2.84217e-14, 1.11022e-16, 1, -1.46965, 1.33536, -0.420212 )
+shape = SubResource( 4 )
 
 [node name="KeyInteract" type="Node" parent="."]
 script = ExtResource( 5 )
 
-[node name="BackJoint" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.836, 1.456 )
+[node name="FLJoint" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
 nodes/node_a = NodePath("../CarBody")
-nodes/node_b = NodePath("../BackWheel")
-angular_motor_z/target_velocity = 120.0
+nodes/node_b = NodePath("../FLWheel")
+angular_motor_x/enabled = false
 
-[node name="FrontJoint" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2.108, -10.341 )
+[node name="FRJoint" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
 nodes/node_a = NodePath("../CarBody")
-nodes/node_b = NodePath("../FrontWheel")
-linear_motor_x/enabled = true
-linear_motor_x/force_limit = 1000.0
-angular_limit_y/upper_angle = 10.0
-angular_limit_y/lower_angle = -10.0
-angular_motor_y/enabled = true
+nodes/node_b = NodePath("../FRWheel")
+angular_motor_x/enabled = false
 
-[node name="AccelTimer" type="Timer" parent="."]
-one_shot = true
+[node name="BLJoint" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4 )
+nodes/node_a = NodePath("../CarBody")
+nodes/node_b = NodePath("../BLWheel")
+
+[node name="BRJoint" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4 )
+nodes/node_a = NodePath("../CarBody")
+nodes/node_b = NodePath("../BRWheel")
+
+[node name="FRWheel" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0 )
+
+[node name="FLWheel" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
+
+[node name="BRWheel" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -4 )
+
+[node name="BLWheel" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4 )
 
 [connection signal="needsorders" from="." to="KeyInteract" method="_on_car_needsorders"]
+[connection signal="on_integrate_forces" from="CarBody" to="." method="_on_CarBody_on_integrate_forces"]

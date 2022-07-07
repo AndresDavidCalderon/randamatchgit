@@ -2,7 +2,7 @@ extends Spatial
 
 export var rotation_speed:Vector2
 var last_mouse_pos:=Vector2.ZERO
-onready var garage:Control=get_parent().get_parent().get_node("UI/Garage")
+onready var garage:Control=get_parent().get_parent().get_parent().get_node("UI/Garage")
 
 func _process(delta):
 	if last_mouse_pos!=Vector2.ZERO:

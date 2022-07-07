@@ -1,7 +1,9 @@
 extends RigidBody
 
+signal on_integrate_forces(state)
+
 func _integrate_forces(state):
-	get_parent()._integrate_forces()
+	emit_signal("on_integrate_forces",state)
 
 func addlocaltorque(axisarg:String,num:float):
 	var rot=get_indexed("transform:basis:"+axisarg)*num

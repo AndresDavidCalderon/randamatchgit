@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="WheelJoint" type="Generic6DOFJoint"]
+linear_motor_x/force_limit = 5000.0
+angular_limit_x/enabled = false
+angular_motor_x/enabled = true
+angular_motor_x/force_limit = 200.0
+angular_motor_y/enabled = true
+angular_motor_y/force_limit = 400.0

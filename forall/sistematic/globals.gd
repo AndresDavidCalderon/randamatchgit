@@ -15,6 +15,7 @@ var ostype:String
 var popuper:Panel
 
 var playernd:Node
+var car_body:RigidBody
 
 var paused=false
 

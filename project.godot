@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://forall/scripts/player.gd"
 }, {
+"base": "Spatial",
+"class": "car_template",
+"language": "GDScript",
+"path": "res://Player/Models/CarTemplate.gd"
+}, {
 "base": "Node",
 "class": "resman",
 "language": "GDScript",
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "aligner": "res://gui/images/extendericon.png",
 "car": "res://Player/player.png",
+"car_template": "",
 "resman": "res://forall/sistematic/resman.png",
 "switcher": ""
 }

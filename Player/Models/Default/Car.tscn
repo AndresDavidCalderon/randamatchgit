@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Models/Default/car.gltf" type="PackedScene" id=1]
+[ext_resource path="res://Player/Models/CarTemplate.gd" type="Script" id=2]
 
 [sub_resource type="SpatialMaterial" id=4]
 
@@ -17,6 +18,8 @@ extents = Vector3( 3.70616, 1.70053, 2.73907 )
 extents = Vector3( 5.21962, 1.1307, 8.01676 )
 
 [node name="CarVisual" type="Spatial"]
+script = ExtResource( 2 )
+collissions = [ NodePath("Collisions/CollisionShape"), NodePath("Collisions/Top"), NodePath("Collisions/Glass") ]
 
 [node name="Model" parent="." instance=ExtResource( 1 )]
 
@@ -37,11 +40,17 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, -0.743577, -0.668651, 0, 0.668651, -0.743577, -0.18717, 2.66358, -3.92095 )
 shape = SubResource( 2 )
 
-[node name="WheelB" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.905553, 3.95248 )
+[node name="BR" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.6718, 3.952 )
 
-[node name="WheelF" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.891329, -8.2098 )
+[node name="BL" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1.6718, 3.952 )
+
+[node name="FR" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.6568, -8.21 )
+
+[node name="FL" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1.6568, -8.21 )
 
 [node name="HatSpot" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.9326, 0.855676 )

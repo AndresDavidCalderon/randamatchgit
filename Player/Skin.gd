@@ -1,31 +1,39 @@
 extends Node
 
 export var default_skin:PackedScene
+export var joint_template:PackedScene
+export var wheel_template:PackedScene
 
 func _ready():
 	if default_skin!=null:
 		set_skin(default_skin.instance())
 
-var collisions:=[]
 var last_skin:Spatial
-func set_skin(skin:Spatial):
+
+var collisions:=[]
+
+var joints:=[]
+var wheels:=[]
+
+func set_skin(skin:car_template):
 	if last_skin!=null:
 		last_skin.queue_free()
 	
 	get_parent().get_node("CarBody").call_deferred("add_child",skin)
 	
-	get_parent().get_node("FrontWheel").translation=skin.get_node("WheelF").translation
-	get_parent().get_node("BackWheel").translation=skin.get_node("WheelB").translation
-	get_parent().get_node("FrontJoint").translation=skin.get_node("WheelF").translation+Vector3(0,0,0)
-	get_parent().get_node("BackJoint").translation=skin.get_node("WheelB").translation+Vector3(0,0,0)
-
+	var idx=0
+	for i in get_parent().joints:
+		var side=str(i).left(2)
+		get_parent().get_node(side+"Wheel").translation=skin.get_node(side).translation
+		get_parent().get_node(side+"Joint").translation=skin.get_node(side).translation
+	
 	for i in collisions:
 		i.queue_free()
 	collisions.clear()
 
-	var collision_container:Spatial=skin.get_node("Collisions")
-	for i in collision_container.get_children():
-		collision_container.remove_child(i)
+	for path in skin.collissions:
+		var i:CollisionShape=skin.get_node(path)
+		i.get_parent().remove_child(i)
 		get_parent().get_node("CarBody").call_deferred("add_child",i)
 		collisions.append(i)
 
@@ -34,9 +42,9 @@ func set_skin(skin:Spatial):
 			i.set_layer_mask_bit(1,true)
 	
 	var floor_reference:CollisionShape=skin.get_node("Floor")
-	get_parent().get_node("getflor").translation.x=floor_reference.translation.x
-	get_parent().get_node("getflor").translation.y=floor_reference.translation.y
-	get_parent().get_node("getflor/col").shape=floor_reference.shape
+	get_parent().get_node("CarBody/getflor").translation.x=floor_reference.translation.x
+	get_parent().get_node("CarBody/getflor").translation.y=floor_reference.translation.y
+	get_parent().get_node("CarBody/getflor/col").shape=floor_reference.shape
 	
 	last_skin=skin
 	update_hat_pos()

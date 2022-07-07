@@ -27,5 +27,5 @@ func _on_Timer_timeout():
 
 
 func _on_Killer_body_entered(body):
-	if body==globals.playernd:
+	if body==globals.car_body:
 		globals.playernd.kill()
